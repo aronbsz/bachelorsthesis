@@ -1,0 +1,101 @@
+%----------------------------------------------------------------------------
+\chapter{Background}
+%----------------------------------------------------------------------------
+
+\section{General background}
+
+\begin{definition}[Alphabet]
+	Let $\Sigma$ be a finite, non-empty set. $\Sigma$ is an Alphabet, its elements are symbols or characters.
+\end{definition}
+
+\begin{definition}[Word]
+	If $\Sigma$ is an alphabet, then any finite sequence comprised of the symbols of $\Sigma$ are words (or Strings). $\Sigma^{n}$ represents the set of every n length word in $\Sigma$. The set of every word under an alphabet, formally $\bigcup\limits_{n>0}^{} \Sigma^{n}$ is denoted by $\Sigma^{*}$.
+\end{definition}
+
+\begin{definition}[Formal Language]
+	An arbitrary set of words under an Alphabet $\Sigma$ is a Language. Formally: $L\subseteq\Sigma^{*}$.
+\end{definition}
+
+\begin{definition}[Deterministic Finite Automaton]
+	A Deterministic Finite Automaton is a Tuple of $ DFA=(S,s_{0},\Sigma,\delta,F) $, where: 
+	\begin{itemize}
+		\item S is a finite, non-epty set containing the states of the automaton,
+		\item $s_{0} \in S$ is the initial state,
+		\item $\Sigma$ is a finite Alphabet,
+		\item $\delta: S\times \Sigma \to S$ is a transition function,
+		\item $F\subseteq S$ is a set of the accepting states of the automaton. 
+	\end{itemize}
+\end{definition}
+
+\noindent As an example, this is a DFA (short for Deterministic Finite Automaton) taken from\cite{Steffen2011}: 
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto] 
+	\node[state,initial] (q_0)   {$q_0$}; 
+	\node[state] (q_1) [right=of q_0] {$q_1$}; 
+	\node[state] (q_2) [below=of q_0] {$q_2$}; 
+	\node[state,accepting](q_3) [right=of q_2] {$q_3$};
+	\path[->] 
+	(q_0) edge  node {a} (q_1)
+	edge [loop below] node {b} ()
+	(q_1) edge  node  {a} (q_2)
+	edge [loop below] node {b} ()
+	(q_2) edge  node [swap] {a} (q_3) 
+	edge [loop above] node {b} ()
+	(q_3) edge  node [swap] {a} (q_0) ;
+	\end{tikzpicture}
+	\caption{A simple DFA.}
+	\label{fig:dfaexample}
+\end{figure}
+
+\noindent The automaton's alphabet is $\Sigma=\{a,b\}$, and it accepts words containing $4i+3 a$ symbols (where $i\in\mathbb{N}$).
+
+\begin{definition}[Mealy machine]
+	A Mealy machine or Mealy automaton is a Tuple of $ M=(S,s_{0},\Sigma,\Omega,\delta,\lambda) $, where:
+	\begin{itemize}
+		\item S S is a finite, non-epty set containing the states of the automaton,
+		\item $s_{0} \in S$ is the initial state,
+		\item $\Sigma$ is the input alphabet of the automaton,
+		\item $\Omega$ is the output alphabet of the automaton,
+		\item $\delta: Q\times \Sigma \to Q$ is the transition function and
+		\item $\lambda: Q\times \Sigma \to \Omega$ is the output function. 
+	\end{itemize}
+\end{definition}
+
+\noindent Mealy machines can be regarded as deterministic finite automata over the union of the input alphabet and an output alphabet with just one rejection state, which is a sink, or more elegantly, with a partially defined transition relation. An example can be seen here:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{content/coffeemealy}
+	\caption{Mealy machine representing the functionality of a coffee machine.\cite{Steffen2011}}
+	\label{fig:coffeemealy}
+\end{figure}
+
+
+\begin{definition}[Canonical automaton]
+	An automaton accepting the language L is canonical iff it is minimal, and contains every other automaton that accepts L.
+\end{definition}
+
+\section{Automaton learning}
+
+
+
+\paragraph{Automaton learning}  is the process of modeling a system without having specific knowledge of the internal workings of it. To accomplish this, we need to infer a model by observing its external behavior. This learned model is, as the name suggests, an automaton. 
+\\Formally: Active  automata  learning is  concerned  with  the  problem  of  inferring  an automaton model for an unknown formal language $L$ over some alphabet $\Sigma$\cite{Howar2018}
+\\\\In order to monitor a system, we need a way of access to its behavioral information, for which there are two approaches, these separate the two types of automaton learning as well.
+
+\paragraph{Passive automaton learning} is the case when the gathering of information is not part of the learning process, but rather a prerequisite to it. The learning is done on a pre-gathered positive an/or negative example set of the systems behavior. In passive automaton learning, the success of the process is not only determined by the efficiency of the algorithm, but the methodology and time used to gather the data.
+
+\paragraph{Active automaton learning} is when the behavioral infromation is gathered by the learning algorithm in an "active" way via queries. For this there is a need to distinguish a learner and a teacher component, of which the second can answer basic questions about the system in real-time. 
+
+
+\paragraph{MAT modell} Active automaton learning follows the MAT, or the Minimally Adequate Teacher model proposed by Dana Angluin\cite{ANGLUIN198787}. It separates the algorithm to a learner and a teacher, where the teacher can only answer the minimally adequate questions needed to learn the system. These two questions, or more precisely, queries are:
+
+
+\paragraph{Membership query} Given a $w\in\Sigma^{*}$ word, it return the $o\in \Omega$ output corresponding to it, treating the word as a string of inputs.
+
+\paragraph{Equivalence query} Given an $M$ hypothesis automaton, it tries to provide a counterexample $o\in\Omega$ and a $w\in\Sigma$ corresponding to it, where given the input $w$ to $M$ and the system, the output given by them differs. $o$ is the differring output given by the system. If no such counterexample can be found, M hypothesis is considered behaviorally identical to the monitored system.
+
+\noindent The learner uses membership queries to build a hypothesis automaton, then refines these by equivalence queries. Once counterexamples can not be found this way, the learning terminates, the output is the current hypothesis.
+
