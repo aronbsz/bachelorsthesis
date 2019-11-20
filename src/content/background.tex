@@ -39,7 +39,7 @@ One of the most simple automaton is the Deterministic Finite Automaton.
 \end{definition}
 
 
-An example of a DFA (Deterministic Finite Automaton) from\cite{Steffen2011} can be seen in Fig. \ref{fig:dfaexample}. This example has four states, $S = \{q_0, q_1, q_2, q_3\}$ (hence $|S| = 4$). The initial state is marked by the start arrow, so $s_0 = q_0$. The alphabet can be inferred as $\Sigma = \{a, b\}$ because of the deterministic in Deterministic Finite automaton, meaning every state must deterministically know what input causes what action. This means, that every state must have every member of the alphabet listed in its transitions. Transitions being the from\_state $\xrightarrow[]{\text{input}}$ to\_state given by the transition function e.g. $\delta(q_0, a) = q_1$. The whole of the transition function in a table form can be seen in Table \ref{tab:dfaexampledelta}. Finally, the accepting states, or in this case, accepting state of the automaton is $F = \{q_3\}$.
+An example of a DFA (Deterministic Finite Automaton) from\cite{Steffen2011} can be seen in Fig. \ref{fig:dfaexample}. This example has four states, $S = \{q_0, q_1, q_2, q_3\}$ (hence $|S| = 4$). The initial state is marked by the start arrow, so $s_0 = q_0$. The alphabet can be inferred as $\Sigma = \{a, b\}$ because of the deterministic in Deterministic Finite automaton, meaning every state must deterministically know what input causes what action. This means, that every state must have every member of the alphabet listed in its transitions. Transitions are visualized as $q_0$ $\xrightarrow[]{\text{a}}$ $q_1$ given by the transition function (in this example) $\delta(q_0, a) = q_1$. The whole of the transition function in a table form can be seen in Table \ref{tab:dfaexampledelta}. Finally, the accepting states, or in this case, accepting state of the automaton is $F = \{q_3\}$.
 
 When talking about automata, it is important to discuss runs. A run of an automaton is to test for a certain input (word), if it is accepted or rejected. An example run of Fig. \ref{fig:dfaexample} with an input of $\{a, a, a\}$ would (following the transition function) end in state $q_3$ meaning the input is accepted. A rejected input could be $\{a, b, b\}$, which would stop at state $q_1$, a non-accepting state. On deeper examination, one can see, that this automaton only accepts runs with inputs containing $4i+3 a$.
 
@@ -76,13 +76,13 @@ When talking about automata, it is important to discuss runs. A run of an automa
 \label{tab:dfaexampledelta}
 \end{table}
 
-DFAs are great to model system behavior based on inputs, but in order to work with reactive systems, we also need to handle outputs. Mealy machines are automata designed to do just this, but the accepting of an input sequence is a bit more complicated.
+DFAs are great to model system behavior based on inputs, but in order to work with reactive systems, we also need to handle outputs. Mealy machines are automata designed to do just this, while becoming more complicated with regard to accepting inputs.
 
 
 \begin{definition}[Mealy machine]
 	A Mealy machine or Mealy automaton is a Tuple of $ M=(S,s_{0},\Sigma,\Omega,\delta,\lambda) $, where:
 	\begin{itemize}
-		\item S S is a finite, non-epty set containing the states of the automaton,
+		\item S is a finite, non-empty set containing the states of the automaton,
 		\item $s_{0} \in S$ is the initial state,
 		\item $\Sigma$ is the input alphabet of the automaton,
 		\item $\Omega$ is the output alphabet of the automaton,
@@ -91,7 +91,18 @@ DFAs are great to model system behavior based on inputs, but in order to work wi
 	\end{itemize}
 \end{definition}
 
-\noindent Mealy machines can be regarded as deterministic finite automata over the union of the input alphabet and an output alphabet with just one rejection state, which is a sink, or more elegantly, with a partially defined transition relation. An example can be seen here:
+Mealy machines can be regarded as deterministic finite automata over the union of the input alphabet and an output alphabet with just one rejection state, which is a sink, or more elegantly, with a partially defined transition relation. 
+
+An example of a deterministic Mealy machine can be seen in Fig. \ref{fig:coffeemealy}. The formal definition of the automaton can be seen below.
+
+\begin{itemize} 
+	\item $S = \{a, b, c, d, d', e, f\}$ 
+	\item $s_0 = a$
+	\item $\Sigma = \{water, pod, button, clean\}$
+	\item $\Omega$ = \{$\checkmark$, \Coffeecup, $\star$\}
+\end{itemize}
+
+The transitions, as seen in \ref{fig:coffeemealy} are visualized as $s_0$ $\xrightarrow[]{\text{input/output}}$ $s_1$, which denotes the machine moving from state $s_0$ to state $s_1$ on the specified input, while causing the specified output. Also, some simplifications are done, e.g. in this transition: d $\xrightarrow[]{\text{\{water,pod\}/\checkmark}}$ d we see a visual simplification of having both transitions merged to one arrow, this is only for visual convenience. Fig. \ref{fig:coffeemealy} is also a great example of sinks, as seen in state f, the machine accepts anything, and never changes. This is a variation of the accepting state seen in DFAs.
 
 \begin{figure}[H]
 	\centering
@@ -99,6 +110,8 @@ DFAs are great to model system behavior based on inputs, but in order to work wi
 	\caption{Mealy machine representing the functionality of a coffee machine.\cite{Steffen2011}}
 	\label{fig:coffeemealy}
 \end{figure}
+
+Since automatons deal with alphabets, formal language theory is essential not only to work with them, but to build them efficiently. Often automata are 
 
 
 \begin{definition}[Canonical automaton]
