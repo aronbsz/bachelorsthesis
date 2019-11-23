@@ -39,7 +39,7 @@ One of the most simple automaton is the Deterministic Finite Automaton.
 \end{definition}
 
 
-An example of a DFA (Deterministic Finite Automaton) from\cite{Steffen2011} can be seen in Fig. \ref{fig:dfaexample}. This example has four states, $S = \{q_0, q_1, q_2, q_3\}$ (hence $|S| = 4$). The initial state is marked by the start arrow, so $s_0 = q_0$. The alphabet can be inferred as $\Sigma = \{a, b\}$ because of the deterministic in Deterministic Finite automaton, meaning every state must deterministically know what input causes what action. This means, that every state must have every member of the alphabet listed in its transitions. Transitions are visualized as $q_0$ $\xrightarrow[]{\text{a}}$ $q_1$ given by the transition function (in this example) $\delta(q_0, a) = q_1$. The whole of the transition function in a table form can be seen in Table \ref{tab:dfaexampledelta}. Finally, the accepting states, or in this case, accepting state of the automaton is $F = \{q_3\}$.
+An example of a DFA (Deterministic Finite Automaton) from\cite{10.1007/978-3-319-11164-3_26} can be seen in Fig. \ref{fig:dfaexample}. This example has four states, $S = \{q_0, q_1, q_2, q_3\}$ (hence $|S| = 4$). The initial state is marked by the start arrow, so $s_0 = q_0$. The alphabet can be inferred as $\Sigma = \{a, b\}$ because of the deterministic in Deterministic Finite automaton, meaning every state must deterministically know what input causes what action. This means, that every state must have every member of the alphabet listed in its transitions. Transitions are visualized as $q_0$ $\xrightarrow[]{\text{a}}$ $q_1$ given by the transition function (in this example) $\delta(q_0, a) = q_1$. The whole of the transition function in a table form can be seen in Table \ref{tab:dfaexampledelta}. Finally, the accepting states, or in this case, accepting state of the automaton is $F = \{q_3\}$.
 
 When talking about automata, it is important to discuss runs. A run of an automaton is to test for a certain input (word), if it is accepted or rejected. An example run of Fig. \ref{fig:dfaexample} with an input of $\{a, a, a\}$ would (following the transition function) end in state $q_3$ meaning the input is accepted. A rejected input could be $\{a, b, b\}$, which would stop at state $q_1$, a non-accepting state. On deeper examination, one can see, that this automaton only accepts runs with inputs containing $4i+3 a$.
 
@@ -102,7 +102,7 @@ An example of a deterministic Mealy machine can be seen in Fig. \ref{fig:coffeem
 	\item $\Omega$ = \{$\checkmark$, \Coffeecup, $\star$\}
 \end{itemize}
 
-The transitions, as seen in \ref{fig:coffeemealy} are visualized as $s_0$ $\xrightarrow[]{\text{input/output}}$ $s_1$, which denotes the machine moving from state $s_0$ to state $s_1$ on the specified input, while causing the specified output. Also, some simplifications are done, e.g. in this transition: d $\xrightarrow[]{\text{\{water,pod\}/\checkmark}}$ d we see a visual simplification of having both transitions merged to one arrow, this is only for visual convenience. Fig. \ref{fig:coffeemealy} is also a great example of sinks, as seen in state f, the machine accepts anything, and never changes. This is a variation of the accepting state seen in DFAs.
+The transitions, as seen in \ref{fig:coffeemealy} are visualized as $s_0$ $\xrightarrow[]{\text{input/output}}$ $s_1$, which denotes the machine moving  state $s_0$ to state $s_1$ on the specified input, while causing the specified output. Also, some simplifications are done, e.g. in this transition: d $\xrightarrow[]{\text{\{water,pod\}/\checkmark}}$ d we see a visual simplification of having both transitions merged to one arrow, this is only for visual convenience. Fig. \ref{fig:coffeemealy} is also a great example of sinks, as seen in state f, the machine accepts anything, and never changes. This is a variation of the accepting state seen in DFAs.
 
 \begin{figure}[H]
 	\centering
@@ -111,7 +111,14 @@ The transitions, as seen in \ref{fig:coffeemealy} are visualized as $s_0$ $\xrig
 	\label{fig:coffeemealy}
 \end{figure}
 
-Since automatons deal with alphabets, formal language theory is essential not only to work with them, but to build them efficiently. Often automata are 
+Since automatons deal with alphabets, formal language theory is essential not only to work with them, but to build them efficiently. Often automata are used to model and test real-life systems. Naturally, questions of efficiency, correctness arise, which is why we will next expand on the relations of automatons and formal languages.
+
+In order to do this, we need some semantic helpers. $\delta^*$ is an extension of the $\delta$ transition function, as $\delta^*: S\times\Sigma^* \to S$ defined by $\delta^*(s,\epsilon) = s$ and $\delta^*(s, \alpha w) = \delta^*(\delta(s, \alpha), w)$, essentially giving us the state of the automaton after running an input sequence from a specified state. The same extension is done with the output function, as $\lambda^*: S\times\Sigma^* \to \Omega$, defined by $\lambda^*(s, \epsilon) = \varnothing$ and $\lambda^*(s, w\alpha) = \lambda(\delta^*(s, w), \alpha)$.
+
+
+
+When monitoring the behavior of Mealy machines, one of the most important metrics given an input is not whether it is accepted or rejected (as it would be with a DFA), but rather what specific output was caused by an input. The behavior of a Mealy machine, a specific run of it, has a pattern of \textit{$i_1,o_1,i_2,o_2,..,i_n,o_n$}, where \textit{i} are inputs and \textit{o} are outputs. But in order to characterize these runs, we actually do not need every output from this pattern, we only need the final one. This means, that a $\llbracket M\rrbracket$: $\Sigma^*\to\Omega$ semantic functional fully captures the behavioral semantics of Mealy machines. We define $\llbracket M\rrbracket$: $\Sigma^*\to\Omega$ as  $\llbracket M\rrbracket$(w) = $\lambda^*(s_0, w)$. Informally,  $\llbracket M\rrbracket$ functional accepts a set of inputs, and returns the last output given after running them from the initial state of the automaton.
+
 
 
 \begin{definition}[Canonical automaton]
