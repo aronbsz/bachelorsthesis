@@ -1,0 +1,33 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Angluin(1987)]{ANGLUIN198787}
+Dana Angluin.
+\newblock Learning regular sets from queries and counterexamples.
+\newblock \emph{Information and Computation}, 75\penalty0 (2):\penalty0 87 --
+  106, 1987.
+\newblock ISSN 0890-5401.
+\newblock URL \url{https://doi.org/10.1016/0890-5401(87)90052-6}.
+
+\bibitem[Howar and Steffen(2018)]{Howar2018}
+Falk Howar and Bernhard Steffen.
+\newblock \emph{Active Automata Learning in Practice}, pages 123--148.
+\newblock Springer International Publishing, Cham, 2018.
+\newblock ISBN 978-3-319-96562-8.
+\newblock \doi{10.1007/978-3-319-96562-8_5}.
+\newblock URL \url{https://doi.org/10.1007/978-3-319-96562-8_5}.
+
+\bibitem[Steffen et~al.(2011)Steffen, Howar, and Merten]{Steffen2011}
+Bernhard Steffen, Falk Howar, and Maik Merten.
+\newblock \emph{Introduction to Active Automata Learning from a Practical
+  Perspective}, pages 256--296.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
+\newblock ISBN 978-3-642-21455-4.
+\newblock \doi{10.1007/978-3-642-21455-4_8}.
+\newblock URL \url{https://doi.org/10.1007/978-3-642-21455-4_8}.
+
+\end{thebibliography}
