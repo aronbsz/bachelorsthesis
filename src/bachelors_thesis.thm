@@ -6,7 +6,10 @@
 \select@language {english} \contentsline {example}{{\pelda }{2}{}}{3}{example.2}% 
 \select@language {english} \contentsline {definition}{{\definicio }{5}{Mealy machine}}{4}{definition.5}% 
 \select@language {english} \contentsline {example}{{\pelda }{3}{}}{4}{example.3}% 
-\select@language {english} \contentsline {definition}{{\definicio }{6}{Canonical automaton}}{5}{definition.6}% 
-\select@language {english} \contentsline {definition}{{\definicio }{7}{Fluxuskondenzátor térerőssége}}{21}{definition.7}% 
-\select@language {english} \contentsline {example}{{\pelda }{4}{}}{21}{example.4}% 
-\select@language {english} \contentsline {theorem}{{\tetel }{1}{Kovács tétele}}{21}{theorem.1}% 
+\select@language {english} \contentsline {definition}{{\definicio }{6}{Recognized language of automata}}{5}{definition.6}% 
+\select@language {english} \contentsline {definition}{{\definicio }{7}{Regular language}}{5}{definition.7}% 
+\select@language {english} \contentsline {example}{{\pelda }{4}{}}{5}{example.4}% 
+\select@language {english} \contentsline {definition}{{\definicio }{8}{Canonical automaton}}{6}{definition.8}% 
+\select@language {english} \contentsline {definition}{{\definicio }{9}{Fluxuskondenzátor térerőssége}}{22}{definition.9}% 
+\select@language {english} \contentsline {example}{{\pelda }{5}{}}{22}{example.5}% 
+\select@language {english} \contentsline {theorem}{{\tetel }{1}{Kovács tétele}}{22}{theorem.1}% 
