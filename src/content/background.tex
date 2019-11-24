@@ -135,9 +135,25 @@ Since automatons deal with alphabets, formal language theory is essential not on
 	A formal language L is regular, iff there exists a Deterministic Finite Automaton M, for which L(M) = L, in other words, iff there exists a DFA with the recognized language of L.
 \end{definition}
 
-Next, we will introduce regularity to Mealy machines, which are a bit more complex in this regard.
+We will now introduce a semantic helper $\delta^*$ for both DFAs and Mealy machines. $\delta^*$ is an extension of the $\delta$ transition function, as $\delta^*: S\times\Sigma^* \to S$ defined by $\delta^*(s,\epsilon) = s$ and $\delta^*(s, \alpha w) = \delta^*(\delta(s, \alpha), w)$, essentially giving us the state of the automaton after running an input sequence from a specified state.
 
-In order to do this, we need to introduce some semantic helpers. $\delta^*$ is an extension of the $\delta$ transition function, as $\delta^*: S\times\Sigma^* \to S$ defined by $\delta^*(s,\epsilon) = s$ and $\delta^*(s, \alpha w) = \delta^*(\delta(s, \alpha), w)$, essentially giving us the state of the automaton after running an input sequence from a specified state. The same extension is done with the output function, as $\lambda^*: S\times\Sigma^* \to \Omega$, defined by $\lambda^*(s, \epsilon) = \varnothing$ and $\lambda^*(s, w\alpha) = \lambda(\delta^*(s, w), \alpha)$.
+\begin{definition}[Myhill-Nerode relation] 
+	A DFA $M=(S,s_{0},\Sigma,\delta,F)$ induces the following equivalence relation $\equiv_M$ on $\Sigma^*$ (when L(M) = $\Sigma$):\\
+	\null\qquad$x\equiv_M y \iff \delta^*(s, x) = \delta^*(s, y)$\\
+	where $x, y\in\Sigma^*$. This means, that x and y are equivalent with respect to $\equiv_M$.\cite{Kozen1977}.
+\end{definition}
+
+The Myhill-Nerode relation is an equivalence relation, meaning $x\equiv_M y$ is reflexive, symmetric and transitive. Also, the following properties apply to it\cite{Kozen1977}.
+
+\begin{itemize}
+	\item Right congruence: $\forall x, y\in\Sigma^*: (x\equiv_M y \implies 		\forall a\in\Sigma: xa\equiv_Mya)$\\ also, by induction, this can be extended to:\\
+	$\forall x, y\in\Sigma^*: (x\equiv_M y \implies \forall w\in\Sigma^*: xw\equiv_Myw)$. 
+	\item It respects membership wrt. R:\\
+	$\forall x, y\in\Sigma^*: x\equiv_M y \implies (x\in R \iff y\in R)$
+	\item $\equiv_M$ is of finite index, has finitely many equivalency classes. Since for every state $s\in S$, the sequences which end up in s are in the same equivalence class, the number of these classes is exactly $|S|$, which is a finite set.
+\end{itemize}
+
+Next, we will introduce the same topics to Mealy machines, which are a bit more complex in this regard. In order to do this, we need to introduce a semantic helper similar to $\delta^*$, but considering the output function of Mealy machines. $\lambda^*: S\times\Sigma^* \to \Omega$, defined by $\lambda^*(s, \epsilon) = \varnothing$ and $\lambda^*(s, w\alpha) = \lambda(\delta^*(s, w), \alpha)$.
 
 
 
@@ -153,7 +169,11 @@ When monitoring the behavior of Mealy machines, one of the most important metric
 	are not, since these input sequences do not produce those outputs.
 \end{example}
 
-Now that we have the semantic functional $P:\Sigma^*\to\Omega$, we can introduce the concept of regularity to Mealy machines, but first, let's see what regularity means in DFAs.
+Similarly to the Myhill-Nerod relations in DFAs, we can introduce an equivalence relation over the $\llbracket M \rrbracket$ functional.
+
+\begin{definition}[Equivalence of words wrt. $\llbracket M \rrbracket$]
+	Given a Mealy machine $M=(S,s_{0},\Sigma,\Omega,\delta,\lambda) $, two words, $u, u'\in\Sigma^*$ are equivalent with respect to $\equiv_{\llbracket M \rrbracket}$ iff for all $v\in\Sigma^*$ continuations $\lambda^*(uv) = \lambda^*(u'v)$.
+\end{definition}
 
 
 

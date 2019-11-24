@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  24 NOV 2019 17:15
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  24 NOV 2019 22:09
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1480,7 +1480,26 @@ File: content/coffeemealy.png Graphic file (type bmp)
 <content/coffeemealy.png>
 
 [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 171--174
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 174.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 174.
+
+
+LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
+(Font)              using `U/stmry/m/n' instead on input line 174.
+
+
+Underfull \hbox (badness 1968) in paragraph at lines 175--176
+[]\TU/lmr/m/n/10.95 Given a Mealy machine $\OML/cmm/m/it/10.95 M \OT1/cmr/m/n/1
+0.95 =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 191--194
 
  []
 
@@ -1676,25 +1695,44 @@ N 978-3-319-
  []
 
 
-Underfull \hbox (badness 2689) in paragraph at lines 25--32
+Underfull \hbox (badness 7540) in paragraph at lines 25--31
+[]\TU/lmr/m/n/10.95 Dexter C. Kozen.  \TU/lmr/m/it/10.95 Myhill—Nerode Relation
+s\TU/lmr/m/n/10.95 , pages 89–94.  Springer
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--31
+\TU/lmr/m/n/10.95 Berlin Heidelberg, Berlin, Heidelberg, 1977.  ISBN 978-3-642-
+85706-5.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--31
+\TU/lmr/m/n/10.95 DOI: [][]\TU/lmtt/m/n/10.95 10.1007/978-3-642-85706-5_16[][]\
+TU/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] []
+[][][] []
+ []
+
+
+Underfull \hbox (badness 2689) in paragraph at lines 33--40
 []\TU/lmr/m/n/10.95 Bernhard Steffen, Falk Howar, and Maik Merten.  \TU/lmr/m/i
 t/10.95 Introduction to Active
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 25--32
+Underfull \hbox (badness 2452) in paragraph at lines 33--40
 \TU/lmr/m/it/10.95 Automata Learning from a Practical Perspective\TU/lmr/m/n/10
 .95 , pages 256–296.  Springer
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--32
+Underfull \hbox (badness 10000) in paragraph at lines 33--40
 \TU/lmr/m/n/10.95 Berlin Heidelberg, Berlin, Heidelberg, 2011.  ISBN 978-3-642-
 21455-4.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--32
+Underfull \hbox (badness 10000) in paragraph at lines 33--40
 \TU/lmr/m/n/10.95 DOI: [][]\TU/lmtt/m/n/10.95 10.1007/978-3-642-21455-4_8[][]\T
 U/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][
 ][][] []
@@ -1738,14 +1776,18 @@ Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 107.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 107.
 Package rerunfilecheck Info: File `bachelors_thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 80B1ABB175B23E38F0510D1339908248.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
  ) 
 Here is how much of TeX's memory you used:
- 38704 strings out of 427669
- 740955 string characters out of 3145155
- 1246091 words of memory out of 3000000
- 42151 multiletter control sequences out of 15000+200000
- 550121 words of font info for 123 fonts, out of 3000000 for 9000
+ 38732 strings out of 427669
+ 741288 string characters out of 3145155
+ 1246194 words of memory out of 3000000
+ 42169 multiletter control sequences out of 15000+200000
+ 553105 words of font info for 133 fonts, out of 3000000 for 9000
  1352 hyphenation exceptions out of 8191
  57i,16n,71p,1481b,1879s stack positions out of 5000i,500n,10000p,200000b,50000s
 

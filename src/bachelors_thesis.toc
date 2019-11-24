@@ -10,10 +10,10 @@
 \select@language {english} \contentsline {section}{\numberline {2.1}Basics of automaton theory}{2}{section.2.1}% 
 \select@language {english} \contentsline {section}{\numberline {2.2}Automaton learning}{6}{section.2.2}% 
 \select@language {english} \contentsline {paragraph}{Automaton learning}{6}{section*.7}% 
-\select@language {english} \contentsline {paragraph}{Passive automaton learning}{6}{section*.8}% 
-\select@language {english} \contentsline {paragraph}{Active automaton learning}{6}{section*.9}% 
-\select@language {english} \contentsline {paragraph}{MAT modell}{6}{section*.10}% 
-\select@language {english} \contentsline {paragraph}{Membership query}{6}{section*.11}% 
+\select@language {english} \contentsline {paragraph}{Passive automaton learning}{7}{section*.8}% 
+\select@language {english} \contentsline {paragraph}{Active automaton learning}{7}{section*.9}% 
+\select@language {english} \contentsline {paragraph}{MAT modell}{7}{section*.10}% 
+\select@language {english} \contentsline {paragraph}{Membership query}{7}{section*.11}% 
 \select@language {english} \contentsline {paragraph}{Equivalence query}{7}{section*.12}% 
 \select@language {english} \contentsline {chapter}{\numberline {3}\LaTeX -eszközök}{8}{chapter.3}% 
 \select@language {english} \contentsline {section}{\numberline {3.1}A szerkesztéshez használatos eszközök}{8}{section.3.1}% 

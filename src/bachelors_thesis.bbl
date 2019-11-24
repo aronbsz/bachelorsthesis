@@ -1,4 +1,4 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{4}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -20,6 +20,14 @@ Falk Howar and Bernhard Steffen.
 \newblock ISBN 978-3-319-96562-8.
 \newblock \doi{10.1007/978-3-319-96562-8_5}.
 \newblock URL \url{https://doi.org/10.1007/978-3-319-96562-8_5}.
+
+\bibitem[Kozen(1977)]{Kozen1977}
+Dexter~C. Kozen.
+\newblock \emph{Myhill---Nerode Relations}, pages 89--94.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1977.
+\newblock ISBN 978-3-642-85706-5.
+\newblock \doi{10.1007/978-3-642-85706-5_16}.
+\newblock URL \url{https://doi.org/10.1007/978-3-642-85706-5_16}.
 
 \bibitem[Steffen et~al.(2011)Steffen, Howar, and Merten]{Steffen2011}
 Bernhard Steffen, Falk Howar, and Maik Merten.
