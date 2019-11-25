@@ -240,7 +240,7 @@ Constructing automata to be canonical, especially in the case of Mealy machines 
 
 \noindent \textbf{Proposition (Bounded reachability\cite{Steffen2011})}: Every state of a minimal Mealy machine with n states has an access sequence, i.e., a path from the initial state to this  state,  of  length  at  most n−1.  Every  transition  of  this  Mealy  machine  can be covered by a sequence of length at most n from the initial state.
 
-The process of constructing automata we will use is partition refinement. It works based on distinguishing suffixes, suffixes of words which mark, witness the difference between two access sequences. We'll introduce the following notion to formalize this.
+The process of constructing automata will use the concept of partition refinement. It works based on distinguishing suffixes, suffixes of words which mark, witness the difference between two access sequences. We'll introduce the following notion to formalize this.
 
 
 \begin{definition}[k-distinguishability\cite{Steffen2011}]
@@ -266,7 +266,7 @@ This way, if we have an automaton M, we can construct its minimal version, by it
 	Here, \textit{water} and \textit{pod} separate a, b and c, while d and d' can still no longer be separated. If observed, even if k is increased, d and d' can not be refined. This means, that they are indistinguishable, they can be merged together without altering behavior. This shows the process of acquiring the minimal machine seen in Fig. \ref{fig:coffeemealyminimal}.
 \end{example} 
 
-The process explained in the above example is called partition refinement, the exact algorithm and proof of its validity can be seen in \cite{Steffen2011}, it is a version of the minimization algorithm for DFAs proposed by Hopcroft\cite{HOPCROFT1971189}. Active automaton learning algorithms operate in a very similar way, but they are not the same as minimization algorithms. We will extend upon this in the next section.
+The process explained in the above example is partition refinement, the exact algorithm and proof of its validity can be seen in \cite{Steffen2011}, it is a version of the minimization algorithm for DFAs proposed by Hopcroft\cite{HOPCROFT1971189}. Active automaton learning algorithms operate in a very similar way, but they are not the same as minimization algorithms. We will extend upon this in the next section.
 
 
 
