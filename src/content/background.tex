@@ -276,9 +276,16 @@ This way, if we have an automaton M, we can construct its minimal version, by it
 	since when k=1, a, b and c are not 1-distinguishable, but d and d' separate on the behavior of the \textit{button} input, while e and f are separated by the suffix \textit{clean}. Let's see the k=2 scenario.\\
 	$P_2 = \{a\}, \{b\}, \{c\}, \{d, d'\}, \{e\}, \{f\}$\\
 	Here, \textit{water} and \textit{pod} separate a, b and c, while d and d' can still no longer be separated. If observed, even if k is increased, d and d' can not be refined. This means, that they are indistinguishable, they can be merged together without altering behavior. This shows the process of acquiring the minimal machine seen in Fig. \ref{fig:coffeemealyminimal}.
+	\label{ex:partitionrefinement}
 \end{example} 
 
-The process explained in the above example is partition refinement, the exact algorithm and proof of its validity can be seen in \cite{Steffen2011}, it is a version of the minimization algorithm for DFAs proposed by Hopcroft\cite{HOPCROFT1971189}. Active automaton learning algorithms operate in a very similar way, but they are not the same as minimization algorithms. We will extend upon this in the next section.
+The process explained in the above example is partition refinement, the exact algorithm and proof of its validity can be seen in \cite{Steffen2011}, it is a version of the minimization algorithm for DFAs proposed by Hopcroft\cite{HOPCROFT1971189}. 
+
+We will define one last relation which will help us in the next section to compare automata minimization and automata learning.
+
+Let  $M=(S,s_{0},\Sigma,\Omega,\delta,\lambda)$ and $M=(S',s_{0}',\Sigma,\Omega,\delta',\lambda')$ be two Mealy machines with shared alphabets. We call a surjective function $f_k: S \to S'$ existential k-epimorphism between $M$ and $M'$, if for all $s'\in S', s\in S$ where $f_k(s) = s'$ and with any $\alpha\in\Sigma$, we have: $f_k(\delta(s,\alpha)) = \delta'(s',\alpha)$, and all states, that are mapped by $f_k$ to the same state of $M'$ are not k-distinguishable. It is straightforward to establish that all intermediate models arising during the partition refinement process are images of the considered Mealy machine under a k-epimorphism, where k is the number of times all transitions have been investigated.\cite{Steffen2011} Essentially this establishes $P_1$ and $P_2$ from Example \ref*{ex:partitionrefinement} as images of the Mealy machine seen in Fig. \ref{ex:coffeemealy} under k-epimorphisms where k=1 and k=2 respectively.
+
+Active automaton learning algorithms operate in a very similar way, but they are not the same as minimization algorithms, since they do not have access to the automatons they are learning. We will extend upon this in the next section.
 
 
 
@@ -306,17 +313,65 @@ Active automaton learning follows the MAT, or the Minimally Adequate Teacher mod
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{figures/flowchartlearning}
-	\caption{}
+	\includegraphics[width=1.0\linewidth]{figures/flowchartlearning}
+	\caption{Abstract model of active automata learning algorithms}
 	\label{fig:flowchartlearning}
 \end{figure}
 
-As seen on Fig. \ref{fig:flowchartlearning}, the learning proceeds in round, generating and refining hypothesis models by exploring the SUL via membership queries. As the equivalence checks produce counterexamples, the next round of this hypothesis refinement is steered by the counterexamples produced.
+As seen on Fig. \ref{fig:flowchartlearning}, the learning proceeds in rounds, generating and refining hypothesis models by exploring the SUL via membership queries. As the equivalence checks produce counterexamples, the next round of this hypothesis refinement is steered by the counterexamples produced.
 
-Using an analogous strategy to the minimization of automatons seen in the previous section, starting only with one state hypothesis automaton we explore over all words in the alphabet in order to refine and extend it. Here, there is a dual way of characterizing (and distinguishing) between states\cite{Steffen2011}:
+Using an analogous strategy to the minimization of automatons seen in the previous section, starting only with a one state hypothesis automaton, we explore over all words in the alphabet in order to refine and extend it. Here, there is a dual way of characterizing (and distinguishing) between states\cite{Steffen2011}:
 \begin{itemize}
 	\item By words reaching them. A prefix-closed set of $S_p$ words, reaching each state exactly once, defines a spanning tree of the automaton. This characterization aims at providing exactly one representative element from each class of $\equiv_P$ on the SUL. Active learning algorithms incrementally construct such a set $S_p$. \\This prefix-closedness is necessary for $S_p$ to be a "spanning tree" of the Mealy machine. Extending $S_p$ with all the one-letter continuations of words in $S_p$ will result in the tree covering all the transitions of the Mealy machine. $L_p$ will denote all the one-letter continuations that are not already contained in $S_p$.
 	\item By their future behavior with respect to an increasing vector of words of $\Sigma^*$. This vector $<d_1, d_2,...,d_k>$ will be denoted by $D$, and contains the "distinguishing suffixes". The corresponding future behavior of a state, here given in terms of its access sequence $u\in S_p$, is the output vector$<mq(u*d_1), ..., mq(u*d_k)>\in\Omega^k$, which leads to an upper approximation of the classes of $\equiv_{\llbracket SUL\rrbracket}$. Active learning incrementally refines this approximation by extending the vector until the approximation is precise.
 \end{itemize}
-While the second characterization defines the states of the automaton, where each output vector corresponds to one state, the spanning tree on $L_p$ is used to determine the transitions of these states.
+While the second characterization defines the states of the automaton, where each output vector corresponds to one state, the spanning tree on $L_p$ is used to determine the transitions of these states. In order to characterize the relation between the SUL $M=(S,s_{0},\Sigma,\Omega,\delta,\lambda)$ and the hypothesis model $M'=(S',s_{0}',\Sigma,\Omega,\delta',\lambda')$ (note, that $M$ and $M'$ only share alphabets) let $D\subseteq\Sigma^*$. We call a surjective function $f_D:S\to S'$ existential D-epimorphism (surjective homomorphism) between $M$ and $M'$ if, for all $s'\in S'$ there exists an $s\in S$ with $f_D(s) = s'$ such that for all $\alpha \in \Sigma$ and all $d\in D$: $f_D(\delta(s, \alpha)) = \delta'(s', \alpha)$, and $\lambda^*(s,d) = \lambda^*(s', d)$. \\
+Note, that active learning deals with canonical Mealy machines, in other words, the canonical form of SUL, and not, the perhaps much larger Mealy machine of SUL itself. \\
+
+Since active learning algorithms maintain an incrementally growing extended spanning tree for $H=(S_H, h_0, \Sigma, \Omega, \delta_H, \lambda_H)$, i.e., a prefix-closed set of words reaching all its states and covering all transitions, it is straightforward to establish that these hypothesis models are images of the canonical version of SUL under a canonical existential D-epimorphism, where D is the set of distinctive futures underlying the hypothesis construction\cite{Steffen2011}
+\begin{itemize}
+	\item define $f_D : S_{SUL}\to S_H$ by $f_D(s) = h$ as following: if $\exists w\in S_p \cup L_p$, where $\delta(s_0, w) = s$, then $h = \delta_H(h_0,w)$. Otherwise h may be chosen arbitrarily.
+	\item It suffices to consider the states reached by words in the spanning tree to establish the defining properties of $f_D$. This straightforwardly yields:
+	\begin{itemize}
+		\item $f_D(\delta(s,\alpha)) = \delta_H(h, \alpha)$ for all $\alpha\in\Sigma$, which reflects the characterization from below.
+		\item $\lambda^*(s, d) = \lambda^*_H(h,d)$ for all $d\in D$, which follows from the maintained characterization from above.\cite{Steffen2011}
+	\end{itemize}
+\end{itemize}
+
+In basic logic, D-epimorphisms and k-epimorphisms do not differ, they both deal with establishing constructed models being images of the model they are based on. D-epimorphisms could replace k-epimorphisms where $D=\Sigma^k$, it can be suggested, that there is no need to differentiate. However, the there is in important difference of complexity between the two. While k-distinguishability supports polynomial time, black-box systems do not. Also, the "existential" in existential D-epimorphism is important: $f_D$ must deal with unknown states, ones that haven't been encountered yet. This implies that characterization can only be valid for already encountered states.
+
+Active learning algorithms can be proven correct using the following three-step pattern:
+\begin{itemize}
+	\item Invariance: The number of states of each hypothesis has an upper bound of $\equiv_{\llbracket SUL\rrbracket}$.
+	\item Progress: Before the final partition is reached, an equivalence query will provide a counterexample, where an input word leads to a different output on the SUL and on the hypothesis. This difference can only be resolved by splitting at least one state, which increases the state count.
+	\item Termination: The refinement terminates after at most the index of $\equiv_{\llbracket SUL\rrbracket}$ many steps, caused directly by the described invariance and progress properties.
+\end{itemize}
+
+The following subsection introduces the first active automaton learning algorithm this thesis covers.
+
+\subsection{Direct Hypothesis Construction}
+The Direct Hypothesis Construction algorithm, as seen in Algorithm \ref{algo:dhc}  follows the idea of the breath-first search of graph theory, it constructs the hypothesis using a queue of states, which is initialized with the states of the spanning tree to be maintained. Explored states are removed from this queue, while the discovered successors are enqueued, if they are provably new states. The algorithm starts with a one-state hypothesis, including only the initial state, reached by $\epsilon$ and D = $\Sigma$. It then tries to complete the hypothesis, for every state we determine the behavior of the state under D, which we will call the extended signature of said state. States with a new extended signatures are provably new states, so to guarantee further investigation, we enqueue all their successors. Initially, $D=\Sigma$, so only the $1^=$-distinguishable states are revealed during the first iteration. This is extended straightforwardly to comprise a prefix closed set of access sequences.\cite{Steffen2011}\cite{10.1007/978-3-642-34781-8_19}
+
+\begin{algorithm}[H]
+	\KwIn{$S_p$: a set of access sequences, D: a set of suffixes, an input alphabet $\Sigma$}
+	\KwOut{A Mealy machine $H=(S, s_0, \Sigma, \Omega, \delta, \lambda)$}
+	initialize hypothesis H, create a state for all elements of $S_p$\;
+	initialize a queue Q with the states of H\;
+	\While{Q is not empty}{
+		s = dequeue state from Q\;
+		u = access sequence from $s_0$ to s\;
+		\For{$d\in D$}{
+			o = mq($u\*d$)\;
+			set $\lambda(s,d) = o$\;
+		}
+		\eIf{exists an $s'\in S$, where the output signature of $s'$ is the same as $s$}{
+			reroute transitions of $s$ to $s'$ in H\;
+			remove $s$ from H\;
+		}{
+			create and enqueue successors of $s$ for every input in $\Sigma$ into Q\;
+		}
+	}
+	\caption{The Direct Hypothesis Construction algorithm as seen in \cite{Steffen2011}.}
+	\label{algo:dhc}
+\end{algorithm}
 

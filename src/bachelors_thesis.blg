@@ -11,6 +11,10 @@ A level-1 auxiliary file: content/template-usage.aux
 A level-1 auxiliary file: content/acknowledgement.aux
 A level-1 auxiliary file: content/appendices.aux
 Database file #1: bib/mybib.bib
+Repeated entry---line 98 of file bib/mybib.bib
+ : @inproceedings{10.1007/978-3-642-34781-8_19
+ :                                            ,
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Jeney"
 Warning--I didn't find a database entry for "Wettl04"
 Warning--I didn't find a database entry for "Candy86"
@@ -21,4 +25,4 @@ Warning--I didn't find a database entry for "Mkrtychev:1997"
 Warning--I didn't find a database entry for "DipPortal"
 Warning--can't use both author and editor fields in Howar2018
 Warning--can't use both author and editor fields in Steffen2011
-(There were 10 warnings)
+(There was 1 error message)

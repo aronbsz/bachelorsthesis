@@ -1,4 +1,4 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{7}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -38,6 +38,16 @@ Dexter~C. Kozen.
 \newblock ISBN 978-3-642-85706-5.
 \newblock \doi{10.1007/978-3-642-85706-5_16}.
 \newblock URL \url{https://doi.org/10.1007/978-3-642-85706-5_16}.
+
+\bibitem[Merten et~al.(2012)Merten, Howar, Steffen, and
+  Margaria]{10.1007/978-3-642-34781-8_19}
+Maik Merten, Falk Howar, Bernhard Steffen, and Tiziana Margaria.
+\newblock Automata learning with on-the-fly direct hypothesis construction.
+\newblock In Reiner H{\"a}hnle, Jens Knoop, Tiziana Margaria, Dietmar
+  Schreiner, and Bernhard Steffen, editors, \emph{Leveraging Applications of
+  Formal Methods, Verification, and Validation}, pages 248--260, Berlin,
+  Heidelberg, 2012. Springer Berlin Heidelberg.
+\newblock ISBN 978-3-642-34781-8.
 
 \bibitem[Nerode(1958)]{10.2307/2033204}
 A.~Nerode.
