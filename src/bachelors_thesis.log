@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  24 NOV 2019 22:09
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  25 NOV 2019 01:15
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1480,37 +1480,39 @@ File: content/coffeemealy.png Graphic file (type bmp)
 <content/coffeemealy.png>
 
 [4] [5]
+Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
+t line 159.
+
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 174.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 187.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 174.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 187.
 
 
 LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
-(Font)              using `U/stmry/m/n' instead on input line 174.
+(Font)              using `U/stmry/m/n' instead on input line 187.
 
-
-Underfull \hbox (badness 1968) in paragraph at lines 175--176
-[]\TU/lmr/m/n/10.95 Given a Mealy machine $\OML/cmm/m/it/10.95 M \OT1/cmr/m/n/1
-0.95 =
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 191--194
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 205--215
 
  []
 
-[6]) [7]
+
+Underfull \hbox (badness 10000) in paragraph at lines 230--233
+
+ []
+
+[7]) [8]
 \openout2 = `content/latex-tools.aux'.
 
  (content/latex-tools.tex
 Chapter 3.
 File: figures/TeXstudio.png Graphic file (type bmp)
 <figures/TeXstudio.png>
-[8
+[9
 
 
 
@@ -1528,10 +1530,10 @@ Underfull \hbox (badness 1033) in paragraph at lines 33--34
 n legegyszerűbben az
  []
 
-[9]
+[10]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 43.
-) [10]
+) [11]
 \openout2 = `content/thesis-format.aux'.
 
  (content/thesis-format.tex
@@ -1549,19 +1551,19 @@ változtatásokkal
  []
 
 
-Package natbib Warning: Citation `Jeney' on page 11 undefined on input line 24.
+Package natbib Warning: Citation `Jeney' on page 12 undefined on input line 24.
 
 
-) [11
+) [12
 
 
 
-] [12]
+] [13]
 \openout2 = `content/template-usage.aux'.
 
  (content/template-usage.tex
 Chapter 5.
-[13
+[14
 
 
 
@@ -1574,7 +1576,7 @@ File: figures/TeXstudio.png Graphic file (type bmp)
 <figures/TeXstudio.png>
 File: figures/TeXstudio.png Graphic file (type bmp)
 <figures/TeXstudio.png>
- [14] [15]
+ [15] [16]
 ("C:\Users\Aron\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings\lstlang1.s
 ty"
 File: lstlang1.sty 2019/02/27 1.8b listings language file
@@ -1617,7 +1619,7 @@ File: lstmisc.sty 2019/02/27 1.8b (Carsten Heinz)
 )
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 98.
- [16] [17] [18]
+ [17] [18] [19]
 Underfull \hbox (badness 1496) in paragraph at lines 238--240
 [][]\TU/lmtt/m/n/10.95 \cite{Lee87}[]\TU/lmr/m/n/10.95 , [][]\TU/lmtt/m/n/10.95
  \cite{KissPhD}[]\TU/lmr/m/n/10.95 , [][]\TU/lmtt/m/n/10.95 \cite{Schreirer00}[
@@ -1626,31 +1628,31 @@ Underfull \hbox (badness 1496) in paragraph at lines 238--240
  []
 
 
-Package natbib Warning: Citation `Wettl04' on page 19 undefined on input line 2
+Package natbib Warning: Citation `Wettl04' on page 20 undefined on input line 2
 45.
 
 
-Package natbib Warning: Citation `Candy86' on page 19 undefined on input line 2
+Package natbib Warning: Citation `Candy86' on page 20 undefined on input line 2
 45.
 
 
-Package natbib Warning: Citation `Lee87' on page 19 undefined on input line 245
+Package natbib Warning: Citation `Lee87' on page 20 undefined on input line 245
 .
 
 
-Package natbib Warning: Citation `KissPhD' on page 19 undefined on input line 2
+Package natbib Warning: Citation `KissPhD' on page 20 undefined on input line 2
 45.
 
 
-Package natbib Warning: Citation `Schreier00' on page 19 undefined on input lin
+Package natbib Warning: Citation `Schreier00' on page 20 undefined on input lin
 e 245.
 
 
-Package natbib Warning: Citation `Mkrtychev:1997' on page 19 undefined on input
+Package natbib Warning: Citation `Mkrtychev:1997' on page 20 undefined on input
  line 245.
 
 
-Package natbib Warning: Citation `DipPortal' on page 19 undefined on input line
+Package natbib Warning: Citation `DipPortal' on page 20 undefined on input line
  245.
 
 
@@ -1666,7 +1668,7 @@ Underfull \hbox (badness 1902) in paragraph at lines 247--248
 z a
  []
 
-[19]
+[20]
 Underfull \hbox (badness 10000) in paragraph at lines 258--259
 []\TU/lmr/m/n/10.95 1 oldalas \TU/lmr/m/it/10.95 tájékoztató \TU/lmr/m/n/10.95 
 a szakdolgozat/diplomaterv szerkezetéről
@@ -1678,13 +1680,10 @@ Underfull \hbox (badness 4108) in paragraph at lines 265--266
 /10.95 : a feladatkiírás pontosítása és részletes el-
  []
 
-[20] [21]
-Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
-t line 314.
-) [22]
+[21] [22]) [23]
 \openout2 = `content/acknowledgement.aux'.
 
- (content/acknowledgement.tex) [23
+ (content/acknowledgement.tex) [24
 
 
 
@@ -1714,31 +1713,31 @@ TU/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] []
  []
 
 
-Underfull \hbox (badness 2689) in paragraph at lines 33--40
+Underfull \hbox (badness 2689) in paragraph at lines 41--48
 []\TU/lmr/m/n/10.95 Bernhard Steffen, Falk Howar, and Maik Merten.  \TU/lmr/m/i
 t/10.95 Introduction to Active
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 33--40
+Underfull \hbox (badness 2452) in paragraph at lines 41--48
 \TU/lmr/m/it/10.95 Automata Learning from a Practical Perspective\TU/lmr/m/n/10
 .95 , pages 256–296.  Springer
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 33--40
+Underfull \hbox (badness 10000) in paragraph at lines 41--48
 \TU/lmr/m/n/10.95 Berlin Heidelberg, Berlin, Heidelberg, 2011.  ISBN 978-3-642-
 21455-4.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 33--40
+Underfull \hbox (badness 10000) in paragraph at lines 41--48
 \TU/lmr/m/n/10.95 DOI: [][]\TU/lmtt/m/n/10.95 10.1007/978-3-642-21455-4_8[][]\T
 U/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][
 ][][] []
  []
 
-) [24
+) [25
 
 
 ]
@@ -1747,7 +1746,7 @@ U/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][
  (content/appendices.tex
 File: figures/TeXstudio.png Graphic file (type bmp)
 <figures/TeXstudio.png>
- [25
+ [26
 
 
 ]
@@ -1755,7 +1754,7 @@ Underfull \hbox (badness 1577) in paragraph at lines 20--20
 []\TU/lmr/bx/n/14.4 Válasz az „Élet, a világmindenség, meg minden”
  []
 
-) [26
+) [27
 
 ]
 \tf@thm=\write6
@@ -1783,12 +1782,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
  ) 
 Here is how much of TeX's memory you used:
- 38732 strings out of 427669
- 741288 string characters out of 3145155
- 1246194 words of memory out of 3000000
- 42169 multiletter control sequences out of 15000+200000
+ 38735 strings out of 427669
+ 741357 string characters out of 3145155
+ 1246261 words of memory out of 3000000
+ 42172 multiletter control sequences out of 15000+200000
  553105 words of font info for 133 fonts, out of 3000000 for 9000
  1352 hyphenation exceptions out of 8191
  57i,16n,71p,1481b,1879s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on bachelors_thesis.pdf (32 pages).
+Output written on bachelors_thesis.pdf (33 pages).

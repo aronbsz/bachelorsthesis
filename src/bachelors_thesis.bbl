@@ -1,4 +1,4 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{5}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -28,6 +28,14 @@ Dexter~C. Kozen.
 \newblock ISBN 978-3-642-85706-5.
 \newblock \doi{10.1007/978-3-642-85706-5_16}.
 \newblock URL \url{https://doi.org/10.1007/978-3-642-85706-5_16}.
+
+\bibitem[Nerode(1958)]{10.2307/2033204}
+A.~Nerode.
+\newblock Linear automaton transformations.
+\newblock \emph{Proceedings of the American Mathematical Society}, 9\penalty0
+  (4):\penalty0 541--544, 1958.
+\newblock ISSN 00029939, 10886826.
+\newblock URL \url{http://www.jstor.org/stable/2033204}.
 
 \bibitem[Steffen et~al.(2011)Steffen, Howar, and Merten]{Steffen2011}
 Bernhard Steffen, Falk Howar, and Maik Merten.

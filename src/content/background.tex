@@ -145,6 +145,7 @@ We will now introduce a semantic helper $\delta^*$ for both DFAs and Mealy machi
 
 The Myhill-Nerode relation is an equivalence relation, meaning $x\equiv_M y$ is reflexive, symmetric and transitive. Also, the following properties apply to it\cite{Kozen1977}.
 
+
 \begin{itemize}
 	\item Right congruence: $\forall x, y\in\Sigma^*: (x\equiv_M y \implies 		\forall a\in\Sigma: xa\equiv_Mya)$\\ also, by induction, this can be extended to:\\
 	$\forall x, y\in\Sigma^*: (x\equiv_M y \implies \forall w\in\Sigma^*: xw\equiv_Myw)$. 
@@ -153,11 +154,23 @@ The Myhill-Nerode relation is an equivalence relation, meaning $x\equiv_M y$ is 
 	\item $\equiv_M$ is of finite index, has finitely many equivalency classes. Since for every state $s\in S$, the sequences which end up in s are in the same equivalence class, the number of these classes is exactly $|S|$, which is a finite set.
 \end{itemize}
 
+Using this relation, we can introduce the Myhill-Nerode theorem, which neatly ties together the previous definitions.
+
+\begin{theorem}[Myhill-Nerode theorem\cite{Kozen1977}\cite{10.2307/2033204}]
+	Let $L\subseteq\Sigma^*$. The following three statements are equivalent:
+	\begin{itemize}
+		\item L is regular.
+		\item there exists a Myhill-Nerode relation for L.
+		\item the relation $\equiv_L$ is of finite index.
+	\end{itemize}
+	For proof, see \cite{Kozen1977}\cite{10.2307/2033204}.
+\end{theorem}
+
 Next, we will introduce the same topics to Mealy machines, which are a bit more complex in this regard. In order to do this, we need to introduce a semantic helper similar to $\delta^*$, but considering the output function of Mealy machines. $\lambda^*: S\times\Sigma^* \to \Omega$, defined by $\lambda^*(s, \epsilon) = \varnothing$ and $\lambda^*(s, w\alpha) = \lambda(\delta^*(s, w), \alpha)$.
 
 
 
-When monitoring the behavior of Mealy machines, one of the most important metrics given an input is not whether it is accepted or rejected (as it would be with a DFA), but rather what specific output was caused by an input. The behavior of a Mealy machine, a specific run of it, has a pattern of \textit{$i_1,o_1,i_2,o_2,..,i_n,o_n$}, where \textit{i} are inputs and \textit{o} are outputs. But in order to characterize these runs, we actually do not need every output from this pattern, we only need the final one. This means, that a $\llbracket M\rrbracket$: $\Sigma^*\to\Omega$ semantic functional fully captures the behavioral semantics of Mealy machines. We define $\llbracket M\rrbracket$: $\Sigma^*\to\Omega$ as  $\llbracket M\rrbracket$(w) = $\lambda^*(s_0, w)$. Informally,the  $\llbracket M\rrbracket$ functional accepts a set of inputs, and returns the last output given after running them from the initial state of the automaton.
+When monitoring the behavior of Mealy machines, one of the most important metrics given an input is not whether it is accepted or rejected (as it would be with a DFA), but rather what specific output was caused by an input. The behavior of a Mealy machine, a specific run of it, has a pattern of \textit{$i_1,o_1,i_2,o_2,..,i_n,o_n$}, where \textit{i} are inputs and \textit{o} are outputs. But in order to characterize these runs, we actually do not need every output from this pattern, we only need the final one. This means, that a $\llbracket M\rrbracket$: $\Sigma^*\to\Omega$ semantic functional fully captures the behavioral semantics of Mealy machines. We define $\llbracket M\rrbracket$: $\Sigma^*\to\Omega$ as  $\llbracket M\rrbracket$(w) = $\lambda^*(s_0, w)$. Informally,the  $\llbracket M\rrbracket$ functional accepts a set of inputs, and returns the last output given after running them from the initial state of the automaton. 
 
 \begin{example}
 	Given the Mealy machine $M\textsubscript{coffeemachine}$ in Fig. \ref{fig:coffeemealy}, the runs:\\
@@ -169,13 +182,39 @@ When monitoring the behavior of Mealy machines, one of the most important metric
 	are not, since these input sequences do not produce those outputs.
 \end{example}
 
-Similarly to the Myhill-Nerod relations in DFAs, we can introduce an equivalence relation over the $\llbracket M \rrbracket$ functional.
+Similarly to the Myhill-Nerod relations in DFAs, we can introduce an equivalence relation over the $P: \Sigma^*\to\Omega$ functional. P being an abstraction of $\llbracket M\rrbracket$, since the latter only maps from initial states.
 
-\begin{definition}[Equivalence of words wrt. $\llbracket M \rrbracket$]
-	Given a Mealy machine $M=(S,s_{0},\Sigma,\Omega,\delta,\lambda) $, two words, $u, u'\in\Sigma^*$ are equivalent with respect to $\equiv_{\llbracket M \rrbracket}$ iff for all $v\in\Sigma^*$ continuations $\lambda^*(uv) = \lambda^*(u'v)$.
+\begin{definition}[Equivalence of words wrt. $\equiv_P$\cite{Steffen2011}]
+	Given a Mealy machine $M=(S,s_{0},\Sigma,\Omega,\delta,\lambda) $, two words, $u, u'\in\Sigma^*$ are equivalent with respect to $\equiv_P$:\\
+	$u \equiv_P u' \iff (\forall v\in\Sigma^*:P(s, uv) = P(s, u'v))$.\\
+	We write [u] to denote the equivalence class of u wrt. $\equiv_P$.
 \end{definition}
 
+This definition is more along the lines of the right congruence property observed in the Myhill-Nerode relations, the original ($u \equiv_P u' \iff P(s, u) = P(s, u')$) format would of course still hold, in this case, $v = \epsilon$.
 
+\begin{example}
+	Taking Fig. \ref{fig:coffeemealy} as an example, the following words are equivalent wrt. $\equiv_{\llbracket M\rrbracket}$:\\
+	\null\qquad\qquad\qquad\qquad\space water, pod\\
+	\null\qquad\qquad$\equiv_{\llbracket M\rrbracket}$\qquad water, water, pod\\
+	\null\qquad\qquad$\equiv_{\llbracket M\rrbracket}$\qquad pod pod water.
+	
+	The first two of these are straightforward, since both lead to the same state, $d'$, more interesting is the \textit{pod pod water} input, which ends in state $d$. Observably, state $d$ and $d'$ wrt. outputs operate exactly the same regardless of continuation, this is why the equivalence holds.
+\end{example}
+
+\begin{theorem}[Characterization theorem\cite{Steffen2011}]
+	Iff mapping $P: \Sigma^*\to\Omega$ $\equiv_P$ has finitely many equivalence classes, there exists a Mealy machine M, for which P is a semantic functional.
+	\\\\
+	\textit{Proof}($\impliedby$): As seen in the case of the Myhill-Nerode finite index property for DFAs, same states in Mealy machines will obviously be in same equivalence classes. This implies, that the number of classes in (or in other words, the index of) $\equiv_P$ is at most the number of states the Mealy machine contains, which is finite by definition.
+	\\
+	\textit{Proof}($\implies$): Consider the following Mealy machine: $M_P=(S,s_{0},\Sigma,\Omega,\delta,\lambda)$:\\
+	\null\qquad -S is given by the equivalence classes of $\equiv_P$.\\
+	\null\qquad -$s_0$ is given by $[\epsilon]$.\\
+	\null\qquad -$\delta$ is defined by $\delta([u], \alpha) = [u\alpha]$.\\
+	\null\qquad -$\lambda$ is defined by $\lambda([u], \alpha) = o$, where $P(u\alpha) = o$.\\
+	A Mealy machine constructed this way fulfills what the theorem states, P is a semantic functional of it, in other words, $\llbracket M\rrbracket$ = P.
+\end{theorem}
+
+With this theorem, we can define regularity for mappings $P:\Sigma^*\to\Omega$. We call a $P:\Sigma^*\to\Omega$ mapping regular, iff there exists a corresponding Mealy machine for which $\llbracket M\rrbracket$ = P, or equivalently, if P has a finite number of equivalence classes, analogously to the previously seen "classical" regularity.
 
 
 
