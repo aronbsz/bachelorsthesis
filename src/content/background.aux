@@ -6,10 +6,12 @@
 \@writefile{toc}{\select@language{english} \contentsline {section}{\numberline {2.1}Basics of automaton theory}{2}{section.2.1}\protected@file@percent }
 \@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{1}{Alphabet}}{2}{definition.1}\protected@file@percent }
 \@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{2}{Word}}{2}{definition.2}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{3}{Formal Language}}{2}{definition.3}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{4}{Deterministic Finite Automaton}}{2}{definition.4}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{3}{Prefixes, Substrings and Suffixes}}{2}{definition.3}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{4}{Formal Language}}{2}{definition.4}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{5}{Prefix-closure}}{2}{definition.5}\protected@file@percent }
 \citation{Steffen2011}
-\global\def\markivdefinitioni{{\large \ensuremath {\centerdot }}}
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{6}{Deterministic Finite Automaton}}{3}{definition.6}\protected@file@percent }
+\global\def\markvidefinitioni{{\large \ensuremath {\centerdot }}}
 \@writefile{thm}{\select@language{english} \contentsline {example}{{\pelda }{1}{}}{3}{example.1}\protected@file@percent }
 \newlabel{ex:dfaexample}{{1}{3}{Basics of automaton theory}{example.1}{}}
 \@writefile{thm}{\select@language{english} \contentsline {example}{{\pelda }{2}{}}{3}{example.2}\protected@file@percent }
@@ -17,21 +19,21 @@
 \@writefile{lof}{\select@language{english} \contentsline {figure}{\numberline {2.1}{\ignorespaces A simple DFA\relax }}{3}{figure.caption.4}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:dfaexample}{{2.1}{3}{A simple DFA\relax }{figure.caption.4}{}}
-\@writefile{lot}{\select@language{english} \contentsline {table}{\numberline {2.1}{\ignorespaces The transition function of the automaton seen in Fig. \ref  {fig:dfaexample}\relax }}{3}{table.caption.5}\protected@file@percent }
-\newlabel{tab:dfaexampledelta}{{2.1}{3}{The transition function of the automaton seen in Fig. \ref {fig:dfaexample}\relax }{table.caption.5}{}}
 \citation{Steffen2011}
 \citation{Steffen2011}
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{5}{Mealy machine}}{4}{definition.5}\protected@file@percent }
-\global\def\markvdefinitioni{{\large \ensuremath {\centerdot }}}
+\@writefile{lot}{\select@language{english} \contentsline {table}{\numberline {2.1}{\ignorespaces The transition function of the automaton seen in Fig. \ref  {fig:dfaexample}\relax }}{4}{table.caption.5}\protected@file@percent }
+\newlabel{tab:dfaexampledelta}{{2.1}{4}{The transition function of the automaton seen in Fig. \ref {fig:dfaexample}\relax }{table.caption.5}{}}
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{7}{Mealy machine}}{4}{definition.7}\protected@file@percent }
+\global\def\markviidefinitioni{{\large \ensuremath {\centerdot }}}
 \@writefile{thm}{\select@language{english} \contentsline {example}{{\pelda }{3}{}}{4}{example.3}\protected@file@percent }
 \newlabel{ex:coffeemealy}{{3}{4}{Basics of automaton theory}{example.3}{}}
 \citation{Kozen1977}
 \citation{Kozen1977}
 \@writefile{lof}{\select@language{english} \contentsline {figure}{\numberline {2.2}{\ignorespaces Mealy machine representing the functionality of a coffee machine.\cite  {Steffen2011}\relax }}{5}{figure.caption.6}\protected@file@percent }
 \newlabel{fig:coffeemealy}{{2.2}{5}{Mealy machine representing the functionality of a coffee machine.\cite {Steffen2011}\relax }{figure.caption.6}{}}
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{6}{Recognized language of automata}}{5}{definition.6}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{7}{Regular language}}{5}{definition.7}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{8}{Myhill-Nerode relation}}{5}{definition.8}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{8}{Recognized language of automata}}{5}{definition.8}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{9}{Regular language}}{5}{definition.9}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{10}{Myhill-Nerode relation}}{5}{definition.10}\protected@file@percent }
 \citation{Kozen1977}
 \citation{10.2307/2033204}
 \citation{Kozen1977}
@@ -39,18 +41,18 @@
 \citation{Steffen2011}
 \@writefile{thm}{\select@language{english} \contentsline {theorem}{{\tetel }{1}{Myhill-Nerode theorem\cite {Kozen1977}\cite {10.2307/2033204}}}{6}{theorem.1}\protected@file@percent }
 \@writefile{thm}{\select@language{english} \contentsline {example}{{\pelda }{4}{}}{6}{example.4}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{9}{Equivalence of words wrt. $\equiv _P$\cite {Steffen2011}}}{6}{definition.9}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{11}{Equivalence of words wrt. $\equiv _P$\cite {Steffen2011}}}{6}{definition.11}\protected@file@percent }
 \citation{Steffen2011}
 \@writefile{thm}{\select@language{english} \contentsline {example}{{\pelda }{5}{}}{7}{example.5}\protected@file@percent }
 \@writefile{thm}{\select@language{english} \contentsline {theorem}{{\tetel }{2}{Characterization theorem\cite {Steffen2011}}}{7}{theorem.2}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{10}{Minimal automata}}{7}{definition.10}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{12}{Minimal automata}}{7}{definition.12}\protected@file@percent }
 \citation{Steffen2011}
 \citation{Steffen2011}
 \@writefile{lof}{\select@language{english} \contentsline {figure}{\numberline {2.3}{\ignorespaces Minimal version of the Mealy machine seen in \ref  {fig:coffeemealy}\relax }}{8}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:coffeemealyminimal}{{2.3}{8}{Minimal version of the Mealy machine seen in \ref {fig:coffeemealy}\relax }{figure.caption.7}{}}
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{11}{Canonical automaton}}{8}{definition.11}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{12}{k-distinguishability\cite {Steffen2011}}}{8}{definition.12}\protected@file@percent }
-\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{13}{exact k-distinguishability}}{8}{definition.13}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{13}{Canonical automaton}}{8}{definition.13}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{14}{k-distinguishability\cite {Steffen2011}}}{8}{definition.14}\protected@file@percent }
+\@writefile{thm}{\select@language{english} \contentsline {definition}{{\definicio }{15}{exact k-distinguishability}}{8}{definition.15}\protected@file@percent }
 \citation{Steffen2011}
 \citation{HOPCROFT1971189}
 \citation{Howar2018}
@@ -60,10 +62,13 @@
 \@writefile{toc}{\select@language{english} \contentsline {paragraph}{Automaton learning}{9}{section*.8}\protected@file@percent }
 \@writefile{toc}{\select@language{english} \contentsline {paragraph}{Passive automaton learning}{9}{section*.9}\protected@file@percent }
 \@writefile{toc}{\select@language{english} \contentsline {paragraph}{Active automaton learning}{9}{section*.10}\protected@file@percent }
+\citation{Steffen2011}
 \@writefile{toc}{\select@language{english} \contentsline {paragraph}{Membership query}{10}{section*.11}\protected@file@percent }
 \@writefile{toc}{\select@language{english} \contentsline {paragraph}{Equivalence query}{10}{section*.12}\protected@file@percent }
+\@writefile{lof}{\select@language{english} \contentsline {figure}{\numberline {2.4}{\ignorespaces \relax }}{10}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:flowchartlearning}{{2.4}{10}{\relax }{figure.caption.13}{}}
 \@setckpt{content/background}{
-\setcounter{page}{11}
+\setcounter{page}{12}
 \setcounter{equation}{0}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
@@ -78,7 +83,7 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{3}
+\setcounter{figure}{4}
 \setcounter{table}{1}
 \setcounter{float@type}{8}
 \setcounter{prop}{0}
@@ -90,7 +95,7 @@
 \setcounter{Hy@AnnotLevel}{0}
 \setcounter{bookmark@seq@number}{11}
 \setcounter{lstnumber}{1}
-\setcounter{endNonectr}{25}
+\setcounter{endNonectr}{28}
 \setcounter{currNonectr}{0}
 \setcounter{caption@flags}{0}
 \setcounter{ContinuedFloat}{0}
@@ -98,9 +103,9 @@
 \setcounter{currexamplectr}{6}
 \setcounter{endexamplectr}{0}
 \setcounter{example}{6}
-\setcounter{currdefinitionctr}{13}
+\setcounter{currdefinitionctr}{15}
 \setcounter{enddefinitionctr}{0}
-\setcounter{definition}{13}
+\setcounter{definition}{15}
 \setcounter{currtheoremctr}{2}
 \setcounter{endtheoremctr}{0}
 \setcounter{theorem}{2}

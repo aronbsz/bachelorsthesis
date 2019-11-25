@@ -16,8 +16,20 @@ First, we introduce the fundamentals of formal language theory, which are essent
 	If $\Sigma$ is an alphabet, then any finite sequence comprised of the symbols of $\Sigma$ are words (or Strings). $\Sigma^{n}$ represents the set of every n length word in $\Sigma$. The set of every word under an alphabet, formally $\bigcup\limits_{n>0}^{} \Sigma^{n}$ is denoted by $\Sigma^{*}$. The empty word is denoted by $\epsilon$.
 \end{definition}
 
+Words can be constructed using other words, the following definition defines these relations.
+
+\begin{definition}[Prefixes, Substrings and Suffixes]
+	If $w = uvs$, where $w, u, v, s\in\Sigma^*$, $u$ is the prefix, $v$ is the substring, and $s$ is the suffix of $w$.
+\end{definition}
+
+Using these atomic elements of formal language theory, the definition of formal language theory can be seen as follows.
+
 \begin{definition}[Formal Language]
 	An arbitrary set of words under an Alphabet $\Sigma$ is a Language. Formally: $L\subseteq\Sigma^{*}$.
+\end{definition}
+
+\begin{definition}[Prefix-closure]
+	Let $L\subseteq\Sigma^*$ and $L' = \{u\in\Sigma^*, v\in\Sigma^* : uv\in L\}$. In other words, L' is the set containing all the prefixes of every word of L. L is prefix-closed if $L = L'$.
 \end{definition}
 
 We will expand on formal languages more once we have a basic understanding of automatons. 
@@ -292,4 +304,19 @@ Active automaton learning follows the MAT, or the Minimally Adequate Teacher mod
 
 \noindent The learner component uses membership queries to construct a hypothesis automaton, then refines this hypothesis by the counterexamples provided by equivalence queries. Once counterexamples can not be found this way, the learners hypothesis is behaviorally equivalent to the SUL, the learning can terminate and the output of the learning is the current hypothesis.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/flowchartlearning}
+	\caption{}
+	\label{fig:flowchartlearning}
+\end{figure}
+
+As seen on Fig. \ref{fig:flowchartlearning}, the learning proceeds in round, generating and refining hypothesis models by exploring the SUL via membership queries. As the equivalence checks produce counterexamples, the next round of this hypothesis refinement is steered by the counterexamples produced.
+
+Using an analogous strategy to the minimization of automatons seen in the previous section, starting only with one state hypothesis automaton we explore over all words in the alphabet in order to refine and extend it. Here, there is a dual way of characterizing (and distinguishing) between states\cite{Steffen2011}:
+\begin{itemize}
+	\item By words reaching them. A prefix-closed set of $S_p$ words, reaching each state exactly once, defines a spanning tree of the automaton. This characterization aims at providing exactly one representative element from each class of $\equiv_P$ on the SUL. Active learning algorithms incrementally construct such a set $S_p$. \\This prefix-closedness is necessary for $S_p$ to be a "spanning tree" of the Mealy machine. Extending $S_p$ with all the one-letter continuations of words in $S_p$ will result in the tree covering all the transitions of the Mealy machine. $L_p$ will denote all the one-letter continuations that are not already contained in $S_p$.
+	\item By their future behavior with respect to an increasing vector of words of $\Sigma^*$. This vector $<d_1, d_2,...,d_k>$ will be denoted by $D$, and contains the "distinguishing suffixes". The corresponding future behavior of a state, here given in terms of its access sequence $u\in S_p$, is the output vector$<mq(u*d_1), ..., mq(u*d_k)>\in\Omega^k$, which leads to an upper approximation of the classes of $\equiv_{\llbracket SUL\rrbracket}$. Active learning incrementally refines this approximation by extending the vector until the approximation is precise.
+\end{itemize}
+While the second characterization defines the states of the automaton, where each output vector corresponds to one state, the spanning tree on $L_p$ is used to determine the transitions of these states.
 
