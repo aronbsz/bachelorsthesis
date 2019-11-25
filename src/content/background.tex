@@ -13,7 +13,7 @@ First, we introduce the fundamentals of formal language theory, which are essent
 \end{definition}
 
 \begin{definition}[Word]
-	If $\Sigma$ is an alphabet, then any finite sequence comprised of the symbols of $\Sigma$ are words (or Strings). $\Sigma^{n}$ represents the set of every n length word in $\Sigma$. The set of every word under an alphabet, formally $\bigcup\limits_{n>0}^{} \Sigma^{n}$ is denoted by $\Sigma^{*}$.
+	If $\Sigma$ is an alphabet, then any finite sequence comprised of the symbols of $\Sigma$ are words (or Strings). $\Sigma^{n}$ represents the set of every n length word in $\Sigma$. The set of every word under an alphabet, formally $\bigcup\limits_{n>0}^{} \Sigma^{n}$ is denoted by $\Sigma^{*}$. The empty word is denoted by $\epsilon$.
 \end{definition}
 
 \begin{definition}[Formal Language]
@@ -216,32 +216,80 @@ This definition is more along the lines of the right congruence property observe
 
 With this theorem, we can define regularity for mappings $P:\Sigma^*\to\Omega$. We call a $P:\Sigma^*\to\Omega$ mapping regular, iff there exists a corresponding Mealy machine for which $\llbracket M\rrbracket$ = P, or equivalently, if P has a finite number of equivalence classes, analogously to the previously seen "classical" regularity.
 
+The introduction of regularity helps us in the construction of automata, specifically, the construction of canonical automata. 
 
+\begin{definition}[Minimal automata]
+	An automata M recognizing the language L is minimal iff every $M'\neq M$ automata that also recognize L have at least as many states as M.
+\end{definition}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{include/coffeemealyminimal}
+	\caption{Minimal version of the Mealy machine seen in \ref{fig:coffeemealy}}
+	\label{fig:coffeemealyminimal}
+\end{figure}
 
 
 \begin{definition}[Canonical automaton]
 	An automaton accepting the language L is canonical iff it is minimal, and contains every other automaton that accepts L.
 \end{definition}
 
+
+Constructing automata to be canonical, especially in the case of Mealy machines is important with regards to efficiency and is the backbone of automaton learning. We will steer to algorithm theory that does this, before actually covering the topic of automaton learning itself. The next proposition comes straightforward from the previously presented characterization theory.
+
+
+\noindent \textbf{Proposition (Bounded reachability\cite{Steffen2011})}: Every state of a minimal Mealy machine with n states has an access sequence, i.e., a path from the initial state to this  state,  of  length  at  most n−1.  Every  transition  of  this  Mealy  machine  can be covered by a sequence of length at most n from the initial state.
+
+The process of constructing automata we will use is partition refinement. It works based on distinguishing suffixes, suffixes of words which mark, witness the difference between two access sequences. We'll introduce the following notion to formalize this.
+
+
+\begin{definition}[k-distinguishability\cite{Steffen2011}]
+	Two states, $s,s'\in S$ are k-distinguishable iff there is a word $w\in\Sigma^*$ of length k or shorter, for which $\lambda^*(s, w)\neq\lambda^*(s',w)$.
+\end{definition} 
+
+\begin{definition}[exact k-distinguishability]
+	Two states, $s,s'\in S$ are exact k-distinguishable, denoted by $k^=$ iff s and s' are k-distinguishable. but not (k-1)-distinguishable
+\end{definition}
+
+Essentially, if two states, s and s' are  k-distinguishable, then when processing the same input sequence, from some suffix of the word w with length at most k, they will produce differing outputs. Using this, we can observe, that whenever two states, $s_1, s_2\in S$ are (k+1)-distinguishable, then they each have an $\alpha$-successor, $s_1'$ and $s_2'$ for some $\alpha\in\Sigma$, such that $s_1'$ and $s_2'$ are k-distinguishable. This suggests, that:
+\begin{itemize}
+	\item no states are 0-distinguishable and
+	\item two states $s_1$ and s2 are (k+1)-distinguishable iff there exists an input symbol $\alpha\in\Sigma$, such that $\lambda(s_1, \alpha) \neq \lambda(s_2,\alpha)$ or $\delta(s_1, \alpha)$ and $\delta(s_2, \alpha)$ are k-distinguishable.
+\end{itemize}
+This way, if we have an automaton M, we can construct its minimal version, by iteratively computing k-distinguishability for increasing k until stability, that is until the set of exactly k-distinguishable states is empty.
+
+\begin{example}
+	Given the Mealy machine seen in Fig.\ref{fig:coffeemealy}, we can use k-distinguishability to refine its partitions. The initial state, the initial partition would be:\\
+	$P_1 = \{a, b, c\}, \{d, d'\}, \{e\}, \{f\}$\\
+	since when k=1, a, b and c are not 1-distinguishable, but d and d' separate on the behavior of the \textit{button} input, while e and f are separated by the suffix \textit{clean}. Let's see the k=2 scenario.\\
+	$P_2 = \{a\}, \{b\}, \{c\}, \{d, d'\}, \{e\}, \{f\}$\\
+	Here, \textit{water} and \textit{pod} separate a, b and c, while d and d' can still no longer be separated. If observed, even if k is increased, d and d' can not be refined. This means, that they are indistinguishable, they can be merged together without altering behavior. This shows the process of acquiring the minimal machine seen in Fig. \ref{fig:coffeemealyminimal}.
+\end{example} 
+
+The process explained in the above example is called partition refinement, the exact algorithm and proof of its validity can be seen in \cite{Steffen2011}, it is a version of the minimization algorithm for DFAs proposed by Hopcroft\cite{HOPCROFT1971189}. Active automaton learning algorithms operate in a very similar way, but they are not the same as minimization algorithms. We will extend upon this in the next section.
+
+
+
 \section{Automaton learning}
 
 
 
-\paragraph{Automaton learning}  is the process of modeling a system without having specific knowledge of the internal workings of it. To accomplish this, we need to infer a model by observing its external behavior. This learned model is, as the name suggests, an automaton. 
+\paragraph{Automaton learning}  is modeling a system without having specific knowledge of its the internal behavior. To accomplish this, a model needs to be inferred by observing the external behavior of the system. This learned model is, as the name suggests, an automaton. 
 \\Formally: Active  automata  learning is  concerned  with  the  problem  of  inferring  an automaton model for an unknown formal language $L$ over some alphabet $\Sigma$\cite{Howar2018}.
-\\\\In order to monitor a system, we need a way of access to its behavioral information, for which there are two approaches, these separate the two types of automaton learning as well.
+\\\\In order to monitor a system, a way of access to its behavioral information is required. There are two approaches, which separate the two types of automaton learning as well.
 
-\paragraph{Passive automaton learning} is the case when the gathering of information is not part of the learning process, but rather a prerequisite to it. The learning is done on a pre-gathered positive an/or negative example set of the systems behavior. In passive automaton learning, the success of the process is not only determined by the efficiency of the algorithm, but the methodology and time used to gather the data.
+\paragraph{Passive automaton learning} In case of passive automaton learning, the gathering of information is not part of the learning process, but rather a prerequisite to it. The learning is performed on a pre-gathered positive an/or negative example set of the systems behavior. In passive automaton learning, the success of the process is determined not only by the efficiency of the algorithm, but the methodology and time used to gather the data.
 
-\paragraph{Active automaton learning} is when the behavioral infromation is gathered by the learning algorithm in an "active" way via queries. For this there is a need to distinguish a learner and a teacher component, of which the second can answer basic questions about the system in real-time. 
-
-
-\paragraph{MAT modell} Active automaton learning follows the MAT, or the Minimally Adequate Teacher model proposed by Dana Angluin\cite{ANGLUIN198787}. It separates the algorithm to a learner and a teacher, where the teacher can only answer the minimally adequate questions needed to learn the system. These two questions, or more precisely, queries are:
+\paragraph{Active automaton learning} In case of active automaton learning, the behavioral infromation is gathered by the learning algorithm in an "active" way via queries. In order to accomplish this, learning is separated to two components: the learner, which learns, and the teacher, which can answer questions about the system under learning.
 
 
-\paragraph{Membership query} Given a $w\in\Sigma^{*}$ word, it return the $o\in \Omega$ output corresponding to it, treating the word as a string of inputs.
+Active automaton learning follows the MAT, or the Minimally Adequate Teacher model proposed by Dana Angluin\cite{ANGLUIN198787}. It separates the algorithm to a learner and a teacher, where the teacher can only answer the minimally adequate questions needed to learn the system. These two questions, or queries are are follows:
 
-\paragraph{Equivalence query} Given an $M$ hypothesis automaton, it tries to provide a counterexample $o\in\Omega$ and a $w\in\Sigma$ corresponding to it, where given the input $w$ to $M$ and the system, the output given by them differs. $o$ is the differring output given by the system. If no such counterexample can be found, M hypothesis is considered behaviorally identical to the monitored system.
 
-\noindent The learner uses membership queries to build a hypothesis automaton, then refines these by equivalence queries. Once counterexamples can not be found this way, the learning terminates, the output is the current hypothesis.
+\paragraph{Membership query} Given a $w\in\Sigma^{*}$ word, the query return the $o\in \Omega$ output corresponding to it, treating the word as a string of inputs. We write $mq(w) = o$ to denote that executing the query w on the system under learning (SUL) leads to the output o: $\llbracket SUL \rrbracket(w) = o$ or $\lambda^*(s_0, w) = o$.
+
+\paragraph{Equivalence query} Given a hypothesis automaton $M$, the query tries to determine if the hypothesis is behaviorally equivalent to the SUL, and if not, finding the diverging behavior, and return with the example of it. We write $eq(H) = c$, where $c\in\Sigma^*$, to denote an equivalence query on hypothesis H, returning a counterexample c. The counter example provided is the sequence of inputs for which the output of system under learning and the output of the hypothesis differ: $ \llbracket H\rrbracket(c) \neq mq(c)$.
+
+\noindent The learner component uses membership queries to construct a hypothesis automaton, then refines this hypothesis by the counterexamples provided by equivalence queries. Once counterexamples can not be found this way, the learners hypothesis is behaviorally equivalent to the SUL, the learning can terminate and the output of the learning is the current hypothesis.
+
 
