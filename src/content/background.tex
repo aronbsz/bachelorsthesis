@@ -247,7 +247,7 @@ The introduction of regularity helps us in the construction of automata, specifi
 \end{definition}
 
 
-Constructing automata to be canonical, especially in the case of Mealy machines is important with regards to efficiency and is the backbone of automaton learning. We will steer to algorithm theory that does this, before actually covering the topic of automaton learning itself. The next proposition comes straightforward from the previously presented characterization theory.
+Constructing automata to be canonical, especially in the case of Mealy machines is important with regards to efficiency and is the backbone of automaton learning. We will steer to algorithm theory that does this, before actually covering the topic of automaton learning itself. The next proposition comes straightforward from the previously presented characterization theorem.
 
 
 \noindent \textbf{Proposition (Bounded reachability\cite{Steffen2011})}: Every state of a minimal Mealy machine with n states has an access sequence, i.e., a path from the initial state to this  state,  of  length  at  most n−1.  Every  transition  of  this  Mealy  machine  can be covered by a sequence of length at most n from the initial state.
@@ -260,15 +260,15 @@ The process of constructing automata will use the concept of partition refinemen
 \end{definition} 
 
 \begin{definition}[exact k-distinguishability]
-	Two states, $s,s'\in S$ are exact k-distinguishable, denoted by $k^=$ iff s and s' are k-distinguishable. but not (k-1)-distinguishable
+	Two states, $s,s'\in S$ are exact k-distinguishable, denoted by $k^=$ iff s and s' are k-distinguishable, but not (k-1)-distinguishable
 \end{definition}
 
 Essentially, if two states, s and s' are  k-distinguishable, then when processing the same input sequence, from some suffix of the word w with length at most k, they will produce differing outputs. Using this, we can observe, that whenever two states, $s_1, s_2\in S$ are (k+1)-distinguishable, then they each have an $\alpha$-successor, $s_1'$ and $s_2'$ for some $\alpha\in\Sigma$, such that $s_1'$ and $s_2'$ are k-distinguishable. This suggests, that:
 \begin{itemize}
 	\item no states are 0-distinguishable and
-	\item two states $s_1$ and s2 are (k+1)-distinguishable iff there exists an input symbol $\alpha\in\Sigma$, such that $\lambda(s_1, \alpha) \neq \lambda(s_2,\alpha)$ or $\delta(s_1, \alpha)$ and $\delta(s_2, \alpha)$ are k-distinguishable.
+	\item two states $s_1$ and s2 are (k+1)-distinguishable iff there exists an input symbol $\alpha\in\Sigma$, such that $\lambda(s_1, \alpha) \neq \lambda(s_2,\alpha)$ or $\delta(s_1, \alpha)$ and $\delta(s_2, \alpha)$ are k-distinguishable.\cite{Steffen2011}
 \end{itemize}
-This way, if we have an automaton M, we can construct its minimal version, by iteratively computing k-distinguishability for increasing k until stability, that is until the set of exactly k-distinguishable states is empty.
+This way, if we have an automaton M, we can construct its minimal version, by iteratively computing k-distinguishability for increasing k, until stability, that is until the set of exactly k-distinguishable states is empty.
 
 \begin{example}
 	Given the Mealy machine seen in Fig.\ref{fig:coffeemealy}, we can use k-distinguishability to refine its partitions. The initial state, the initial partition would be:\\
@@ -320,7 +320,7 @@ Active automaton learning follows the MAT, or the Minimally Adequate Teacher mod
 
 As seen on Fig. \ref{fig:flowchartlearning}, the learning proceeds in rounds, generating and refining hypothesis models by exploring the SUL via membership queries. As the equivalence checks produce counterexamples, the next round of this hypothesis refinement is steered by the counterexamples produced.
 
-Using an analogous strategy to the minimization of automatons seen in the previous section, starting only with a one state hypothesis automaton, we explore over all words in the alphabet in order to refine and extend it. Here, there is a dual way of characterizing (and distinguishing) between states\cite{Steffen2011}:
+Using an analogous strategy to the minimization of automatons seen in the previous section, starting only with a one state hypothesis automaton, we explore over all words in the alphabet in order to refine and extend this hypothesis. Here, there is a dual way of characterizing (and distinguishing) between states\cite{Steffen2011}:
 \begin{itemize}
 	\item By words reaching them. A prefix-closed set of $S_p$ words, reaching each state exactly once, defines a spanning tree of the automaton. This characterization aims at providing exactly one representative element from each class of $\equiv_P$ on the SUL. Active learning algorithms incrementally construct such a set $S_p$. \\This prefix-closedness is necessary for $S_p$ to be a "spanning tree" of the Mealy machine. Extending $S_p$ with all the one-letter continuations of words in $S_p$ will result in the tree covering all the transitions of the Mealy machine. $L_p$ will denote all the one-letter continuations that are not already contained in $S_p$.
 	\item By their future behavior with respect to an increasing vector of words of $\Sigma^*$. This vector $<d_1, d_2,...,d_k>$ will be denoted by $D$, and contains the "distinguishing suffixes". The corresponding future behavior of a state, here given in terms of its access sequence $u\in S_p$, is the output vector$<mq(u*d_1), ..., mq(u*d_k)>\in\Omega^k$, which leads to an upper approximation of the classes of $\equiv_{\llbracket SUL\rrbracket}$. Active learning incrementally refines this approximation by extending the vector until the approximation is precise.
@@ -338,7 +338,7 @@ Since active learning algorithms maintain an incrementally growing extended span
 	\end{itemize}
 \end{itemize}
 
-In basic logic, D-epimorphisms and k-epimorphisms do not differ, they both deal with establishing constructed models being images of the model they are based on. D-epimorphisms could replace k-epimorphisms where $D=\Sigma^k$, it can be suggested, that there is no need to differentiate. However, the there is in important difference of complexity between the two. While k-distinguishability supports polynomial time, black-box systems do not. Also, the "existential" in existential D-epimorphism is important: $f_D$ must deal with unknown states, ones that haven't been encountered yet. This implies that characterization can only be valid for already encountered states.
+In basic logic, D-epimorphisms and k-epimorphisms do not differ, they both deal with establishing constructed models being images of the model they are based on. D-epimorphisms could replace k-epimorphisms where $D=\Sigma^k$, it can be suggested, that there is no need to differentiate. However, there is in important difference of complexity between the two. While k-distinguishability supports polynomial time, black-box systems do not. Also, the "existential" in existential D-epimorphism is important: $f_D$ must deal with unknown states, ones that haven't been encountered yet. This implies that characterization can only be valid for already encountered states.
 
 Active learning algorithms can be proven correct using the following three-step pattern:
 \begin{itemize}
@@ -350,9 +350,11 @@ Active learning algorithms can be proven correct using the following three-step 
 The following subsection introduces the first active automaton learning algorithm this thesis covers.
 
 \subsection{Direct Hypothesis Construction}
-The Direct Hypothesis Construction algorithm, as seen in Algorithm \ref{algo:dhc}  follows the idea of the breath-first search of graph theory, it constructs the hypothesis using a queue of states, which is initialized with the states of the spanning tree to be maintained. Explored states are removed from this queue, while the discovered successors are enqueued, if they are provably new states. The algorithm starts with a one-state hypothesis, including only the initial state, reached by $\epsilon$ and D = $\Sigma$. It then tries to complete the hypothesis, for every state we determine the behavior of the state under D, which we will call the extended signature of said state. States with a new extended signatures are provably new states, so to guarantee further investigation, we enqueue all their successors. Initially, $D=\Sigma$, so only the $1^=$-distinguishable states are revealed during the first iteration. This is extended straightforwardly to comprise a prefix closed set of access sequences.\cite{Steffen2011}\cite{10.1007/978-3-642-34781-8_19}
+The Direct Hypothesis Construction algorithm, which hypothesis construction can be seen in Algorithm \ref{algo:dhc}  follows the idea of the breath-first search of graph theory, it constructs the hypothesis using a queue of states, which is initialized with the states of the spanning tree to be maintained. Explored states are removed from this queue, while the discovered successors are enqueued, if they are provably new states. The algorithm starts with a one-state hypothesis, including only the initial state, reached by $\epsilon$ and D = $\Sigma$. It then tries to complete the hypothesis, for every state we determine the behavior of the state under D, we will call this behavior the extended signature of said state. States with a new extended signatures are provably new states, so to guarantee further investigation, we enqueue all their successors. Initially, $D=\Sigma$, so only the $1^=$-distinguishable states are revealed during the first iteration. This is extended straightforwardly to comprise a prefix closed set of access sequences. \cite{Steffen2011}\cite{10.1007/978-3-642-34781-8_19}
 
 \begin{algorithm}[H]
+	\SetAlgoLined
+	\DontPrintSemicolon
 	\KwIn{$S_p$: a set of access sequences, D: a set of suffixes, an input alphabet $\Sigma$}
 	\KwOut{A Mealy machine $H=(S, s_0, \Sigma, \Omega, \delta, \lambda)$}
 	initialize hypothesis H, create a state for all elements of $S_p$\;
@@ -368,10 +370,19 @@ The Direct Hypothesis Construction algorithm, as seen in Algorithm \ref{algo:dhc
 			reroute transitions of $s$ to $s'$ in H\;
 			remove $s$ from H\;
 		}{
-			create and enqueue successors of $s$ for every input in $\Sigma$ into Q\;
+			create and enqueue successors of $s$ for every input in $\Sigma$ into Q, if not already in $S_p$\;
 		}
 	}
-	\caption{The Direct Hypothesis Construction algorithm as seen in \cite{Steffen2011}.}
+	Remove entries of $D\setminus\Sigma$ from $\lambda$\;
+	\Return{H}\;
+	\caption{Hypothesis construction of the Direct Hypothesis Construction algorithm as seen in \cite{Steffen2011}.}
 	\label{algo:dhc}
 \end{algorithm}
 
+After the run of the Hypothesis construction seen in Algorithm \ref{algo:dhc}, the output automaton H is used in an equivalence query eq(H) = c, to find if a counterexample c exists. If no counteraxamle can be found, the learning terminates, H is the learned automaton. Else, if a counterexample c is found, for which $\lambda_H(s_0,c) \neq mq(c)$, c is used to enlarge the suffixes in D and a new iteration of Algorithm \ref{algo:dhc} begins, using the now extended set D and all the access sequences found in the previous iteration, the current spanning tree $S_p$.
+
+To formalize the treatment of counterexamples, we introduce the following notation: let $[u]_H$, where $u\in\Sigma^*$, be the word  in $S_p$ which reaches $\delta^*(s_0, u)$ in hypothesis H. Using notation, the following theorem can be established.
+
+\begin{theorem}[Counterexample decomposition\cite{Steffen2011}]
+	For every counterexample c, there is a decomposition $c=u\alpha w$, where u is its prefix, $\alpha$ is its string, or action, and w is its suffix, such that $mq([u]_Hav)\neq mq([u\alpha]_Hw)$.
+\end{theorem}
