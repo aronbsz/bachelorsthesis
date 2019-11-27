@@ -83,7 +83,7 @@ When talking about automata, it is important to discuss runs. A run of an automa
 	(q_3) edge  node [swap] {a} (q_0)
 	 edge [loop above] node {b} () ;
 	\end{tikzpicture}
-	\caption{A simple DFA}
+	\caption{A simple DFA from \cite{10.1007/978-3-319-11164-3_26}.}
 	\label{fig:dfaexample}
 \end{figure}
 
@@ -230,9 +230,6 @@ With this theorem, we can define regularity for mappings $P:\Sigma^*\to\Omega$. 
 
 The introduction of regularity helps us in the construction of automata, specifically, the construction of canonical automata. 
 
-\begin{definition}[Minimal automata]
-	An automata M recognizing the language L is minimal iff every $M'\neq M$ automata that also recognize L have at least as many states as M.
-\end{definition}
 
 \begin{figure}[H]
 	\centering
@@ -242,15 +239,19 @@ The introduction of regularity helps us in the construction of automata, specifi
 \end{figure}
 
 
-\begin{definition}[Canonical automaton]
-	An automaton accepting the language L is canonical iff it is minimal, and contains every other automaton that accepts L.
+\begin{definition}[Canonical automaton (Minimal automaton)]
+	An automaton M is canonical (i.e. minimal) iff:
+	\begin{itemize}
+		\item every state is reachable: $\forall s\in S: \exists w\in\Sigma^*: \delta^*(s_0, w) = s$,
+		\item all states are pairwisely separable, in other words behaviorally distinguishable. For Mealy machines, this is formalized as: $\forall s_1, s_2\in S: \exists w\in\Sigma^*: \lambda(s_1, w)\neq\lambda(s_2, w)$
+	\end{itemize}
 \end{definition}
 
 
 Constructing automata to be canonical, especially in the case of Mealy machines is important with regards to efficiency and is the backbone of automaton learning. We will steer to algorithm theory that does this, before actually covering the topic of automaton learning itself. The next proposition comes straightforward from the previously presented characterization theorem.
 
 
-\noindent \textbf{Proposition (Bounded reachability\cite{Steffen2011})}: Every state of a minimal Mealy machine with n states has an access sequence, i.e., a path from the initial state to this  state,  of  length  at  most n−1.  Every  transition  of  this  Mealy  machine  can be covered by a sequence of length at most n from the initial state.
+\noindent \textbf{Proposition (Bounded reachability\cite{Steffen2011})}: Every state of a minimal Mealy machine with n states has an access sequence, i.e., a path from the initial state to this  state,  of  length  at  most n-1.  Every  transition  of  this  Mealy  machine  can be covered by a sequence of length at most n from the initial state.
 
 The process of constructing automata will use the concept of partition refinement. It works based on distinguishing suffixes, suffixes of words which mark, witness the difference between two access sequences. We'll introduce the following notion to formalize this.
 
@@ -349,7 +350,7 @@ Active learning algorithms can be proven correct using the following three-step 
 
 The following subsection introduces the first active automaton learning algorithm this thesis covers.
 
-\subsection{Direct Hypothesis Construction}
+\subsection{Direct Hypothesis Construction\cite{10.1007/978-3-642-34781-8_19}}
 The Direct Hypothesis Construction algorithm, which hypothesis construction can be seen in Algorithm \ref{algo:dhc}  follows the idea of the breath-first search of graph theory, it constructs the hypothesis using a queue of states, which is initialized with the states of the spanning tree to be maintained. Explored states are removed from this queue, while the discovered successors are enqueued, if they are provably new states. The algorithm starts with a one-state hypothesis, including only the initial state, reached by $\epsilon$ and D = $\Sigma$. It then tries to complete the hypothesis, for every state we determine the behavior of the state under D, we will call this behavior the extended signature of said state. States with a new extended signatures are provably new states, so to guarantee further investigation, we enqueue all their successors. Initially, $D=\Sigma$, so only the $1^=$-distinguishable states are revealed during the first iteration. This is extended straightforwardly to comprise a prefix closed set of access sequences. \cite{Steffen2011}\cite{10.1007/978-3-642-34781-8_19}
 
 \begin{algorithm}[H]
@@ -381,8 +382,80 @@ The Direct Hypothesis Construction algorithm, which hypothesis construction can 
 
 After the run of the Hypothesis construction seen in Algorithm \ref{algo:dhc}, the output automaton H is used in an equivalence query eq(H) = c, to find if a counterexample c exists. If no counteraxamle can be found, the learning terminates, H is the learned automaton. Else, if a counterexample c is found, for which $\lambda_H(s_0,c) \neq mq(c)$, c is used to enlarge the suffixes in D and a new iteration of Algorithm \ref{algo:dhc} begins, using the now extended set D and all the access sequences found in the previous iteration, the current spanning tree $S_p$.
 
-To formalize the treatment of counterexamples, we introduce the following notation: let $[u]_H$, where $u\in\Sigma^*$, be the word  in $S_p$ which reaches $\delta^*(s_0, u)$ in hypothesis H. Using notation, the following theorem can be established.
+While the DHC algorithm is a straightforward implementation of active automata learning, it struggles with time complexity, it terminates after at most $n^3mk+n^2k^2$ membership queries, and $n$ equivalence queries, where $n$ is the number of states in the final hypothesis, $k$ is the longest set of inputs, and m is the length of the longest counterexample. This of course is far from efficient, the next subsection deals with a far more optimal algorithm, the TTT algorithm.
 
-\begin{theorem}[Counterexample decomposition\cite{Steffen2011}]
-	For every counterexample c, there is a decomposition $c=u\alpha w$, where u is its prefix, $\alpha$ is its string, or action, and w is its suffix, such that $mq([u]_Hav)\neq mq([u\alpha]_Hw)$.
-\end{theorem}
+\subsection{The TTT algorithm\cite{10.1007/978-3-319-11164-3_26}}
+
+As seen in the Direct Hypothesis Construction algorithm, a large number membership queries are required in order to learn an automaton, causing a bottleneck on the scalability of the algorithm. The main cause of this complexity issue is the way counterexamples are treated. In order to ensure every state is properly found, \textit{all} suffixes of the counterexample are added to the algorithms structure (denoted D in the previous subsection), which, in the next iteration of the hypothesis construction, has a huge impact on the number of membership queries. TTT resolves this inefficiency by fine-tuning exactly what needs to be further investigated by membership queries.\\\\
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\centering
+		\begin{tikzpicture}[shorten >=1pt,node distance=3.5cm,on grid,auto] 
+		\node[state,initial] (q_0)   {$q_0$}; 
+		\node[state] (q_1) [right=of q_0] {$q_1$}; 
+		\node[state] (q_2) [below=of q_0] {$q_2$}; 
+		\node[state](q_3) [right=of q_2] {$q_3$};
+		\path[->] 
+		(q_0) edge[line width = 0.4mm]  node {a/$\top$} (q_1)
+		edge [loop below] node {b/$\top$} ()
+		(q_1) edge[line width = 0.4mm]  node  {a/$\top$} (q_2)
+		edge [loop below] node {b/$\top$} ()
+		(q_2) edge[line width = 0.4mm]  node [swap] {a/$\bot$} (q_3) 
+		edge [loop above] node {b/$\top$} ()
+		(q_3) edge  node [swap] {a/$\top$} (q_0)
+		edge [loop above] node {b/$\bot$} () ;
+		\end{tikzpicture}
+		\caption{A Mealy-machine version of the DFA seen in Fig. \ref{fig:dfaexample}. Constructed simply by the following rule: if a transition ends in $q_3$, the output is $\bot$, else the output is $\top$.}
+	\end{subfigure}
+	\begin{subfigure}{0.55\textwidth}
+		\centering
+		\begin{tikzpicture}[shorten >=1pt,node distance=1.8cm,on grid,auto] 
+		\node[state] (e)   {$\epsilon$}; 
+		\node[state] (a) [below left=of e] {$a$}; 
+		\node[state] (q3) [right=of a] {$q_3$}; 
+		\node[state] (aa) [below left=of a] {$aa$};
+		\node[state] (q2) [right=of aa] {$q_2$}; 
+		\node[state] (q0) [below left=of aa] {$q_0$}; 
+		\node[state] (q1) [right=of q0] {$q_1$}; 
+		\path[->] 
+		(e) edge node {} (a)
+		(e) edge node {} (q3)
+		(a) edge node {} (aa)
+		(a) edge node {} (q2)
+		(aa) edge node {} (q0)
+		(aa) edge node {} (q1);
+		\end{tikzpicture}
+		\caption{Final discrimination tree.}
+	\end{subfigure}
+	\begin{subfigure}{0.2\textwidth}
+		\centering
+		\begin{tikzpicture}[shorten >=1pt,node distance=1.8cm,on grid,auto] 
+		\node[state] (e)   {$\epsilon$}; 
+		\node[state] (a) [below=of e] {$a$}; 
+		\node[state](aa) [below=of a] {$aa$};
+		\path[->] 
+		(aa) edge node {a} (a)
+		(a) edge node {a} (e);
+		\end{tikzpicture}
+		\caption{Discriminator trie of the final hypothesis.}
+	\end{subfigure}	
+	\caption{The three namesake trees of the TTT algorithm. (a) being a spanning \textbf{T}ree, (b) a disctimination \textbf{T}ree, and (c) a discriminator \textbf{T}rie.}
+	\label{fig:dfaexamplemealyver}
+\end{figure}
+
+\begin{example}
+	As an example, we'll use the automaton portrayed on Fig.\ref{fig:dfaexamplemealyver}.a a Mealy machine version of the DFA previously seen in Fig.\ref{fig:dfaexample}. TTT keeps the notion of separating states by a $S_p$ spanning tree, a prefix-closed set of words from $\Sigma^*$, this tree defines the access sequences of each state. The spanning tree $S_p$ is indicated by bold transitions in Fig.\ref{fig:dfaexamplemealyver}.a. States are separated by the notion of discriminators. The algorithm maintains a set of discriminator suffixes D, but uses them differently from the DHC algorithm. D in TTT is used by a n-ary tree, where n = $|\Omega|$, so in this example a binary tree. We cal this tree a discrimination tree (seen in Fig.\ref{fig:dfaexamplemealyver}.b), which maintains information about which inputs (discriminators) separate states: for every distinct pair of states, a separator can be obtained by looking at the label of the lowest common ancestor of the corresponding leaves. This way, the label of inner nodes act as discriminators. These labels form a suffix-close set and are stored in a trie seen in Fig.\ref{fig:dfaexamplemealyver}.c. Each node of the trie is a word, which can be constructed by going up the tree towards the root.
+\end{example}
+
+Discriminator trees, as seen in the previous example, are rooted n-ary trees, where n is the size of the output alphabet. Leaves are labeled by states of the automaton, while inner states are labeled by discriminators (suffixes). When adding a new word to the tree T, we sift the word $w\in\Sigma^*$ into T by starting at the root, and for every inner node $v\in D$, we branch depending on the output of $\lambda^*(wu)$. This limits the number of membership queries to the height of the tree, while DHCs limit was $S_p\times D$.
+\\\\
+\textbf{Key steps of the TTT algorithm:}
+\begin{itemize}
+	\item \textbf{Hypothesis construction.} The initial state is initialized and membership queried for all inputs, the results of which are sifted into the discriminator tree T.
+	\item \textbf{Hypothesis refinement.} If a counterexample is found, the corresponding state is split (analogously to the DHC algorithm), in the discriminator tree, the leaf corresponding to this new state is split by a temporary discriminator $v\in\Sigma$.
+	\item \textbf{Hypothesis stabilization.} The hypothesis provided by the previous example might contradict information of the discrimination tree. This step searches for counterexamples between them (without the need of equivalence queries), and if any such counterexample exist, states are split accordingly.
+	\item \textbf{Discriminator finalization.} TTT treats discriminators derived directly from counterexamples temporary, keeping track of the maximal sub-tree of the discrimination tree containing temporary discriminators. This sub-tree is split as temporary discriminators are replaced with final ones. Only when this finalization happens, is an inner node of the discrimination tree considered a member of the discriminator trie, in other words, when finalizing a temporary discriminator, it is added to the discriminator trie.
+\end{itemize}
+A more thorough view on the TTT algorithm can be seen here\cite{10.1007/978-3-319-11164-3_26}.
