@@ -21,6 +21,7 @@
 \select@language {english} \contentsline {subsection}{\numberline {2.2.1}Direct Hypothesis Construction\cite {10.1007/978-3-642-34781-8_19}}{13}{subsection.2.2.1}% 
 \select@language {english} \contentsline {subsection}{\numberline {2.2.2}The TTT algorithm\cite {10.1007/978-3-319-11164-3_26}}{14}{subsection.2.2.2}% 
 \select@language {english} \contentsline {chapter}{\numberline {3}Contribution}{16}{chapter.3}% 
-\select@language {english} \contentsline {chapter}{Acknowledgements}{17}{chapter*.15}% 
-\select@language {english} \contentsline {chapter}{Bibliography}{18}{chapter*.15}% 
-\select@language {english} \contentsline {chapter}{Appendix}{19}{appendix*.17}% 
+\select@language {english} \contentsline {section}{\numberline {3.1}Implementing a learning algorithm}{16}{section.3.1}% 
+\select@language {english} \contentsline {chapter}{Acknowledgements}{20}{chapter*.17}% 
+\select@language {english} \contentsline {chapter}{Bibliography}{21}{chapter*.17}% 
+\select@language {english} \contentsline {chapter}{Appendix}{22}{appendix*.19}% 
