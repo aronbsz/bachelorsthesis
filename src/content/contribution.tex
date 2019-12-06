@@ -92,3 +92,74 @@ Utilizing the Xtext grammar in Listing \ref{li:xtext}, I created the input to be
 		Transition { input a output top sourceState q3 targetState q0 } , 
 		Transition { input b output bot sourceState q3 targetState q3 } } }
 \end{lstlisting}
+
+Using the input file in Listing \ref{li:4ixtext} and converting it to a MealyMachine object using Xtext/EMF integration, the implemented DHC algorithm worked as intended. The execution of the algorithm returned with a new MealyMachine hypotesis object, which was the minimal version of the input automaton (seen in Fig. \ref{fig:coffeemealyminimal}). After the learning, the program wrote the learned hypothesis into a file in the same Xtext grammar the input was described in.\\ The overview of this implementation can be seen in Table \ref{tab:activelearningproto}.
+
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\begin{table}[H]
+	
+	\begin{tabularx}{\columnwidth}{YYYYY}
+		\hline
+		\textbf{Algorithm} & \textbf{Input formalism} & \textbf{Output formalism} & \textbf{Input source} & \textbf{Output source}\\ \hline
+		Direct Hypothesis Construction & Mealy machine & Mealy machine & Xtext & Xtext \\	\hline
+	\end{tabularx}
+	\caption{Overview of the prototype DHC algorithm implementation.}
+	\label{tab:activelearningproto}
+\end{table}
+
+I used the experience gained during this prototype implementation to extend it into a framework.
+
+\section{Automaton learning framework}
+After implementing a singular active learning algorithm using fixed formalisms, I started designing an abstract framework to implement any algorithm using arbitrary formalisms. My desing decisions are mostly illustrated by Fig. \ref{fig:flowchartlearning}. The "Learner" and the "Teacher" components are both abstractions upon an algorithm, with two endpoints, one being the input, the other the output. Following this mindset, I first created a high-level model of the framework.
+
+\subsection{High-level overview}
+
+Since the implementation of the framework would be using Java as a language, the high-level view of it seen in Fig. \ref{fig:abstractoverview} is an UML class diagram of the packages and the relations between them, essentially being an overview of the modularization of the framework.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{figures/abstractoverview}
+	\caption{Structure and relations of the packages comprising the framework.}
+	\label{fig:abstractoverview}
+\end{figure}
+
+Note, that when comparing Fig. \ref{fig:abstractoverview} to Fig. \ref{fig:flowchartlearning}, the data flows identically. The Learnable package containing the input formalisms, and the Hypothesis package containing the output formalisms are used by the teacher (Teacher package) and the learner (Algorithm package). The package not represented on Fig. \ref{fig:flowchartlearning}, the Adapter package is used as an abstraction layer by which the algorithm and the teacher get separated from the input formalism. Since automaton learning algorithms have no direct access to the system under learning, they operate in a black-box way, this Adapter package is a useful addition, which unfortunately can not be used on the output layer. Hypothesis are directly accessed by the learning algorithms, they are constructed during the learning. While more specific abstractions were made (and can be seen later), no singular abstraction layer can be provided for every type of automaton and every type of learning algorithm the same way as for the input formalisms.
+\\\\
+The relations between the packages (modules) are straightforward. Composition is used, to indicate, that there is no Algorithm (learner) without a Teacher, there is no Teacher, without an Adapter, and there is no Adapter, without an input, a Learnable, to adapt. Algorithms of course depend on Hypothesis, and because of equivalence queries, which are later queried through the Teacher and Adapter components, they both also have a dependency on the Hypothesis package.
+
+\subsection{Detailed overview of abstractions}
+
+
+The diagram in Figure \ref{fig:abstractoverview} showed the modularization of the framework, which depend on the correct implementation of object-oriented architecture so the notated compositions and dependencies in Fig. \ref{fig:abstractoverview} are satisfied. These abstractions are defined and implemented in Java as abstract classes and interfaces seen in Fig. \ref{fig:abstractdetailedoverview}. The detailed descriptions of these abstractions are as follows.
+\\
+\begin{itemize}
+	\item \textbf{Learnable:} The \emph{Learnable} interface is the input type used by the framework. It defines two generic parameters, \emph{I} is the character type of the regular language the Learnable represents, while \emph{O} is the character type by which actions are defined for the system under learning. The only method the interface defines is the \emph{getOutput()} method, which returns the output \emph{O} given by the system under learning for a specific sequence of inputs. Note, that while the word "output" is used, the \emph{O} it returns is the action the system takes for an input. If the system is represented as a DFA, this would be the state it moves to, if the system is represented as a Mealy machine, it would be an output.
+	
+	\item \textbf{Hypothesis:} The \emph{Hypothesis} abstract class is the output type used by the framework. The generic parameters it takes are the automaton it uses (\emph{M}), and the input (\emph{I}), output (\emph{O}), state (\emph{S}) and transition (\emph{T}) types used by \emph{M}. The Hypothesis class does not enforce bounds on these parameters to allow flexibility in implementation. Beyond the getters, the \emph{query()} method takes a sequence of inputs, and returns the output given by the hypothesis automaton. Just as with the \emph{Learnable} interface, this output represents action in the automaton.
+	
+	\item \textbf{LearnableAdapter:} The \emph{LearnableAdapter} abstract class is the abstraction of the adaptation between any \emph{Learnables} and \emph{Hypotheses}. The generic parameters of it are the \emph{Hypothesis} type (\emph{H}) and the input, output types of \emph{H} (\emph{HI}, \emph{HO}), similarly, the \emph{Learnable} type (\emph{L}) and the input, output types of \emph{L} (\emph{LI}, \emph{LO}). The \emph{LearnableAdapter} class stores a \emph{Learnable}, the object which represents the data of the system under learning. It gives access to the system using the \emph{membershipQuery()} method and the abstract \emph{equivalenceQuery()} method. The abstract \emph{covert..()} methods are used to do the actual adapting between \emph{Hypotheses} and \emph{Learnables} character by character.
+	
+	\item \textbf{Teacher:} The \emph{Teacher} abstract class defines the "middle ground" between a learning algorithm and the input. The \emph{Teacher} class as generic parameter, takes a \emph{Hypothesis} (\emph{H}) with input and outputs types of \emph{HI} and \emph{HO}, also a \emph{LearnableAdapter} (\emph{LA}) which has the same \emph{Hypothesis} type as \emph{H}. It defines two query types, \emph{membershipQuery()} and \emph{equivalenceQuery}, both of which it delegates to the current adapter object in its adapter field. The \emph{Teacher class} is needed for easy extensibility, specifically, for any algorithm and input to work together without modification on them.
+	
+	\item \textbf{ActiveLearningAlgorithm:} The \emph{ActiveLearningAlgorithm} class provides abstraction for active automaton learning algorithms. It defines only a \emph{Hypothesis}  (\emph{H}), and its input types (\emph{HI}, \emph{HO}). The teacher field bounded to the \emph{Hypothesis} \emph{H} is used for queries, while the \emph{execute()} method executes the algorithm and returns with the learned \emph{Hypothesis}. Note, that the algorithm is fully separated from the system it is learning, it does not even know the generic type which with the communication, queries are executed.
+\end{itemize}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.97\linewidth]{figures/abstractdetailedoverview}
+	\caption{Overview of the abstract classes and interfaces of the framework.}
+	\label{fig:abstractdetailedoverview}
+\end{figure}
+
+\subsection{Detailed overview of implementation}
+
+The detailed (but not exhaustive) class diagram of the frameworks implementation can be seen in Fig. \ref{fig:abstractdetailedoverview}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/implementationdetailedoverview}
+	\caption{Non-exhaustive detailed overview of the implementation and structure of the framework.}
+	\label{fig:impldetailedoverview}
+\end{figure}

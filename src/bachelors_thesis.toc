@@ -22,6 +22,10 @@
 \select@language {english} \contentsline {subsection}{\numberline {2.2.2}The TTT algorithm\cite {10.1007/978-3-319-11164-3_26}}{14}{subsection.2.2.2}% 
 \select@language {english} \contentsline {chapter}{\numberline {3}Contribution}{16}{chapter.3}% 
 \select@language {english} \contentsline {section}{\numberline {3.1}Implementing a learning algorithm}{16}{section.3.1}% 
-\select@language {english} \contentsline {chapter}{Acknowledgements}{19}{chapter*.17}% 
-\select@language {english} \contentsline {chapter}{Bibliography}{20}{chapter*.17}% 
-\select@language {english} \contentsline {chapter}{Appendix}{21}{appendix*.19}% 
+\select@language {english} \contentsline {section}{\numberline {3.2}Automaton learning framework}{19}{section.3.2}% 
+\select@language {english} \contentsline {subsection}{\numberline {3.2.1}High-level overview}{19}{subsection.3.2.1}% 
+\select@language {english} \contentsline {subsection}{\numberline {3.2.2}Detailed overview of abstractions}{20}{subsection.3.2.2}% 
+\select@language {english} \contentsline {subsection}{\numberline {3.2.3}Detailed overview of implementation}{22}{subsection.3.2.3}% 
+\select@language {english} \contentsline {chapter}{Acknowledgements}{23}{chapter*.21}% 
+\select@language {english} \contentsline {chapter}{Bibliography}{24}{chapter*.21}% 
+\select@language {english} \contentsline {chapter}{Appendix}{25}{appendix*.23}% 
