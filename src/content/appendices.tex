@@ -44,3 +44,54 @@ Transition { input pod output none sourceState f targetState f } ,
 Transition { input water output none sourceState f targetState f } } }
 \end{lstlisting}
 
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.5\linewidth}
+		\centering
+		\includegraphics[width=1.0\linewidth]{figures/alternatingbit}
+		\caption{Mealy machine representation of the alternating-bit protocol.}
+	\end{subfigure}
+	\begin{subfigure}{0.8\linewidth}
+		\centering
+		\begin{lstlisting}
+			String sequence = 
+				"null|send0|ack1|send0|ack0|send1"
+				+ "|ack0null|send1|ack0ack0|send1|ack0ack1|send0"
+				+ "|ack1null|send0|ack1ack0|send1|ack1ack1|send0"
+				+ "|nullnull|send0|nullack0|send1|nullack1|send0"
+				+ "|ack0nullnull|send1|ack0nullack0|send1|ack0nullack1|send0"
+				+ "|ack0ack0null|send1|ack0ack0ack0|send1|ack0ack0ack1|send0"
+				+ "|ack0ack1null|send0|ack0ack1ack0|send1|ack0ack1ack1|send0"
+				+ "|ack1nullnull|send0|ack1nullack0|send1|ack1nullack1|send0"
+				+ "|ack1ack0null|send1|ack1ack0ack0|send1|ack1ack0ack1|send0"
+				+ "|ack1ack1null|send0|ack1ack1ack0|send1|ack1ack1ack1|send0"
+				+ "|nullnullnull|send0|nullnullack0|send1|nullnullack1|send0"
+				+ "|nullack0null|send1|nullack0ack0|send1|nullack0ack1|send0"
+				+ "|nullack1null|send0|nullack1ack0|send1|nullack1ack1|send0";
+		\end{lstlisting}
+		\caption{}
+	\end{subfigure}
+	\caption{A Mealy machine \textbf{(a)}, with its input format \textbf{(b)} using the formalism described in Section \ref{item:stringsequencelearnable}s \emph{StringSequenceLearnable} item.}
+	\label{fig:alternatingbit}
+\end{figure}
+
+
+\begin{lstlisting}[caption=Brute-force implementation of equivalence queries described in Section \ref{item:stringsequencelearnable}s \emph{StringSequenceAdapter} item using google guavas Sets.powerSet() function.,label=li:eqbruteforce]
+@Override
+public List<? extends I> equivalenceQuery(H hypothesis, Collection<? extends I> alphabet) {
+	for(Set<I> s : com.google.common.collect.Sets.powerSet(new HashSet<I>(alphabet))) {
+		if(!s.isEmpty()) {
+			for(List<I> permutation : com.google.common.collect.Collections2.permutations(s)) {
+				if(!hypothesis.query(permutation).equals(this.membershipQuery(permutation))) {
+					O a = hypothesis.query(permutation);
+					O b = this.membershipQuery(permutation);
+					return permutation;
+				}
+			}
+		}
+	}
+	return null;
+}
+\end{lstlisting}
+
+

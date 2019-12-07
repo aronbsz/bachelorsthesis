@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  6 DEC 2019 02:12
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  6 DEC 2019 23:26
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1764,12 +1764,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 134--136
 [20]
 File: figures/abstractdetailedoverview.pdf Graphic file (type pdf)
 <use figures/abstractdetailedoverview.pdf>
+ [21]
+Underfull \hbox (badness 6157) in paragraph at lines 167--168
+[]\TU/lmr/bx/n/10.95 DHCMealyMachineHypothesis: \TU/lmr/m/n/10.95 The \TU/lmr/m
+/it/10.95 DHCMealyMachineHypothesis \TU/lmr/m/n/10.95 class
+ []
+
+
+Underfull \hbox (badness 1297) in paragraph at lines 169--170
+[]\TU/lmr/bx/n/10.95 StringSequenceAdapter: \TU/lmr/m/n/10.95 The \TU/lmr/m/it/
+10.95 StringSequenceAdapter \TU/lmr/m/n/10.95 abstract class adapts
+ []
+
+
+Underfull \hbox (badness 2512) in paragraph at lines 173--174
+[]\TU/lmr/bx/n/10.95 MealyMachineTeacher: \TU/lmr/m/n/10.95 The \TU/lmr/m/it/10
+.95 MealyMachineTeacher \TU/lmr/m/n/10.95 abstract class bounds
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--175
+[]\TU/lmr/bx/n/10.95 MealyMachineTeacherStringSequenceImpl: \TU/lmr/m/n/10.95 T
+he \TU/lmr/m/it/10.95 MealyMachineTeacher-
+ []
+
+[22]
 File: figures/implementationdetailedoverview.pdf Graphic file (type pdf)
 <use figures/implementationdetailedoverview.pdf>
- [21]) [22]
+) [23] [24]
 \openout2 = `content/acknowledgement.aux'.
 
- (content/acknowledgement.tex) [23
+ (content/acknowledgement.tex) [25
 
 
 
@@ -1829,24 +1854,32 @@ U/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][
 ][][] []
  []
 
-) [24
+) [26
 
 
 ]
 \openout2 = `content/appendices.aux'.
 
- (content/appendices.tex) [25
+ (content/appendices.tex
+File: figures/alternatingbit.pdf Graphic file (type pdf)
+<use figures/alternatingbit.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--52
+[][]|\TU/lmr/m/n/10 Mealy machine representation of the
+ []
+
+[27
 
 
-]
+]) [28]
 \tf@thm=\write6
 \openout6 = `bachelors_thesis.thm'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 104.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 104.
- (bachelors_thesis.aux
-(include/titlepage.aux) (include/declaration.aux) (content/abstract.aux)
-(content/introduction.aux) (content/background.aux) (content/contribution.aux)
+ (bachelors_thesis.aux (include/titlepage.aux)
+(include/declaration.aux) (content/abstract.aux) (content/introduction.aux)
+(content/background.aux) (content/contribution.aux)
 (content/acknowledgement.aux) (content/appendices.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 104.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 104.
@@ -1859,12 +1892,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 104.
  ) 
 Here is how much of TeX's memory you used:
- 38416 strings out of 427669
- 740325 string characters out of 3145155
- 1047306 words of memory out of 3000000
- 41884 multiletter control sequences out of 15000+200000
+ 38424 strings out of 427669
+ 740532 string characters out of 3145155
+ 1119963 words of memory out of 3000000
+ 41891 multiletter control sequences out of 15000+200000
  547118 words of font info for 107 fonts, out of 3000000 for 9000
  1352 hyphenation exceptions out of 8191
- 57i,15n,70p,1336b,1140s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 57i,15n,70p,1336b,1255s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on bachelors_thesis.pdf (31 pages).
+Output written on bachelors_thesis.pdf (34 pages).

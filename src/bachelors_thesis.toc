@@ -26,6 +26,6 @@
 \select@language {english} \contentsline {subsection}{\numberline {3.2.1}High-level overview}{19}{subsection.3.2.1}% 
 \select@language {english} \contentsline {subsection}{\numberline {3.2.2}Detailed overview of abstractions}{20}{subsection.3.2.2}% 
 \select@language {english} \contentsline {subsection}{\numberline {3.2.3}Detailed overview of implementation}{22}{subsection.3.2.3}% 
-\select@language {english} \contentsline {chapter}{Acknowledgements}{23}{chapter*.21}% 
-\select@language {english} \contentsline {chapter}{Bibliography}{24}{chapter*.21}% 
-\select@language {english} \contentsline {chapter}{Appendix}{25}{appendix*.23}% 
+\select@language {english} \contentsline {chapter}{Acknowledgements}{25}{chapter*.21}% 
+\select@language {english} \contentsline {chapter}{Bibliography}{26}{chapter*.21}% 
+\select@language {english} \contentsline {chapter}{Appendix}{27}{appendix*.23}% 
