@@ -1,121 +1,31 @@
 \chapter{Contribution}
 
-The main contribution in this thesis is to provide an active automaton learning framework, which can be used to support system design and analysis. This framework, since used in system design, is needed to be easily modifiable and extensible, while having the capability of handling any variation of formalisms systems might use.
-\\\\
-In order to tackle the problem of creating such a framework, I first needed to understand active automaton learning algorithms themselves.
-\\
-\section{Implementing a learning algorithm}
+The main contribution of this thesis is an active automaton learning framework, which can be used to support system design and analysis. This framework, since used in system engineering, is required to be easily modifiable and extensible, while having the capability of handling any variation of formalisms systems might rely on.
 
-\begin{figure}
+
+\section{Automaton learning framework}
+
+Active automaton learning algorithms essentially have two endpoints: the input, reached through the teacher component, and the output, where the learned hypothesis automaton is returned. This is illustrated in Fig. \ref{fig:learningcomm}. The teacher and the learner can be adjusted to the required formalisms: the underlying modeling language of the system under learning (the \emph{input formalism}) and that of the learned hypothesis (the \emph{output formalism}). \\
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/learningcomm}
 	\caption{Data flow of active learning algorithms.}
 	\label{fig:learningcomm}
 \end{figure}
 
-After processing the background knowledge seen in \cite{Steffen2011}, I decided to implement the most straightforward learning algorithm presented therein, the direct hypothesis construction algorithm.
-\\
-The first step was determining the formalisms used in this implementation, more specifically, the input and the output formalisms. Active automaton learning algorithms essentially have two endpoints: one being the input, reached through the teacher component, and the other being the output, where the learned hypothesis automaton is returned. This is illustrated in Fig. \ref{fig:learningcomm}. The teacher and learner component can handle abstraction, meaning the formalisms of the system under learning, or from now the input formalism, and the formalism of the learned hypothesis, or from now, the output formalism can both be arbitrary. Only implementing a specific algorithm, these formalisms needed to be specified. \\
+\subsection{Tooling}
 
-Even if at first I was only implementing a single algorithm, the decisions on the formalism of this implementation was made with the future framework in mind. Since automaton learning algorithms can be  implemented on any type of automata, the easiest method would've been to implement DHC using deterministic finite automata. However, real-life reactive systems usually are better modeled using Mealy machines, hence the implementation was made using Mealy machines as both input and output formalisms.
-\\
-The first step of the implementation process was choosing the right tooling. This decision was also formed by the future system design perspective, which is why the Mealy machine implementation was done in Eclipse Modeling Framework.
-\\\\
-Eclipse Modeling Framework (EMF), or more specifically, EMF core, is an "abstraction for describing, composing, and manipulating structured information", essentially a tool for system modeling and code generation implemented in Java. Figure \ref*{fig:mealyecore} shows an UML class diagram of the metamodel I've created using the Ecore package of EMF core. 
+As seen in Fig. \ref{fig:learningcomm}, the variables of the framework are essentially the input and output formalisms it accepts. In order to provide flexibility in this regard, the following tools were used.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=1.0\linewidth]{figures/mealymodel}
-	\caption{Ecore metamodel of Mealy machines.}
-	\label{fig:mealyecore}
-\end{figure}
+\begin{itemize}
+	\item \textbf{Eclipse Modeling Framework (EMF):} EMF, or more specifically, EMF core, is an "abstraction for describing, composing, and manipulating structured information", essentially a tool for system modeling and code generation implemented in Java. The tool it provides allows graphical modeling of UML class diagrams and generating code based on these models.
+	\item \textbf{Xtext:} Xtext is a framework for creating programming and domain-specific languages, which also has integration with EMF. This integration allows reading and writing text files in the form of an Xtext grammar using corresponding EMF generated classes.
+\end{itemize}
 
-In text, the Ecore model I've created uses Strings as distinguishers (on code generation, EString is converted to java.lang.String). States of the automaton, i.e. State objects are differentiated based on the name field. Note, that this is a transition-driven model of mealy machines, the Transition class stores the source and target states of the transition, as opposed to some models, where states store their own transition information (successors, predecessors) like nodes in a graph. This decision was based on the DHC algorithm, which while learning, stores traversal information itself, rather than asking for it, which is why ease of access is preferred as opposed to efficiency.
-\\\\
-Using EMF, I generated the class diagram seen in Fig. \ref{fig:mealyecore} into Java code. With this code, I implemented the direct hypothesis construction algorithm (in Java as well), without any framework whatsoever, only a single class accepting a MealyMachine object and constructing a Hypothesis MealyMachine object based off of it. In order to run and test this implementation, an example was needed, for which I chose the automaton seen in \ref{fig:coffeemealy}. Programmatically creating this example as an object is not a scalable solution, espetially regarding the future framework to be built, so I used Xtext, another tool, to solve this issue.
-\\
-Xtext is a framework for creating programming and domain-specific languages, which also has integration with EMF metamodels. Using this integration, I generated the Xtext grammar seen in Listing \ref{li:xtext}. In words, this  grammar describes a textual grammar in which instances of the metamodel seen in Fig. \ref{fig:mealyecore} can be stored. 
-
-
-
-\begin{lstlisting}[caption=Xtext grammar describing Mealy machines.,label=li:xtext]
-MealyMachine returns MealyMachine:
-	'MealyMachine'
-	'{'
-		'initialState' initialState=State
-		'states' '{' states+=State ( "," states+=State)* '}' 
-		'inputAlphabet' inputAlphabet=Alphabet
-		'outputAlphabet' outputAlphabet=Alphabet
-		'transitions' '{' transitions+=Transition ( "," transitions+=Transition)* '}' 
-	'}';
-	
-State returns State:
-	{State}
-	'State'
-	name=EString;
-
-Alphabet returns Alphabet:
-	'Alphabet'
-	'{'
-		'characters' '{' characters+=EString ( "," characters+=EString)* '}' 
-	'}';
-
-Transition returns Transition:
-	'Transition'
-	'{'
-		'input' input=EString
-		'output' output=EString
-		'sourceState' sourceState=[State|EString]
-		'targetState' targetState=[State|EString]
-	'}';
-
-EString returns ecore::EString:
-STRING | ID;
-\end{lstlisting}
-
-Utilizing the Xtext grammar in Listing \ref{li:xtext}, I created the input to be used by the implemented DHC, containing the formalized version of the automaton shown in Fig. \ref{fig:coffeemealy}. The input file can bee seen in Listing \ref{li:4ixtext}
-
-
-\begin{lstlisting}[caption=The Mealy machine seen in Fig.\ref{fig:dfaexamplemealyver}.a in the form of the Xtext grammar described in Listing \ref{li:xtext}.,label=li:4ixtext]
-	MealyMachine{
-		initialState 
-		State q0 states { State q0, State q1, State q2, State q3}
-		inputAlphabet Alphabet { characters { a , b } }
-		outputAlphabet Alphabet { characters { top , bot } }
-		transitions{ 
-		Transition { input a output top sourceState q0 targetState q1 } , 
-		Transition { input b output top sourceState q0 targetState q0 } , 
-		Transition { input a output top sourceState q1 targetState q2 } , 
-		Transition { input b output top sourceState q1 targetState q1 } , 
-		Transition { input a output bot sourceState q2 targetState q3 } , 
-		Transition { input b output top sourceState q2 targetState q2 } , 
-		Transition { input a output top sourceState q3 targetState q0 } , 
-		Transition { input b output bot sourceState q3 targetState q3 } } }
-\end{lstlisting}
-
-Using the input file in Listing \ref{li:4ixtext} and converting it to a MealyMachine object using Xtext/EMF integration, the implemented DHC algorithm worked as intended. The execution of the algorithm returned with a new MealyMachine hypotesis object, which was the minimal version of the input automaton (seen in Fig. \ref{fig:coffeemealyminimal}). After the learning, the program wrote the learned hypothesis into a file in the same Xtext grammar the input was described in.\\ The overview of this implementation can be seen in Table \ref{tab:activelearningproto}.
-
-\renewcommand{\tabularxcolumn}[1]{m{#1}}
-\newcolumntype{Y}{>{\centering\arraybackslash}X}
-\begin{table}[H]
-	
-	\begin{tabularx}{\columnwidth}{YYYYY}
-		\hline
-		\textbf{Algorithm} & \textbf{Input formalism} & \textbf{Output formalism} & \textbf{Input source} & \textbf{Output source}\\ \hline
-		Direct Hypothesis Construction & Mealy machine & Mealy machine & Xtext & Xtext \\	\hline
-	\end{tabularx}
-	\caption{Overview of the prototype DHC algorithm implementation.}
-	\label{tab:activelearningproto}
-\end{table}
-
-I used the experience gained during this prototype implementation to extend it into a framework.
-
-\section{Automaton learning framework}
-After implementing a singular active learning algorithm using fixed formalisms, I started designing an abstract framework to implement any algorithm using arbitrary formalisms. My desing decisions are mostly illustrated by Fig. \ref{fig:flowchartlearning}. The "Learner" and the "Teacher" components are both abstractions upon an algorithm, with two endpoints, one being the input, the other the output. Following this mindset, I first created a high-level model of the framework.
 
 \subsection{High-level overview}
 
-Since the implementation of the framework would be using Java as a language, the high-level view of it seen in Fig. \ref{fig:abstractoverview} is an UML class diagram of the packages and the relations between them, essentially being an overview of the modularization of the framework.
+Since the implementation of the framework would be using Java as a language, the high-level view seen in Fig. \ref{fig:abstractoverview} is an UML class diagram of the packages and the relations between them, essentially being an overview of the modularization of the framework.
 
 \begin{figure}
 	\centering
@@ -124,9 +34,9 @@ Since the implementation of the framework would be using Java as a language, the
 	\label{fig:abstractoverview}
 \end{figure}
 
-Note, that when comparing Fig. \ref{fig:abstractoverview} to Fig. \ref{fig:flowchartlearning}, the data flows identically. The Learnable package containing the input formalisms, and the Hypothesis package containing the output formalisms are used by the teacher (Teacher package) and the learner (Algorithm package). The package not represented on Fig. \ref{fig:flowchartlearning}, the Adapter package is used as an abstraction layer by which the algorithm and the teacher get separated from the input formalism. Since automaton learning algorithms have no direct access to the system under learning, they operate in a black-box way, this Adapter package is a useful addition, which unfortunately can not be used on the output layer. Hypothesis are directly accessed by the learning algorithms, they are constructed during the learning. While more specific abstractions were made (and can be seen later), no singular abstraction layer can be provided for every type of automaton and every type of learning algorithm the same way as for the input formalisms.
+Note, that when comparing Fig. \ref{fig:abstractoverview} to Fig. \ref{fig:learningcomm}, the data flows identically. The Learnable package containing the input formalisms, and the Hypothesis package containing the output formalisms are used by the teacher (Teacher package) and the learner (Algorithm package). The package not represented on Fig. \ref{fig:learningcomm}, the Adapter package is used as an abstraction layer to separate the algorithm and the teacher from the input formalism. Since automaton learning algorithms have no direct access to the system under learning, they operate in a black-box way, the Adapter package is a useful addition. Unfortunately no such adapter can be used on the output layer, since Hypotheses are directly accessed by the learning algorithms, and are constructed during the learning. While more specific abstractions were made (and can be seen later), no singular abstraction layer can be provided for every type of automaton and every type of learning algorithm the same way as for the input formalisms.
 \\\\
-The relations between the packages (modules) are straightforward. Composition is used, to indicate, that there is no Algorithm (learner) without a Teacher, there is no Teacher, without an Adapter, and there is no Adapter, without an input, a Learnable, to adapt. Algorithms of course depend on Hypothesis, and because of equivalence queries, which are later queried through the Teacher and Adapter components, they both also have a dependency on the Hypothesis package.
+The relations between the packages (modules) are straightforward. Composition is used, to indicate, that there is no Algorithm (learner) without a Teacher, there is no Teacher without an Adapter, and there is no Adapter without an input, a Learnable, to adapt. Algorithms of course depend on Hypothesis, and because of equivalence queries, which are later transferred through the Teacher and Adapter components, they both also have a dependency on the Hypothesis package.
 
 \subsection{Detailed overview of abstractions}
 
@@ -153,9 +63,108 @@ The diagram in Figure \ref{fig:abstractoverview} showed the modularization of th
 	\label{fig:abstractdetailedoverview}
 \end{figure}
 
-\subsection{Detailed overview of implementation} \label{item:stringsequencelearnable}
+\section{Implementing learning algorithms}
 
-The detailed (but not exhaustive) class diagram of the frameworks implementation can be seen in Fig. \ref{fig:abstractdetailedoverview}. The figure is self-explanatory in some regards, while the generic specifics and implementation details are explained in the following.
+Building upon the abstractions of the framework, I implemented the two active learning algorithms presented in the Background chapter. The first step of the implementation was determining the input and output formalisms to use.
+
+Since automaton learning algorithms can be implemented on any type of automata, the easiest method would be using deterministic finite automata. However, real-life reactive systems usually are better modeled using Mealy machines, hence the implementation was made using Mealy machines as both input and output formalisms.
+\\
+The first step of the implementation process was choosing the right tooling, which is why the Mealy machine implementation was done in Eclipse Modeling Framework.
+\\\\
+Figure \ref*{fig:mealyecore} shows an UML class diagram of the metamodel I've created using the Ecore package of EMF core, and the graphical modeling tool provided by EMF. I also used EMF to generate Java classes corresponding to the ones seen in Fig. \ref*{fig:mealyecore}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/mealymodel}
+	\caption{Ecore metamodel of Mealy machines.}
+	\label{fig:mealyecore}
+\end{figure}
+
+In text, the Ecore model uses Strings as distinguishers (on code generation, EString is converted to java.lang.String). States of the automaton, i.e. State objects are differentiated based on the name field. Note, that this is a transition-driven model of Mealy machines, the Transition class has a reference to the source and target states of the transition, as opposed to some models, where states store their own transition information (successors, predecessors) like nodes in a graph. This decision was based on the DHC algorithm, which stores traversal information itself, rather than asking for it, which is why ease of access is preferred as opposed to efficiency.
+
+Extending upon the metamodel in Figure \ref*{fig:mealyecore}, I generated the Xtext grammar seen in Listing \ref{li:xtext} utilizing Xtexts EMF integration. In words, this  grammar describes a textual grammar in which instances of the metamodel seen in Fig. \ref{fig:mealyecore} can be stored. 
+
+
+
+\begin{lstlisting}[caption=Xtext grammar describing Mealy machines.,label=li:xtext]
+MealyMachine returns MealyMachine:
+'MealyMachine'
+'{'
+'initialState' initialState=State
+'states' '{' states+=State ( "," states+=State)* '}' 
+'inputAlphabet' inputAlphabet=Alphabet
+'outputAlphabet' outputAlphabet=Alphabet
+'transitions' '{' transitions+=Transition ( "," transitions+=Transition)* '}' 
+'}';
+
+State returns State:
+{State}
+'State'
+name=EString;
+
+Alphabet returns Alphabet:
+'Alphabet'
+'{'
+'characters' '{' characters+=EString ( "," characters+=EString)* '}' 
+'}';
+
+Transition returns Transition:
+'Transition'
+'{'
+'input' input=EString
+'output' output=EString
+'sourceState' sourceState=[State|EString]
+'targetState' targetState=[State|EString]
+'}';
+
+EString returns ecore::EString:
+STRING | ID;
+\end{lstlisting}
+
+An example of a MealyMachine instance in the form if the grammar in Listing \ref{li:xtext} can be seen in Listing \ref{li:4ixtext}.
+
+\begin{lstlisting}[caption=The Mealy machine seen in Fig.\ref{fig:dfaexamplemealyver}.a in the form of the Xtext grammar described in Listing \ref{li:xtext}.,label=li:4ixtext]
+MealyMachine{
+initialState 
+State q0 states { State q0, State q1, State q2, State q3}
+inputAlphabet Alphabet { characters { a , b } }
+outputAlphabet Alphabet { characters { top , bot } }
+transitions{ 
+Transition { input a output top sourceState q0 targetState q1 } , 
+Transition { input b output top sourceState q0 targetState q0 } , 
+Transition { input a output top sourceState q1 targetState q2 } , 
+Transition { input b output top sourceState q1 targetState q1 } , 
+Transition { input a output bot sourceState q2 targetState q3 } , 
+Transition { input b output top sourceState q2 targetState q2 } , 
+Transition { input a output top sourceState q3 targetState q0 } , 
+Transition { input b output bot sourceState q3 targetState q3 } } }
+\end{lstlisting}
+
+\subsection{Direct Hypothesis Construction}
+
+While implementing the DHC algorithm, I used the above described MealyMachine formalism using the Xtext input source, but I also described a way to programmatically describe an input to ease the process of creating small inputs. An overview of this can be seen in Table \ref{tab:activelearningproto}. Both are expanded upon in the following.
+
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\begin{table}[H]
+	
+	\begin{tabularx}{\columnwidth}{YYYYY}
+		\hline
+		\textbf{Algorithm} & \textbf{Input formalism} & \textbf{Output formalism} & \textbf{Input source} & \textbf{Output source}\\ \hline
+		Direct Hypothesis Construction & Mealy machine & Mealy machine & Xtext & Xtext \\	\hline
+		Direct Hypothesis Construction & String sequences & Mealy machine & String & Xtext
+		\\ \hline
+	\end{tabularx}
+	\caption{Overview of the DHC algorithm implementation.}
+	\label{tab:activelearningproto}
+\end{table}
+
+
+
+
+\label{item:stringsequencelearnable}
+
+The detailed (but not exhaustive) class diagram of the frameworks DHC implementation can be seen in Fig. \ref{fig:abstractdetailedoverview}. The figure is self-explanatory in some regards, while the generic specifics and implementation details are explained in the following.
 
 \begin{itemize}
 	\item \textbf{StringSequenceLearnable:} The \emph{StringSequenceLearnable} class is a realization of the Learnable interface, defining simply any type of learnable, which use Strings (java.lang.String) as both input and output types. It contains a simple implementation for describing behavior, accepting a String in the format of $"|input1|output1|input2|output2|...|inputn|outputn|"$, and storing it in a HashMap. One example of this formalism can be seen in Fig. \ref{fig:alternatingbit}.
@@ -193,9 +202,35 @@ public DHCHypothesis execute() {
 }
 \end{lstlisting}
 
+Note, that while Table \ref{tab:activelearningproto} states the current working implementations, the algorithm itself runs using its abstract Hypothesis type, resulting in easy extensibility.
+
+
 \begin{figure}
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/implementationdetailedoverview}
-	\caption{Non-exhaustive detailed overview of the implementation and structure of the framework.}
+	\vspace*{-1.2cm}
+	\hspace*{-1.2cm}
+	\centerline{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{figures/implementationdetailedoverview}}
+	\caption{Non-exhaustive detailed structural overview of the frameworks DHC implementation.}
 	\label{fig:impldetailedoverview}
 \end{figure}
+
+\subsection{TTT}
+
+The TTT algorithm is complex, in both theory and implementation. Due to it using multiple specific types of data structures and sub-algorithms, which are not themselves part of TTT, during my imlementation I depended on the original (defining) implementation of it in LearnLib\cite{10.1007/978-3-319-21690-4_32}.
+\\
+LearnLib describes an abstract layer of TTT to extend in implementations. I used these abstractions to implement the algorithm into my framework in a (from the perspective of execution) near seamless manner. The current implementation only allows MealyMachines as inputs, but this can be extended upon analogously as with the DHC implementation seen previously.
+
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\begin{table}[H]
+	
+	\begin{tabularx}{\columnwidth}{YYYYY}
+		\hline
+		\textbf{Algorithm} & \textbf{Input formalism} & \textbf{Output formalism} & \textbf{Input source} & \textbf{Output source}\\ \hline
+		TTT & Mealy machine & Mealy machine & Xtext & Xtext \\	\hline
+	\end{tabularx}
+	\caption{Overview of the TTT algorithm implementation.}
+	\label{tab:TTTformalisms}
+\end{table}
+
+The implementation itself is built similarly as the DHC implementation, but the algorithm wraps the abstractions of the framework and converts between types of these abstractions and the ones used in LearnLib.

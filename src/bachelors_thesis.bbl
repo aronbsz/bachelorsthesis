@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{9}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -39,6 +39,15 @@ Malte Isberner, Falk Howar, and Bernhard Steffen.
 \newblock In Borzoo Bonakdarpour and Scott~A. Smolka, editors, \emph{Runtime
   Verification}, pages 307--322, Cham, 2014. Springer International Publishing.
 \newblock ISBN 978-3-319-11164-3.
+
+\bibitem[Isberner et~al.(2015)Isberner, Howar, and
+  Steffen]{10.1007/978-3-319-21690-4_32}
+Malte Isberner, Falk Howar, and Bernhard Steffen.
+\newblock The open-source learnlib.
+\newblock In Daniel Kroening and Corina~S. P{\u{a}}s{\u{a}}reanu, editors,
+  \emph{Computer Aided Verification}, pages 487--495, Cham, 2015. Springer
+  International Publishing.
+\newblock ISBN 978-3-319-21690-4.
 
 \bibitem[Kozen(1977)]{Kozen1977}
 Dexter~C. Kozen.
