@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  9 DEC 2019 04:18
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  9 DEC 2019 04:20
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1867,9 +1867,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 104.
 (content/acknowledgement.aux) (content/appendices.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 104.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 104.
-Package rerunfilecheck Info: File `bachelors_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 21E95EB304FC04376CFCB4F411C49D12.
 
+
+Package rerunfilecheck Warning: File `bachelors_thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `bachelors_thesis.out':
+(rerunfilecheck)             Before: 21E95EB304FC04376CFCB4F411C49D12
+(rerunfilecheck)             After:  C6F060B3D2F680EC101477B1DB9C07F1.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 

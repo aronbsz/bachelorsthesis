@@ -25,7 +25,7 @@
 \select@language {english} \contentsline {subsection}{\numberline {3.1.1}Tooling}{17}{subsection.3.1.1}% 
 \select@language {english} \contentsline {subsection}{\numberline {3.1.2}High-level overview}{18}{subsection.3.1.2}% 
 \select@language {english} \contentsline {subsection}{\numberline {3.1.3}Detailed overview of abstractions}{19}{subsection.3.1.3}% 
-\select@language {english} \contentsline {section}{\numberline {3.2}Implementing learning algorithms}{20}{section.3.2}% 
+\select@language {english} \contentsline {section}{\numberline {3.2}Implemented learning algorithms}{20}{section.3.2}% 
 \select@language {english} \contentsline {subsection}{\numberline {3.2.1}Direct Hypothesis Construction}{22}{subsection.3.2.1}% 
 \select@language {english} \contentsline {subsection}{\numberline {3.2.2}TTT}{24}{subsection.3.2.2}% 
 \select@language {english} \contentsline {chapter}{Acknowledgements}{26}{chapter*.22}% 
