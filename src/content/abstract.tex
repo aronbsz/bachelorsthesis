@@ -8,9 +8,17 @@
 %----------------------------------------------------------------------------
 \chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
 
-Jelen dokumentum egy diplomaterv sablon, amely formai keretet ad a BME Villamosmérnöki és Informatikai Karán végző hallgatók által elkészítendő szakdolgozatnak és diplomatervnek. A sablon használata opcionális. Ez a sablon \LaTeX~alapú, a \emph{TeXLive} \TeX-implementációval és a PDF-\LaTeX~fordítóval működőképes.
+Informatikai rendszerek tervezése, fejlesztése modell-alapú technológiák segítségével hatékonyabbá tehető. A tervezett rendszerről rendelkezésre álló formális modell lehetővé teszi olyan feladatok automatizált végrehajtását, mint a helyességellenőrzés, kódgenerálás, valamint a rendszer kvalitatív és kvantitatív analízise.
+\\\\
+A rendszermodell reaktív komponensei (pl. kommunikációs protokollok) tipikusan állapot-alapú formalizmusokkal modellezhetők. Sokszor azonban a szükséges rendszermodell elkészítése nehéz feladat, hiszen ezen protokollokat kényelmesebb példalefutások alapján megtervezni. Tudomásom szerint az irodalomban még nincs olyan eszköz, mely lehetővé tenné egy rendszer(komponens) megtervezését példalefutások alapján.
+\\\\
+Munkám célja a rendszertervezés megkönnyítése, egy olyan szoftver létrehozásával, mely lehetővé teszi egy rendszer példalefutások alapján való megtervezését. A tervezett rendszer magját automatatanuló algoritmusok képzik, melyek erőssége éppen az, hogy állapot-alapú modelleket hoznak létre tervezett viselkedések alapján.
+\\\\
+A fenti cél megvalósítására a dolgozatomban bemutatok egy moduláris, kiterjeszthető és más szoftverekkel integrálható keretrendszert. Munkám során két algoritmust is implementáltam, melyek tetszőleges formalizmusokat képesek kezelni. Az elkészült keretrendszer hatékonyságát és alkalmazhatóságát mind elméleti szempontból, mind mérésekkel is igazoltam. 
+\\
+A bemutatott keretrendszer a rendszertervezés elősegítésén kívül az automatatanuló algoritmusok fejlesztését, összehasonlítását és tetszőleges célú felhasználását is lehetővé teszi.
 
-
+%TODO: "olyan nincs, ami kiterjeszthető stb stb"
 \vfill
 \selectenglish
 
@@ -20,7 +28,9 @@ Jelen dokumentum egy diplomaterv sablon, amely formai keretet ad a BME Villamosm
 %----------------------------------------------------------------------------
 \chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}
 
-This document is a \LaTeX-based skeleton for BSc/MSc~theses of students at the Electrical Engineering and Informatics Faculty, Budapest University of Technology and Economics. The usage of this skeleton is optional. It has been tested with the \emph{TeXLive} \TeX~implementation, and it requires the PDF-\LaTeX~compiler.
+The design and development of technological systems can be made more efficient using model-based technologies. A formal model of the system under design makes the automation of tasks such as verification, code generation, and qualitative and quantitative system-analysis possible.
+\\\\
+
 
 
 \vfill

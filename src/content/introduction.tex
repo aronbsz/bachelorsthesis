@@ -2,22 +2,34 @@
 \chapter{Introduction}
 %----------------------------------------------------------------------------
 
-\section{Overview}
+\section{Context}
 
-
+Model-based technologies can be used to optimize the process of system design and development, by enabling the automatization of various tasks. Given a formal model of a system under design, the verification and analysis of the system can be automated and model-based code generation becomes possible.
 
 \section{Problem Statement}
 
-
+%biztonsági protokoll etc
+The reactive components of a system, such as communication and security protocols, are typically modelled using state-based formalisms. The manual design of these components can often be a difficult task, since these protocols are more easily defined by their behavior. Specifically, describing the behavior of such a system by example runs proves to be an easier task then modeling them outright. A communication protocol for instance, can be defined by the union of every runs behavior from the viewpoints of every participant of the communication. To the best of my knowledge, there is is no current software, that enables the modeling of a system, or a system component by the description of its example runs.
 
 \section{Objective}
 
-
+The objective of my work was to design a framework capable of supporting system design by modeling a system (component) based on example-runs describing its behavior. Behavioral state-based modeling is the strength of automaton learning algorithms, specifically, active automaton learning algorithms excel at monitoring system behavior, which is why they are the core of the framework that I created.
 
 \section{Contribution}
 
+%TTT, DHC hivatkozva
+To realize my goal, I have created an automaton learning framework capable of handling arbitrary formalisms in a modular, easily extensible and integrable way. In the framework, I implemented two active automaton learning algorithms, the Direct Hypothesis Construction\cite{10.1007/978-3-642-34781-8_19} and the TTT\cite{10.1007/978-3-319-11164-3_26} algorithms, both capable of infering a system using behavioral information.
 
+\section{Related work}
 
+%Össze kell gyűjteni a kapcsolódó munkákat. LearnLib tanul, gamma, theta felhasznál, de tanulni nem tud. Riválisok: automatatanuló keretrendszer, szoftver vagy protokollt lehet ilyen módon tervezni, algok összehasonlítása
+
+%szoftver neve, hivatkozás, mit csinál (röviden), viszont mi az amit nem tud ehhez képest. pl. gamma lehetővé teszi szoftvetkomponensek automata alapú fejlesztését, nem tud automata tanulást
+
+\section{Added value}
+
+%Hogyan segíti elő ezeket %TTT bonyolult, csak LearnLibben
+The presented framework, while capable of system design using example runs, also enables the modular implementation of active automaton learning algorithms and the formalisms they might depend on. Additionally, it makes the comparison of different learning algorithms possible in the same environment (and such, with the same overhead), and allows the discretionary use of the automaton learning algorithms implemented therein.
 \section{Outline}
 
-Chapter 2 provides an outline of the necessary technical background.
+The paper is organized as follows. Chapter 2 provides an outline of the necessary theoretical background, Chapter 3 gives insight into the contribution presented in this thesis. Chapter 4 TODO
