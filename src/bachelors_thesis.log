@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  9 DEC 2019 22:46
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  11 DEC 2019 03:36
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1350,7 +1350,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 39.
 )
 (bachelors_thesis.aux (include/titlepage.aux) (include/declaration.aux)
 (content/abstract.aux) (content/introduction.aux) (content/background.aux)
-(content/contribution.aux) (content/conclusion.aux)
+(content/contribution.aux) (content/evaluation.aux) (content/conclusion.aux)
 (content/acknowledgement.aux) (content/appendices.aux))
 \openout1 = `bachelors_thesis.aux'.
 
@@ -1554,13 +1554,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 11--20
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 31--33
+Underfull \hbox (badness 10000) in paragraph at lines 31--40
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--33
+Underfull \hbox (badness 10000) in paragraph at lines 31--40
 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--40
+
+ []
+
+
+Underfull \hbox (badness 1147) in paragraph at lines 31--40
+\TU/lmr/m/n/10.95 To attain the above goal, I present a modular, extensible and
+ easily integrable
  []
 
 \c@romanPage=\count344
@@ -1817,19 +1828,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 236--80
 
  []
 
-[25] [26]
+[25] [26] [27]
+\openout2 = `content/evaluation.aux'.
+
+ (content/evaluation.tex
+Chapter 4.
+[28
+
+
+
+]) [29]
 \openout2 = `content/conclusion.aux'.
 
  (content/conclusion.tex
-Chapter 4.
-) [27
+Chapter 5.
+) [30
 
 
 
 ]
 \openout2 = `content/acknowledgement.aux'.
 
- (content/acknowledgement.tex) [28
+ (content/acknowledgement.tex) [31
 
 
 
@@ -1889,7 +1909,7 @@ U/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][
 ][][] []
  []
 
-) [29
+) [32
 
 
 ]
@@ -1903,36 +1923,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--52
 [][]|\TU/lmr/m/n/10 Mealy machine representation of the
  []
 
-[30
+[33
 
 
-]) [31]
+]) [34]
 \tf@thm=\write6
 \openout6 = `bachelors_thesis.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 106.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 106.
  (bachelors_thesis.aux (include/titlepage.aux)
 (include/declaration.aux) (content/abstract.aux) (content/introduction.aux)
-(content/background.aux) (content/contribution.aux) (content/conclusion.aux)
-(content/acknowledgement.aux) (content/appendices.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 105.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
+(content/background.aux) (content/contribution.aux) (content/evaluation.aux)
+(content/conclusion.aux) (content/acknowledgement.aux) (content/appendices.aux)
+)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 106.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 106.
 Package rerunfilecheck Info: File `bachelors_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 8572689EAE63643260CD85149B7E704A.
+(rerunfilecheck)             Checksum: 38143353442F010FD65C3E54349FF4E8.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 106.
  ) 
 Here is how much of TeX's memory you used:
- 38424 strings out of 427669
- 740638 string characters out of 3145155
- 1121186 words of memory out of 3000000
- 41888 multiletter control sequences out of 15000+200000
+ 38434 strings out of 427669
+ 740825 string characters out of 3145155
+ 1122033 words of memory out of 3000000
+ 41891 multiletter control sequences out of 15000+200000
  545221 words of font info for 97 fonts, out of 3000000 for 9000
  1352 hyphenation exceptions out of 8191
- 57i,15n,70p,1205b,1759s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 57i,15n,70p,1344b,1759s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on bachelors_thesis.pdf (37 pages).
+Output written on bachelors_thesis.pdf (40 pages).
