@@ -1,9 +1,14 @@
 \chapter{Conclusions}
-This chapter concludes the contributions of this thesis, and presents myfuture goals.
+This chapter concludes the contributions of this thesis, and presents my future goals.
 
 \section{Contributions}
 %saját kontribúció pontokban szedve
 %tudományos kontribúció pontokban sedve
 %2mondat. As a result, lehetővé tettem, van egy keretrendszer...
+In my thesis, I have introduced active automaton learning and two specific learning algorithms. I designed a framework for the development of automaton learning algorithms and implemented a prototype of it. I have demonstrated the correctness of the implementation using case-studies and evaluated its efficiency by experimental evaluations.
+
+As a result, an extensible and modular framework for active automaton learning was created. This framework contains an implementation of the Direct Hypothesis Construction and the TTT algorithms both of which are straightforward to extend using arbitrary formalisms. Utilizing these algorithms and the formalisms already implemented in the framework, system design can be supported by modeling system (components) based on example runs, as show in the case studies presented.
+
 \section{Future work}
 %további algoritmusok, gamma intergráció közelebbről távolabbra. (keretrendszertől absztrakthozt)
+In terms of future work, the next step is clearing the equivalence query bottleneck shown in the experimental evaluation by implementing a more efficient algorithm. Also, more formalisms and learning algorithms are to be on-boarded into the framework. An integration with the Gamma Statechart Composition framework\cite{DBLP:conf/icse/MolnarGVMV18} is planned to enable the development and verification of software component using the automata learned by the framework presented in this thesis.

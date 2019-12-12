@@ -79,7 +79,9 @@ As seen in the theoretical evaluation, the size of the state space is not the on
 	\label{fig:abcextended}
 \end{figure}
 
-After running the experiments, an obvious bottleneck could be found. The current brute-force equivalence query implementation is inefficient, as the theoretical evaluation suggested. Figure \ref{fig:stateruntime} and \ref{fig:inputruntime} shows the inefficiency observed. In order to show (and compare) my implementation without this bottleneck, Fig. \ref{fig:inputruntime1} shows the exact same run done with a near linear-time equivalence oracle implemented in LearnLib.
+After running the experiments, an obvious bottleneck could be found. The current brute-force equivalence query implementation is inefficient, as the theoretical evaluation suggested. Figure \ref{fig:stateruntime} shows the inefficiency observed when extending the states and the behavior of the learned automaton. The cause of this is the large number of states resulting in a large space of possibilities when brute-forcing equivalence, as theorized in the theoretical evaluation.
+
+Figure \ref{fig:inputruntime} shows, that this is not the case with the extension of the input alphabet, since with the same number of sates, less future predictions are to be done, extending the input alphabet is not as taxing. In order to show (and compare) my implementation without this bottleneck, since these inefficiencies are not of the learning algorithms, but of the equivalence algorithm Fig. \ref{fig:inputruntime1} shows the exact same run as Figure \ref{fig:stateruntime} done with a near linear-time equivalence oracle implemented in LearnLib.
 
 \begin{figure}
 	\centering
@@ -94,6 +96,8 @@ After running the experiments, an obvious bottleneck could be found. The current
 	\caption{Figure of the runtime observed when the input alphabet was increased without any behavioral change.}
 	\label{fig:inputruntime}
 \end{figure}
+
+
 
 \begin{figure}
 	\centering
