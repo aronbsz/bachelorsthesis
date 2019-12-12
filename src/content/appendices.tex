@@ -76,7 +76,7 @@ Transition { input water output none sourceState f targetState f } } }
 \end{figure}
 
 
-\begin{lstlisting}[caption=Brute-force implementation of equivalence queries described in Section \ref{item:stringsequencelearnable}s \emph{StringSequenceAdapter} item using google guavas Sets.powerSet() function.,label=li:eqbruteforce]
+\begin{lstlisting}[caption=Brute-force implementation of equivalence queries described in Section \ref{item:stringsequencelearnable}s \emph{StringSequenceAdapter} item using google guavas Sets.powerSet() function.,label=li:eqbruteforce,float,floatplacement=H]
 @Override
 public List<? extends I> equivalenceQuery(H hypothesis, Collection<? extends I> alphabet) {
 	for(Set<I> s : com.google.common.collect.Sets.powerSet(new HashSet<I>(alphabet))) {
@@ -94,7 +94,7 @@ public List<? extends I> equivalenceQuery(H hypothesis, Collection<? extends I> 
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption=The output MealyMachine after running the implemented TTT algorithm with the input seen in Listing \ref{li:xtext}.,label=li:xtextttt]
+\begin{lstlisting}[caption=The output MealyMachine after running the implemented TTT algorithm with the input seen in Listing \ref{li:xtext}.,label=li:xtextttt,float,floatplacement=H]
 MealeyMachine{
 	initialState State s0
 	states {State s0,State s1,State s2,State s3,}
@@ -111,7 +111,7 @@ MealeyMachine{
 \end{lstlisting}
 
 
-\begin{lstlisting}[caption=The output MealyMachine after running the implemented DHC algorithm with the input seen in Listing \ref{li:xtext}.,label=li:xtextdhc]
+\begin{lstlisting}[caption=The output MealyMachine after running the implemented DHC algorithm with the input seen in Listing \ref{li:xtext}.,label=li:xtextdhc,float,floatplacement=H]
 MealeyMachine{
 	initialState State state0
 	states {State state0,State state1,State state2,State state3,}
@@ -127,7 +127,7 @@ MealeyMachine{
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption=The output MealyMachine after running the implemented DHC algorithm with the input seen in Listing \ref{li:coffeemealy}.,label=li:coffeedhcret]
+\begin{lstlisting}[caption=The output MealyMachine after running the implemented DHC algorithm with the input seen in Listing \ref{li:coffeemealy}.,label=li:coffeedhcret,float,floatplacement=H]
 MealeyMachine{
 	initialState State state0
 	states {State state0,State state1,State state2,State state3,State state4,State state5,}
@@ -159,7 +159,7 @@ MealeyMachine{
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption=The output MealyMachine after running the implemented DHC algorithm with the input seen in Listing \ref{li:coffeemealy}.,label=li:coffeetttret]
+\begin{lstlisting}[caption=The output MealyMachine after running the implemented DHC algorithm with the input seen in Listing \ref{li:coffeemealy}.,label=li:coffeetttret,float,floatplacement=H]
 MealeyMachine{
 	initialState State s0
 	states {State s0,State s1,State s2,State s3,State s4,State s5,}

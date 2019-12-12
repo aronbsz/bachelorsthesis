@@ -52,7 +52,7 @@ The experimental evaluation of the implemented algorithms were performed using v
 	\label{fig:5ia}
 \end{figure}
 
-As seen in the theoretical evaluation, the size of the state space is not the only possible bottleneck, both algorithms (and the equivalence query implementation especially) slows with the size of the input alphabet. A simple solution of testing growing input alphabets using the Mealy machine seen in Fig. \ref{fig:dfaexamplemealyver}.a, is to add characters (transitions) without adding behavior. This does not end the minimal property of an automaton contrary to adding states without changing behavior, thus increasing runtime. An example of the described input alphabet extension can be seen in Figure \ref{fig:abcextended}.
+As seen in the theoretical evaluation, the size of the state space is not the only possible bottleneck, both algorithms (and the equivalence query implementation especially) slows with the size of the input alphabet. A simple solution of testing growing input alphabets using the Mealy machine seen in Fig. \ref{fig:dfaexamplemealyver}.a, is to add characters (transitions) without adding behavior. This does not remove the minimal property of an automaton, contrary to adding states without changing behavior, thus increasing runtime. An example of the described input alphabet extension can be seen in Figure \ref{fig:abcextended}.
 
 \begin{figure}
 	\centering
@@ -86,7 +86,7 @@ Figure \ref{fig:inputruntime} shows, that this is not the case with the extensio
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/stateruntime}
-	\caption{Figure showing the bottleneck the brute-force equivalence query implementation causes when increasing the state space.}
+	\caption{Figure showing the bottleneck the brute-force equivalence query implementation causes when increasing the state space in a worst-case scenario.}
 	\label{fig:stateruntime}
 \end{figure}
 
@@ -98,10 +98,9 @@ Figure \ref{fig:inputruntime} shows, that this is not the case with the extensio
 \end{figure}
 
 
-
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/inputruntime1}
-	\caption{Run after clearing up the bottleneck by using a near linear runtime equivalence checking algorithm implemented in LearnLib.}
+	\caption{}
 	\label{fig:inputruntime1}
 \end{figure}
