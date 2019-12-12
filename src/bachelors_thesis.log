@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  11 DEC 2019 03:36
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  12 DEC 2019 15:26
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1792,43 +1792,44 @@ File: figures/mealymodel.jpg Graphic file (type bmp)
 [21]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 89.
- [22] [23]
-Underfull \hbox (badness 6157) in paragraph at lines 176--177
+ [22]
+Underfull \hbox (badness 6157) in paragraph at lines 162--163
 []\TU/lmr/bx/n/10.95 DHCMealyMachineHypothesis: \TU/lmr/m/n/10.95 The \TU/lmr/m
 /it/10.95 DHCMealyMachineHypothesis \TU/lmr/m/n/10.95 class
  []
 
-
-Underfull \hbox (badness 1297) in paragraph at lines 178--179
+[23]
+Underfull \hbox (badness 1297) in paragraph at lines 164--165
 []\TU/lmr/bx/n/10.95 StringSequenceAdapter: \TU/lmr/m/n/10.95 The \TU/lmr/m/it/
 10.95 StringSequenceAdapter \TU/lmr/m/n/10.95 abstract class adapts
  []
 
 
-Underfull \hbox (badness 2512) in paragraph at lines 182--183
+Underfull \hbox (badness 2512) in paragraph at lines 168--169
 []\TU/lmr/bx/n/10.95 MealyMachineTeacher: \TU/lmr/m/n/10.95 The \TU/lmr/m/it/10
 .95 MealyMachineTeacher \TU/lmr/m/n/10.95 abstract class bounds
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
+Underfull \hbox (badness 10000) in paragraph at lines 169--170
 []\TU/lmr/bx/n/10.95 MealyMachineTeacherStringSequenceImpl: \TU/lmr/m/n/10.95 T
 he \TU/lmr/m/it/10.95 MealyMachineTeacher-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
  []
 
 [24]
 File: figures/implementationdetailedoverview.pdf Graphic file (type pdf)
 <use figures/implementationdetailedoverview.pdf>
 
-
-Package array Warning: Column Y is already defined on input line 224.
-
-)
-Underfull \hbox (badness 10000) in paragraph at lines 236--80
+Underfull \hbox (badness 10000) in paragraph at lines 209--212
 
  []
 
-[25] [26] [27]
+[25] [26]) [27]
 \openout2 = `content/evaluation.aux'.
 
  (content/evaluation.tex
@@ -1837,36 +1838,37 @@ Chapter 4.
 
 
 
-]) [29]
+] [29]
+File: figures/stateruntime.png Graphic file (type bmp)
+<figures/stateruntime.png>
+File: figures/inputruntime.png Graphic file (type bmp)
+<figures/inputruntime.png>
+File: figures/inputruntime1.png Graphic file (type bmp)
+<figures/inputruntime1.png>
+) [30] [31]
 \openout2 = `content/conclusion.aux'.
 
  (content/conclusion.tex
 Chapter 5.
-) [30
+) [32
 
 
 
 ]
 \openout2 = `content/acknowledgement.aux'.
 
- (content/acknowledgement.tex) [31
+ (content/acknowledgement.tex) [33
 
 
 
 ] (bachelors_thesis.bbl
-Underfull \hbox (badness 1122) in paragraph at lines 17--25
-\TU/lmr/m/it/10.95 putations\TU/lmr/m/n/10.95 , pages 189 – 196. Academic Press
-, 1971.  ISBN 978-0-12-417750-5.
- []
-
-
-Underfull \hbox (badness 1584) in paragraph at lines 27--33
+Underfull \hbox (badness 1137) in paragraph at lines 27--33
 \TU/lmr/m/n/10.95 123–148.  Springer International Publishing, Cham, 2018.  ISB
 N 978-3-319-
  []
 
 
-Underfull \hbox (badness 7540) in paragraph at lines 53--59
+Underfull \hbox (badness 6204) in paragraph at lines 53--59
 []\TU/lmr/m/n/10.95 Dexter C. Kozen.  \TU/lmr/m/it/10.95 Myhill—Nerode Relation
 s\TU/lmr/m/n/10.95 , pages 89–94.  Springer
  []
@@ -1884,35 +1886,35 @@ TU/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] []
 [][][] []
  []
 
+[34
 
-Underfull \hbox (badness 2689) in paragraph at lines 79--86
+
+]
+Underfull \hbox (badness 2050) in paragraph at lines 90--97
 []\TU/lmr/m/n/10.95 Bernhard Steffen, Falk Howar, and Maik Merten.  \TU/lmr/m/i
 t/10.95 Introduction to Active
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 79--86
+Underfull \hbox (badness 1803) in paragraph at lines 90--97
 \TU/lmr/m/it/10.95 Automata Learning from a Practical Perspective\TU/lmr/m/n/10
 .95 , pages 256–296.  Springer
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--86
+Underfull \hbox (badness 10000) in paragraph at lines 90--97
 \TU/lmr/m/n/10.95 Berlin Heidelberg, Berlin, Heidelberg, 2011.  ISBN 978-3-642-
 21455-4.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--86
+Underfull \hbox (badness 10000) in paragraph at lines 90--97
 \TU/lmr/m/n/10.95 DOI: [][]\TU/lmtt/m/n/10.95 10.1007/978-3-642-21455-4_8[][]\T
 U/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][
 ][][] []
  []
 
-) [32
-
-
-]
+) [35]
 \openout2 = `content/appendices.aux'.
 
  (content/appendices.tex
@@ -1923,10 +1925,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--52
 [][]|\TU/lmr/m/n/10 Mealy machine representation of the
  []
 
-[33
+[36
 
 
-]) [34]
+] [37] [38]) [39]
 \tf@thm=\write6
 \openout6 = `bachelors_thesis.thm'.
 
@@ -1940,7 +1942,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 106.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 106.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 106.
 Package rerunfilecheck Info: File `bachelors_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 38143353442F010FD65C3E54349FF4E8.
+(rerunfilecheck)             Checksum: 32C000E1FE200A0B006B0D6895FFC85F.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1948,12 +1950,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 106.
  ) 
 Here is how much of TeX's memory you used:
- 38434 strings out of 427669
- 740825 string characters out of 3145155
- 1122033 words of memory out of 3000000
- 41891 multiletter control sequences out of 15000+200000
+ 38493 strings out of 427669
+ 742059 string characters out of 3145155
+ 1160040 words of memory out of 3000000
+ 41947 multiletter control sequences out of 15000+200000
  545221 words of font info for 97 fonts, out of 3000000 for 9000
  1352 hyphenation exceptions out of 8191
- 57i,15n,70p,1344b,1759s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 57i,15n,70p,1344b,1755s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on bachelors_thesis.pdf (40 pages).
+Output written on bachelors_thesis.pdf (45 pages).

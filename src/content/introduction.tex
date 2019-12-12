@@ -26,10 +26,12 @@ To realize my goal, I have created an automaton learning framework capable of ha
 
 %szoftver neve, hivatkozás, mit csinál (röviden), viszont mi az amit nem tud ehhez képest. pl. gamma lehetővé teszi szoftvetkomponensek automata alapú fejlesztését, nem tud automata tanulást
 
+\emph{LearnLib}\cite{10.1007/978-3-319-21690-4_32} provides a Java framework for active and passive automaton learning, with the versatile AutomataLib framework acting as a backbone of it, but has no native support for software-component development. The \emph{libalf} framework also provides learning techniques for finite automata implemented in \emph{C++}. Te Gamma Statechart Composition framework\cite{DBLP:conf/icse/MolnarGVMV18} provides automata-based development of software components, but is not capable of learning automata. The Theta framework\cite{theta-fmcad2017} enables the evaluation of abstraction refinement-based algorithms, but has no support for automaton learning.
+
 \section{Added value}
 
 %Hogyan segíti elő ezeket %TTT bonyolult, csak LearnLibben
 The presented framework, while capable of system design using example runs, also enables the modular implementation of active automaton learning algorithms and the formalisms they might depend on. Additionally, it makes the comparison of different learning algorithms possible in the same environment (and such, with the same overhead), and allows the discretionary use of the automaton learning algorithms implemented therein.
 \section{Outline}
 
-The paper is organized as follows. Chapter 2 provides an outline of the necessary theoretical background. Chapter 3 gives insight into the contribution presented in this thesis. Chapter 4 TODO
+The paper is organized as follows. Chapter 2 provides an outline of the necessary theoretical background. Chapter 3 gives insight into the contribution presented in this thesis. Chapter 4 evaluates the correctness of the presented framework and the algorithm implemented within both theoretically and experimentally. Chapter 5 concludes the thesis and presents future work goals.

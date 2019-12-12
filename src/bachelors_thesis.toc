@@ -34,9 +34,10 @@
 \select@language {english} \contentsline {section}{\numberline {4.1}Theoretical evaluation}{28}{section.4.1}% 
 \select@language {english} \contentsline {subsection}{\numberline {4.1.1}Evaluation of DHC}{28}{subsection.4.1.1}% 
 \select@language {english} \contentsline {subsection}{\numberline {4.1.2}Evaluation of TTT}{29}{subsection.4.1.2}% 
-\select@language {english} \contentsline {chapter}{\numberline {5}Conclusions}{30}{chapter.5}% 
-\select@language {english} \contentsline {section}{\numberline {5.1}Contributions}{30}{section.5.1}% 
-\select@language {english} \contentsline {section}{\numberline {5.2}Future work}{30}{section.5.2}% 
-\select@language {english} \contentsline {chapter}{Acknowledgements}{31}{chapter*.22}% 
-\select@language {english} \contentsline {chapter}{Bibliography}{32}{chapter*.22}% 
-\select@language {english} \contentsline {chapter}{Appendix}{33}{appendix*.24}% 
+\select@language {english} \contentsline {section}{\numberline {4.2}Experimental evaluation}{29}{section.4.2}% 
+\select@language {english} \contentsline {chapter}{\numberline {5}Conclusions}{32}{chapter.5}% 
+\select@language {english} \contentsline {section}{\numberline {5.1}Contributions}{32}{section.5.1}% 
+\select@language {english} \contentsline {section}{\numberline {5.2}Future work}{32}{section.5.2}% 
+\select@language {english} \contentsline {chapter}{Acknowledgements}{33}{chapter*.26}% 
+\select@language {english} \contentsline {chapter}{Bibliography}{34}{chapter*.26}% 
+\select@language {english} \contentsline {chapter}{Appendix}{36}{appendix*.28}% 

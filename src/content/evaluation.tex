@@ -20,4 +20,88 @@ In summary, the best-case scenario of the current DHC implementation has an $O(n
 
 \subsection{Evaluation of TTT}
 
-The TTT algorithm, as presented in \cite{10.1007/978-3-319-11164-3_26}, requires $O(n)$ equivalence queries and $O(kn^2+n\log m)$ membership queries, each of which takes $O(n+m)$ time, where $n=|S|$, $k=|\Sigma|$ and m is the longest counterexample. This is a very pessimistic estimate caused by the edge-case of a discriminator tree having $n$ height. The time complexity of the equivalence query implementation seen in \ref{li:eqbruteforce} still holds as $O(2^kk!)$, but is lengthened by the complexity of conversion between formalisms, being $O(nt)$ in the worst case, where t is the number of transitions of the current hypothesized automaton. Altogether, the worst case scenario has a $O((kn^2+n\log m)(n+m) + 2^kk!nt)$ time complexity.
+The TTT algorithm, as presented in \cite{10.1007/978-3-319-11164-3_26}, requires $O(n)$ equivalence queries and $O(kn^2+n\log m)$ membership queries, each of which takes $O(n+m)$ time, where $n=|S|$, $k=|\Sigma|$ and m is the longest counterexample. This is a very pessimistic estimate caused by the edge-case of a discriminator tree having $n$ height. The time complexity of the equivalence query implementation seen in \ref{li:eqbruteforce} still holds as $O(2^kk!)$, but is lengthened by the complexity of conversion between formalisms, being $O(nt)$ in the worst case, where t is the number of transitions of the current hypothesized automaton. Altogether, the worst case scenario has a $O((kn^2+n\log m)(n+m) + 2^kk!nt)$ time complexity. TTT also provides an efficient $\Theta(kn)$ space complexity\cite{10.1007/978-3-319-11164-3_26}.
+
+
+\section{Experimental evaluation}
+
+The experimental evaluation of the implemented algorithms were done using variations of the automaton seen in Fig. \ref{fig:dfaexamplemealyver}.a. This decision is based on the simplicity of extending the automaton accepting inputs containing $4i+3a$ to inputs containing $ni+(n-1)a$, where $n, i \in \mathbb{N}$. An example of this can be seen in Fig. \ref{fig:5ia}, where $n=5$. This solution is easily scalable and straightforward to implement even for large $n$s.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[shorten >=1pt,node distance=3.5cm,on grid,auto] 
+	\node[state,initial] (q_0)   {$q_0$}; 
+	\node[state] (q_1) [right=of q_0] {$q_1$}; 
+	\node[state] (q_2) [below=of q_0] {$q_2$}; 
+	\node[state](q_3) [right=of q_2] {$q_3$};
+	\node[state](q_4) [above right= 2.4cm of q_3] {$q_4$};
+	\path[->] 
+	(q_0) edge[]  node {a/$\top$} (q_1)
+	edge [loop below] node {b/$\top$} ()
+	(q_1) edge[]  node[pos=0.62]  {a/$\top$} (q_2)
+	edge [loop below] node {b/$\top$} ()
+	(q_2) edge[]  node [swap] {a/$\top$} (q_3) 
+	edge [loop above] node {b/$\top$} ()
+	(q_3) edge  node[pos=0.62] [swap] {a/$\bot$} (q_4)
+	edge [loop above] node {b/$\top$} () 
+	(q_4) edge[bend right=70]  node[pos=0.62] [swap] {a/$\top$} (q_0)
+	edge [loop right] node {b/$\bot$} ();
+	
+	\end{tikzpicture}
+	\caption{Example of an automaton accepting inputs containing $5i+4a$.}
+	\label{fig:5ia}
+\end{figure}
+
+As seen in the theoretical evaluation, the size of the state space is not the only possible bottleneck, both algorithms (and the equivalence query implementation especially) slows with the size of the input alphabet. A simple solution of testing growing input alphabets using the Mealy machine seen in Fig. \ref{fig:dfaexamplemealyver}.a, is to add characters (transitions) without adding behavior. This does not end the minimal property of an automaton contrary to adding states without changing behavior, thus increasing runtime. An example of the described input alphabet extension can be seen in Figure \ref{fig:abcextended}.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[shorten >=1pt,node distance=3.5cm,on grid,auto] 
+	\node[state,initial] (q_0)   {$q_0$}; 
+	\node[state] (q_1) [right=of q_0] {$q_1$}; 
+	\node[state] (q_2) [below=of q_0] {$q_2$}; 
+	\node[state](q_3) [right=of q_2] {$q_3$};
+	\path[->] 
+	(q_0) edge[]  node {a/$\top$} (q_1)
+	edge [loop below] node {b/$\top$} ()
+	edge [loop above] node {c/$\bot$} () 
+	(q_1) edge[]  node[pos=0.62]  {a/$\top$} (q_2)
+	edge [loop below] node {b/$\top$} ()
+	edge [loop above] node {c/$\bot$} () 
+	(q_2) edge[]  node [swap] {a/$\top$} (q_3) 
+	edge [loop above] node {b/$\top$} ()
+	edge [loop below] node {c/$\bot$} () 
+	(q_3) edge  node[pos=0.62] [swap] {a/$\bot$} (q_0)
+	edge [loop above] node {b/$\bot$} () 
+	edge [loop below] node {c/$\bot$} () ;
+	\end{tikzpicture}
+	\caption{Example of the automaton seen in Fig. \ref{fig:dfaexamplemealyver}.a with an extended input alphabet $\Sigma=\{a, b, c\}$.}
+	\label{fig:abcextended}
+\end{figure}
+
+After running the experiments, an obvious bottleneck could be found. The current brute-force equivalence query implementation is inefficient, as the theoretical evaluation suggested. Figure \ref{fig:stateruntime} shows the inefficiency observed when extending the states and the behavior of the learned automaton. The cause of this is the large number of states resulting in a large space of possibilities when brute-forcing equivalence, as theorized in the theoretical evaluation.
+
+Figure \ref{fig:inputruntime} shows, that this is not the case with the extension of the input alphabet, since with the same number of sates, less future predictions are to be done, extending the input alphabet is not as taxing. In order to show (and compare) my implementation without this bottleneck, since these inefficiencies are not of the learning algorithms, but of the equivalence algorithm Fig. \ref{fig:inputruntime1} shows the exact same run as Figure \ref{fig:stateruntime} done with a near linear-time equivalence oracle implemented in LearnLib.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/stateruntime}
+	\caption{Figure showing the bottleneck the brute-force equivalence query implementation causes when increasing the state space.}
+	\label{fig:stateruntime}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/inputruntime}
+	\caption{Figure of the runtime observed when the input alphabet was increased without any behavioral change.}
+	\label{fig:inputruntime}
+\end{figure}
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/inputruntime1}
+	\caption{Run after clearing up the bottleneck by using a near linear runtime equivalence checking algorithm implemented in LearnLib.}
+	\label{fig:inputruntime1}
+\end{figure}
