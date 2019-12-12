@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  12 DEC 2019 15:13
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  12 DEC 2019 15:26
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1928,7 +1928,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--52
 [36
 
 
-]) [37]
+] [37] [38]) [39]
 \tf@thm=\write6
 \openout6 = `bachelors_thesis.thm'.
 
@@ -1950,12 +1950,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 106.
  ) 
 Here is how much of TeX's memory you used:
- 38489 strings out of 427669
- 741999 string characters out of 3145155
- 1126464 words of memory out of 3000000
- 41943 multiletter control sequences out of 15000+200000
+ 38493 strings out of 427669
+ 742059 string characters out of 3145155
+ 1160040 words of memory out of 3000000
+ 41947 multiletter control sequences out of 15000+200000
  545221 words of font info for 97 fonts, out of 3000000 for 9000
  1352 hyphenation exceptions out of 8191
- 57i,15n,70p,1344b,1255s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 57i,15n,70p,1344b,1755s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on bachelors_thesis.pdf (43 pages).
+Output written on bachelors_thesis.pdf (45 pages).
