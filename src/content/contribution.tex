@@ -204,7 +204,7 @@ The detailed (but not exhaustive) class diagram of the frameworks DHC implementa
 
 The TTT algorithm is complex, in both theory and implementation. Due to it using multiple specific types of data structures and sub-algorithms, which are not themselves part of TTT, during my imlementation I depended on the original (defining) implementation of it in LearnLib\cite{10.1007/978-3-319-21690-4_32}.
 \\
-LearnLib describes an abstract layer of TTT to extend in implementations. I used these abstractions to implement the algorithm into my framework in a (from the perspective of execution) near seamless manner. The current implementation only allows MealyMachines as inputs, but this can be extended upon analogously as with the DHC implementation seen previously.
+LearnLib describes an abstract layer of TTT to extend in implementations. I used these abstractions to implement the algorithm into my framework in an (from the perspective of execution) almost seamless manner. The current implementation only allows MealyMachines as inputs, but this can be extended upon analogously as with the DHC implementation seen previously.
 
 The implementation itself is built similarly as the DHC implementation, but the algorithm wraps the abstractions of the framework and converts between types of these abstractions and the ones used in LearnLib. More specifically, LearnLib defines abstract types for parts of the TTT algorithms, such as \emph{AbstractTTTHypothesis},\emph{AbstractBaseDTNode} (abstract discriminator tree node), \emph{AbstractTTTLearner}. While LearnLib has implementations of these, I only depended on abstractions, using the current implementation as reference.
 \\\\
