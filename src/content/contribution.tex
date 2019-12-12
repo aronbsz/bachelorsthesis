@@ -1,4 +1,4 @@
-\chapter{Contribution}
+\chapter{Contribution}\label{contrib}
 
 The main contribution of this thesis is an active automaton learning framework, which can be used to support system design and analysis. This framework, since used in system engineering, is required to be easily modifiable and extensible, while having the capability of handling any variation of formalisms systems might rely on.
 
@@ -65,7 +65,7 @@ The diagram in Figure \ref{fig:abstractoverview} showed the modularization of th
 
 \section{Implemented learning algorithms}
 
-Building upon the abstractions of the framework, I implemented the two active learning algorithms presented in the Background chapter. The first step of the implementation was determining the input and output formalisms to use.
+Building upon the abstractions of the framework, I implemented the two active learning algorithms presented in Chapter \ref{background}. The first step of the implementation was determining the input and output formalisms to use.
 
 Since automaton learning algorithms can be implemented on any type of automata, the easiest method would be using deterministic finite automata. However, real-life reactive systems are usually better modeled using Mealy machines, hence the implementation was made using Mealy machines as both input and output formalisms.
 \\
@@ -204,13 +204,13 @@ The detailed (but not exhaustive) class diagram of the frameworks DHC implementa
 
 The TTT algorithm is complex, in both theory and implementation. Due to it using multiple specific types of data structures and sub-algorithms, which are not themselves part of TTT, during my imlementation I depended on the original (defining) implementation of it in LearnLib\cite{10.1007/978-3-319-21690-4_32}.
 \\
-LearnLib describes an abstract layer of TTT to extend in implementations. I used these abstractions to implement the algorithm into my framework in a (from the perspective of execution) near seamless manner. The current implementation only allows MealyMachines as inputs, but this can be extended upon analogously as with the DHC implementation seen previously.
+LearnLib describes an abstract layer of TTT to extend in implementations. I used these abstractions to implement the algorithm into my framework in an (from the perspective of execution) almost seamless manner. The current implementation only allows MealyMachines as inputs, but this can be extended upon analogously as with the DHC implementation seen previously.
 
 The implementation itself is built similarly as the DHC implementation, but the algorithm wraps the abstractions of the framework and converts between types of these abstractions and the ones used in LearnLib. More specifically, LearnLib defines abstract types for parts of the TTT algorithms, such as \emph{AbstractTTTHypothesis},\emph{AbstractBaseDTNode} (abstract discriminator tree node), \emph{AbstractTTTLearner}. While LearnLib has implementations of these, I only depended on abstractions, using the current implementation as reference.
 \\\\
 For key steps of TTT, the responsibilities of the current implementation are as follows. The Hypothesis construction and refinement is done by my framework, which provides the methods of hypothesis construction, while also hadling the calculation of output inconsistencies and the refinement of them. LearnLib manages the internal data structures including the dicriminator tree, which stores my implementation of the $AbstractBaseDTNode$ class. The state splitting (part of Hypothesis stabilization) and discriminator finalization is handled by LearnLib. Considering the communication with the system under learning, equivalence queries are done in the exact way presented in the DHC algorithm, done by wrapping the \emph{Teacher} class of my implementation into the \emph{EquivalenceOracle} interface of LearnLib. The same solution could not be used with membership queries, since the TTT algorithm internally tries avoiding these queries (done partly by finding output inconsistencies), and has specific behavior in its LearnLib implementation differing from traditional membership queries. The conversion between the formalisms used by the two frameworks allowed me to natively use their \emph{MembershipOracle} interface with the converted \emph{Learnable}.
 
-
+\subsection{Case studies}
 
 A summary of the DHC and TTT implementations can be seen in Table \ref{tab:activelearningproto}.
 
@@ -231,5 +231,6 @@ A summary of the DHC and TTT implementations can be seen in Table \ref{tab:activ
 	\caption{Overview of the algorithm implementations in the framework.}
 	\label{tab:activelearningproto}
 \end{table}
+
 
 After running the example seen in \ref{li:4ixtext}, the output of the DHC algorithm can be seen in Listing \ref{li:xtextdhc}, while the output of the TTT algorithm can be seen in \ref{li:xtextttt}. As a case study, both these algorithms were ran on the Mealy machine seen in \ref{fig:coffeemealy} contained in the input in Listing \ref{li:coffeemealy}, resulting in the outputs Listing \ref{li:coffeetttret} and Listing \ref{li:coffeedhcret} repsectively.
