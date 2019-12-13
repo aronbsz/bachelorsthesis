@@ -87,11 +87,11 @@ The semantics of automata are defined via runs. A run of an automaton is to test
 	\path[->] 
 	(q_0) edge  node {a} (q_1)
 	edge [loop below] node {b} ()
-	(q_1) edge  node  {a} (q_2)
+	(q_1) edge  node[pos=0.62]  {a} (q_2)
 	edge [loop below] node {b} ()
 	(q_2) edge  node [swap] {a} (q_3) 
 	edge [loop above] node {b} ()
-	(q_3) edge  node [swap] {a} (q_0)
+	(q_3) edge  node[pos=0.62] [swap] {a} (q_0)
 	 edge [loop above] node {b} () ;
 	\end{tikzpicture}
 	\caption{A simple DFA from \cite{10.1007/978-3-319-11164-3_26}.}
@@ -125,7 +125,7 @@ DFAs are useful to model system behavior based on inputs, but in order to work w
 	\end{itemize}
 \end{definition}
 
-Mealy machines can be regarded as deterministic finite automata over the union of the input alphabet and an output alphabet with just one rejection state, which is a sink, or more elegantly, with a partially defined transition relation. 
+Mealy machines can be regarded as deterministic finite automata over the union of the input alphabet and an output alphabet with just one rejection state, which is a sink, or more elegantly, with a partially defined transition relation.\cite{Steffen2011}
 
 An example of a deterministic Mealy machine can be seen in Example \ref{ex:coffeemealy}.
 
@@ -418,7 +418,13 @@ While the DHC algorithm is a straightforward implementation of active automata l
 
 \subsection{The TTT algorithm\cite{10.1007/978-3-319-11164-3_26}}
 
-As seen in the Direct Hypothesis Construction algorithm, a large number membership queries are required in order to learn an automaton, causing a bottleneck on the scalability of the algorithm. The main cause of this complexity issue is the way counterexamples are treated. In order to ensure every state is properly found, \textit{all} suffixes of the counterexample are added to the algorithms structure, which, has a huge impact on the number of membership queries in the next iteration of the hypothesis construction. TTT resolves this inefficiency by fine-tuning exactly what needs to be further investigated by membership queries.\\\\
+As seen in the Direct Hypothesis Construction algorithm, a large number membership queries are required in order to learn an automaton, causing a bottleneck on the scalability of the algorithm. The main cause of this complexity issue is the way counterexamples are treated. In order to ensure every state is properly found, \textit{all} suffixes of the counterexample are added to the algorithms structure, which, has a huge impact on the number of membership queries in the next iteration of the hypothesis construction. TTT resolves this inefficiency by fine-tuning exactly what needs to be further investigated by membership queries.\\
+
+\begin{example}
+	As an example, we'll use the automaton portrayed on Fig.\ref{fig:dfaexamplemealyver}.a, a Mealy machine version of the DFA previously seen in Fig.\ref{fig:dfaexample} constructed simply by the following rule: if a transition ends in $q_3$, the output is $\bot$, else the output is $\top$.
+	\\TTT keeps the notion of separating states by a spanning tree $S_p$, a prefix-closed set of words from $\Sigma^*$, this tree defines the access sequences of each state. The spanning tree $S_p$ is indicated by bold transitions in Fig.\ref{fig:dfaexamplemealyver}.a. 
+	\\States are separated by the notion of discriminators. The algorithm maintains a set of discriminator suffixes D, but uses them differently from the DHC algorithm. D in TTT is used by a n-ary tree, where n = $|\Omega|$, so in this example a binary tree. We call this tree a discrimination tree (seen in Fig.\ref{fig:dfaexamplemealyver}.b), which maintains information about which inputs (discriminators) separate states: for every distinct pair of states, a separator can be obtained by looking at the label of the lowest common ancestor of the corresponding leaves. This way, the label of inner nodes act as discriminators. These labels form a suffix-close set and are stored in a trie seen in Fig.\ref{fig:dfaexamplemealyver}.c. Each node of the trie is a word, which can be constructed by going up the tree towards the root.
+\end{example}
 
 \begin{figure}[H]
 	\centering
@@ -477,11 +483,6 @@ As seen in the Direct Hypothesis Construction algorithm, a large number membersh
 	\label{fig:dfaexamplemealyver}
 \end{figure}
 
-\begin{example}
-	As an example, we'll use the automaton portrayed on Fig.\ref{fig:dfaexamplemealyver}.a, a Mealy machine version of the DFA previously seen in Fig.\ref{fig:dfaexample} constructed simply by the following rule: if a transition ends in $q_3$, the output is $\bot$, else the output is $\top$.
-	\\TTT keeps the notion of separating states by a spanning tree $S_p$, a prefix-closed set of words from $\Sigma^*$, this tree defines the access sequences of each state. The spanning tree $S_p$ is indicated by bold transitions in Fig.\ref{fig:dfaexamplemealyver}.a. 
-	\\States are separated by the notion of discriminators. The algorithm maintains a set of discriminator suffixes D, but uses them differently from the DHC algorithm. D in TTT is used by a n-ary tree, where n = $|\Omega|$, so in this example a binary tree. We call this tree a discrimination tree (seen in Fig.\ref{fig:dfaexamplemealyver}.b), which maintains information about which inputs (discriminators) separate states: for every distinct pair of states, a separator can be obtained by looking at the label of the lowest common ancestor of the corresponding leaves. This way, the label of inner nodes act as discriminators. These labels form a suffix-close set and are stored in a trie seen in Fig.\ref{fig:dfaexamplemealyver}.c. Each node of the trie is a word, which can be constructed by going up the tree towards the root.
-\end{example}
 
 Discriminator trees, as seen in the previous example, are rooted n-ary trees, where n is the size of the output alphabet. Leaves are labeled by states of the automaton, while inner states are labeled by discriminators (suffixes). When adding a new word to the tree $T$, we sift the word $w\in\Sigma^*$ into T by starting at the root, and for every inner node $v\in D$, we branch depending on the output of $\lambda^*(wu)$. This limits the number of membership queries to the height of the tree, while DHCs limit was $S_p\times D$.
 \\\\

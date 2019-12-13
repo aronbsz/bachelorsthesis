@@ -9,7 +9,7 @@ Model-based technologies can be used to optimize the process of system design an
 \section{Problem Statement}
 
 %biztonsági protokoll etc
-The reactive components of a system, such as communication and security protocols, are typically modeled using state-based formalisms. The manual design of these components can often be a difficult task, since these protocols are more easily defined by their behavior. Specifically, describing the behavior of such a system by example runs proves to be an easier task then modeling them outright. A communication protocol for instance, can be defined by the union of every runs behavior from the viewpoints of every participant of the communication. To the best of my knowledge, there is is no current software, that enables the modeling of a system, or a system component by the description of its example runs.
+The reactive components of a system, such as communication and security protocols, are typically modeled using state-based formalisms. The manual design of these components can often be a difficult task, since these protocols are more easily defined by their behavior. Specifically, describing the behavior of such a system by example runs proves to be an easier task then modeling them outright. A communication protocol for instance, can be defined by the union of every runs behavior from the viewpoints of every participant of the communication. To the best of my knowledge, there is is no current software, that enables the modeling of a system, or a system component by the description of its example runs which is capable of performing the desired analysis on the output.
 
 \section{Objective}
 
@@ -27,9 +27,9 @@ To realize my goal, I have created an automaton learning framework capable of ha
 %szoftver neve, hivatkozás, mit csinál (röviden), viszont mi az amit nem tud ehhez képest. pl. gamma lehetővé teszi szoftvetkomponensek automata alapú fejlesztését, nem tud automata tanulást
 
 There are many automaton learning tools in the literature, including
-\emph{LearnLib}\cite{10.1007/978-3-319-21690-4_32} that provides a Java framework for active and passive automaton learning, with the versatile AutomataLib framework acting as a backbone of it, but has no native support for software-component development. The \emph{libalf} framework also provides learning techniques for finite automata implemented in \emph{C++}. 
+\emph{LearnLib}\cite{10.1007/978-3-319-21690-4_32} that provides a Java framework for active and passive automaton learning, with the versatile AutomataLib framework acting as a backbone of it, but has no native support for software-component development. The \emph{libalf} framework also provides learning techniques for finite automata implemented in \emph{C++}. \emph{Tomte}\cite{aarts2012automata} is a framework utilizing LearnLib for counterexample driven abstraction refinement of real software components modeled in a restricted class of finite automata. 
 
-Modular and extendable frameworks include the Gamma Statechart Composition framework\cite{DBLP:conf/icse/MolnarGVMV18} that provides automata-based development of software components, as well as the Theta framework\cite{theta-fmcad2017} which enables the evaluation of abstraction refinement-based algorithms. Both of them are developed by the department but neither has support for automaton learning.
+Modular and extendable frameworks include the \emph{Gamma Statechart Composition framework}\cite{DBLP:conf/icse/MolnarGVMV18} that provides automata-based development of software components, as well as the \emph{Theta framework}\cite{theta-fmcad2017} which enables the evaluation of abstraction refinement-based algorithms. Both of them are developed by the department but neither has support for automaton learning.
 
 \section{Added value}
 
