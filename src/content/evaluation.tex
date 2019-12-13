@@ -79,6 +79,22 @@ As seen in the theoretical evaluation, the size of the state space is not the on
 	\label{fig:abcextended}
 \end{figure}
 
+Table \ref{tab:evalspecs} details the specifications on which the measurements were ran.
+
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\begin{table}[H]
+	
+	\begin{tabularx}{\columnwidth}{YYYYY}
+		\hline
+		\textbf{Operating system} & \textbf{Processor}  & \textbf{Java version} & \textbf{Eclipse version} & \textbf{Heap size} \\ \hline
+		Windows 10 Pro & Intel Core i7-8700 & OpenJDK 1.8 & Eclipse Modeling Tools 4.12.0 & Xms1024m, Xmx2048m
+		\\ \hline
+	\end{tabularx}
+	\caption{Overview of the algorithm implementations in the framework.}
+	\label{tab:evalspecs}
+\end{table}
+
 After running the experiments, an obvious bottleneck could be found. The current brute-force equivalence query implementation is inefficient, as the theoretical evaluation suggested. Figure \ref{fig:stateruntime} shows the inefficiency observed when extending the states and the behavior of the learned automaton. Similarly, the TTT implementation was slowed to the point of having the same runtime as the DHC algorithm, as illustrated by Fig. \ref{fig:stateruntimettt}. The same can be said about the extenstion of the input alphabet, Fig. \ref{fig:inputruntime} and Fig. \ref{fig:inputruntimettt} show the DHC and the TTT algorithms respectively being bottlenecked to the point of indifferentiability. This is caused by both the inefficient equivalence query and the small size of the automata being learned. 
 
 It is important to note, that these inefficiencies were not caused by the learning algorithms, but by the equivalence algorithm. In order to remove the bottleneck and compare the actual learning algorithm runtimes, an optimized, near linear-time equivalence oracle from \emph{LearnLib} was onboarded to the framework for both the DHC and TTT algorithms to use.

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  13 DEC 2019 05:13
+This is XeTeX, Version 3.14159265-2.6-0.999991 (MiKTeX 2.9.7140 64-bit) (preloaded format=xelatex 2019.8.11)  13 DEC 2019 05:26
 entering extended mode
 **./bachelors_thesis.tex
 (bachelors_thesis.tex
@@ -1831,7 +1831,11 @@ Chapter 4.
 
 
 
-] [29] [30]
+] [29]
+
+Package array Warning: Column Y is already defined on input line 85.
+
+[30]
 File: figures/stateruntime.png Graphic file (type bmp)
 <figures/stateruntime.png>
 File: figures/stateruntimettt.png Graphic file (type bmp)
@@ -1848,16 +1852,16 @@ File: figures/inputruntimeopt.png Graphic file (type bmp)
 <figures/inputruntimeopt.png>
 File: figures/inputruntimeoptttt.png Graphic file (type bmp)
 <figures/inputruntimeoptttt.png>
- [31] [32] [33]) [34]
+ [31] [32] [33] [34]) [35]
 \openout2 = `content/conclusion.aux'.
 
  (content/conclusion.tex
 Chapter 5.
-) [35
+) [36
 
 
 
-] [36] (bachelors_thesis.bbl
+] [37] (bachelors_thesis.bbl
 Underfull \hbox (badness 1137) in paragraph at lines 36--42
 \TU/lmr/m/n/10.95 123–148.  Springer International Publishing, Cham, 2018.  ISB
 N 978-3-319-
@@ -1882,7 +1886,7 @@ TU/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] []
 [][][] []
  []
 
-[37
+[38
 
 
 ]
@@ -1910,7 +1914,7 @@ U/lmr/m/n/10.95 .  URL [][]$[][][][][] [] [] [] [][][] [] [][][] [] [][] [] [][
 ][][] []
  []
 
-) [38]
+) [39]
 \openout2 = `content/appendices.aux'.
 
  (content/appendices.tex
@@ -1921,10 +1925,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--52
 [][]|\TU/lmr/m/n/10 Mealy machine representation of the
  []
 
-[39
+[40
 
 
-]) [40] [41] [42]
+]) [41] [42] [43]
 \tf@thm=\write6
 \openout6 = `bachelors_thesis.thm'.
 
@@ -1937,7 +1941,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 106.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 106.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 106.
 Package rerunfilecheck Info: File `bachelors_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: FD585EC0769B09B7882E6FA72F64EA3E.
+(rerunfilecheck)             Checksum: C4CE2DF22F2B81FA3C2B225A66BC48E5.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1945,12 +1949,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 106.
  ) 
 Here is how much of TeX's memory you used:
- 38514 strings out of 427669
- 742650 string characters out of 3145155
- 1414435 words of memory out of 3000000
- 41970 multiletter control sequences out of 15000+200000
+ 38515 strings out of 427669
+ 742665 string characters out of 3145155
+ 1414528 words of memory out of 3000000
+ 41971 multiletter control sequences out of 15000+200000
  545221 words of font info for 97 fonts, out of 3000000 for 9000
  1352 hyphenation exceptions out of 8191
  57i,15n,70p,1344b,1255s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on bachelors_thesis.pdf (48 pages).
+Output written on bachelors_thesis.pdf (49 pages).
