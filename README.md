@@ -1,6 +1,7 @@
 Github repository of my Bachelor's thesis. PDF version can be found [here](src/bachelors_thesis.pdf).
 
 Abstract:
+
 The design and development of technological systems can be made more efficient using model-based technologies. A formal model of the system under design makes it possible to automate tasks such as verification, code generation and qualitative, quantitative system-analysis.
 
 Reactive components of a system model (e.g. communication protocols) are typically modeled using state-based formalisms. However, the construction of such a system-model is often difficult, since these protocols are more straightforward to design using example runs. To the best of my knowledge, there is no tool in the literature capable of creating  a state based model of a system (component) from a set of runs and then performing the desired analysis on the output.
